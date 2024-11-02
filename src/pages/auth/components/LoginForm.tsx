@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/services/auth.service';
-import { TextField, Button, Alert } from '@mui/material';
+import { Button, Alert } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from './Logo';
 import { GlassContainer } from './GlassContainer';
+import { StyledTextField } from './StyledTextField';
 
 const FormWrapper = styled(motion.form)(({ theme }) => ({
   width: '100%',
@@ -31,6 +32,23 @@ const itemVariants = {
   hidden: { opacity: 0, x: -20 },
   visible: { opacity: 1, x: 0 }
 };
+
+const StyledButton = styled(Button)({
+  borderRadius: 0,
+  height: '48px',
+  textTransform: 'uppercase',
+  letterSpacing: '1px',
+  fontWeight: 600,
+  '&:before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '1px',
+    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)',
+  }
+});
 
 export function LoginForm() {
   const navigate = useNavigate();
@@ -75,7 +93,7 @@ export function LoginForm() {
         </AnimatePresence>
 
         <motion.div variants={itemVariants}>
-          <TextField
+          <StyledTextField
             required
             fullWidth
             id="email"
@@ -85,14 +103,11 @@ export function LoginForm() {
             autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            sx={{
-              borderRadius: '0px'
-            }}
           />
         </motion.div>
 
         <motion.div variants={itemVariants}>
-          <TextField
+          <StyledTextField
             required
             fullWidth
             name="password"
@@ -110,14 +125,14 @@ export function LoginForm() {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
-          <Button
+          <StyledButton
             type="submit"
             fullWidth
             variant="contained"
             size="large"
           >
             Sign In
-          </Button>
+          </StyledButton>
         </motion.div>
       </FormWrapper>
     </GlassContainer>
