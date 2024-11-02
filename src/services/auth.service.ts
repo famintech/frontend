@@ -6,6 +6,8 @@ interface AuthResponse {
   user: User;
   permissions: string[];
   roles: string[];
+  access_token: string;
+  refresh_token: string;
 }
 
 export function useAuth() {
@@ -14,7 +16,6 @@ export function useAuth() {
   const login = async (credentials: { email: string; password: string }) => {
     const response = await fetch(`${API_ENDPOINTS.AUTH.LOGIN}`, {
       method: 'POST',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -25,7 +26,12 @@ export function useAuth() {
       throw new Error('Login failed');
     }
 
-    const data = await response.json();
+    const data: AuthResponse = await response.json();
+    
+    // Store tokens in localStorage
+    localStorage.setItem('access_token', data.access_token);
+    localStorage.setItem('refresh_token', data.refresh_token);
+
     setAuth({
       user: data.user,
       permissions: data.permissions,
@@ -35,36 +41,46 @@ export function useAuth() {
   };
 
   const logout = async () => {
+    const token = localStorage.getItem('refresh_token');
     const response = await fetch(`${API_ENDPOINTS.AUTH.LOGOUT}`, {
       method: 'POST',
-      credentials: 'include',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ refresh_token: token }),
     });
 
-    if (response.ok) {
-      clearAuth();
-    }
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    clearAuth();
   };
 
-  // Create an axios instance with interceptors
   const createAuthenticatedFetch = () => {
     return async (url: string, options: RequestInit = {}) => {
+      const token = localStorage.getItem('access_token');
+      
       try {
         const response = await fetch(url, {
           ...options,
-          credentials: 'include',
+          headers: {
+            ...options.headers,
+            'Authorization': `Bearer ${token}`,
+          },
         });
 
-        // If the response is 401 (Unauthorized), try to refresh the token
         if (response.status === 401) {
           const refreshed = await refreshToken();
           if (refreshed) {
-            // Retry the original request
+            // Retry with new token
             return fetch(url, {
               ...options,
-              credentials: 'include',
+              headers: {
+                ...options.headers,
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+              },
             });
           }
-          // If refresh failed, logout
           await logout();
           throw new Error('Session expired');
         }
@@ -81,22 +97,22 @@ export function useAuth() {
 
   const refreshToken = async (): Promise<boolean> => {
     try {
+      const token = localStorage.getItem('refresh_token');
       const response = await fetch(`${API_ENDPOINTS.AUTH.REFRESH_TOKEN}`, {
         method: 'POST',
-        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ refresh_token: token }),
       });
 
       if (!response.ok) {
         return false;
       }
 
-      const data: AuthResponse = await response.json();
-      setAuth({
-        user: data.user,
-        permissions: data.permissions,
-        roles: data.roles,
-      });
-
+      const data = await response.json();
+      localStorage.setItem('access_token', data.access_token);
+      
       return true;
     } catch {
       return false;

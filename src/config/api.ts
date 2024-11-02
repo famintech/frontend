@@ -1,7 +1,7 @@
 export const API_CONFIG = {
-    BASE_URL: 'https://api.famin.cloud/v1',
-    WEBSOCKET_URL: 'wss://api.famin.cloud',
-    APP_URL: 'https://siren.famin.cloud'
+    BASE_URL: import.meta.env.VITE_API_URL || 'https://api.famin.cloud/v1',
+    WEBSOCKET_URL: import.meta.env.VITE_WS_URL || 'wss://api.famin.cloud',
+    APP_URL: import.meta.env.VITE_APP_URL || 'https://siren.famin.cloud'
 };
 
 export const API_ENDPOINTS = {
