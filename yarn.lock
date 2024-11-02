@@ -2745,6 +2745,11 @@ react-router@6.27.0:
   dependencies:
     "@remix-run/router" "1.20.0"
 
+react-starfield@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-starfield/-/react-starfield-1.0.3.tgz#928bea6066535c9bd96498d05330768aee0c970b"
+  integrity sha512-JgNib2NPBvcCyvm0eLWnE1bjy5x3q/qywenjiIlrWScbz8tPAcRgmqsBfHe3mMkOs0bFm2kH6wjtc0HBRzFDqA==
+
 react-transition-group@^4.4.5:
   version "4.4.5"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.5.tgz#e53d4e3f3344da8521489fbef8f2581d42becdd1"
