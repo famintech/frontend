@@ -21,9 +21,8 @@ export function useAuth() {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Origin': API_CONFIG.APP_URL,
         },
-        mode: 'no-cors', // Try this temporarily
+        credentials: 'include',
         body: JSON.stringify(credentials),
       });
   
