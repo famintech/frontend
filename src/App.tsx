@@ -5,6 +5,7 @@ import { Router } from './routes';
 import { createSWRConfig } from './config/swr-config';
 import { globalStyles } from './theme/global-styles';
 import { theme } from './theme';
+import './theme/fonts.css';
 
 function App() {
   return (

@@ -4,6 +4,7 @@ import { useAuth } from '@/services/auth.service';
 import { TextField, Button, Alert } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Logo } from './Logo';
+
 const FormWrapper = styled('form')(({ theme }) => ({
   width: '100%',
   maxWidth: 400,
