@@ -23,16 +23,18 @@ export function useAuth() {
           'Accept': 'application/json',
         },
         credentials: 'include',
+        mode: 'cors',
         body: JSON.stringify(credentials),
       });
-
+  
       if (!response.ok) {
         const errorText = await response.text();
         console.error('Login failed:', response.status, errorText);
         throw new Error(`Login failed: ${response.status}`);
       }
-
+  
       const data: AuthResponse = await response.json();
+      console.log('Login successful:', data);
 
       // Store tokens in localStorage
       localStorage.setItem('access_token', data.access_token);
