@@ -42,7 +42,7 @@ export function useAuth() {
 
   const logout = async () => {
     const token = localStorage.getItem('refresh_token');
-    const response = await fetch(`${API_ENDPOINTS.AUTH.LOGOUT}`, {
+    await fetch(`${API_ENDPOINTS.AUTH.LOGOUT}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
@@ -50,7 +50,7 @@ export function useAuth() {
       },
       body: JSON.stringify({ refresh_token: token }),
     });
-
+  
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     clearAuth();
