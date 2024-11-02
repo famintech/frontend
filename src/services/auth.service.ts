@@ -92,9 +92,11 @@ export function useAuth() {
       try {
         const response = await fetch(url, {
           ...options,
+          credentials: 'include',
           headers: {
             ...options.headers,
             'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
           },
         });
 
@@ -104,9 +106,11 @@ export function useAuth() {
             // Retry with new token
             return fetch(url, {
               ...options,
+              credentials: 'include',
               headers: {
                 ...options.headers,
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                'Content-Type': 'application/json',
               },
             });
           }
