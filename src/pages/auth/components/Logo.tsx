@@ -7,7 +7,7 @@ const LogoWrapper = styled(motion.div)(({ theme }) => ({
   flexDirection: 'column',
   alignItems: 'center',
   gap: theme.spacing(2),
-  marginBottom: theme.spacing(2) // Reduced from 4 to 2
+  marginBottom: theme.spacing(0) // Reduced from 4 to 2
 }));
 
 const LogoImage = styled(motion.img)({

@@ -5,7 +5,8 @@ const DividerContainer = styled(Box)({
   display: 'flex',
   alignItems: 'center',
   width: '100%',
-  margin: '24px 0'
+  margin: '0',
+  marginBottom: '16px'
 });
 
 const Line = styled(Box)(({ theme }) => ({
