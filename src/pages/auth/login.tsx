@@ -4,7 +4,6 @@ import { LoginForm } from './components/LoginForm';
 const MainContainer = styled(Box)({
   display: 'grid',
   gridTemplateColumns: '1fr 2fr',
-  minHeight: '100vh',
   margin: 0,
   padding: 0
 });
