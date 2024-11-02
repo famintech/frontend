@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from './Logo';
 import { GlassContainer } from './GlassContainer';
 import { StyledTextField } from './StyledTextField';
-
+import { Divider } from './Divider';
 const FormWrapper = styled(motion.form)(({ theme }) => ({
   width: '100%',
   // maxWidth: 400,
@@ -75,8 +75,10 @@ export function LoginForm() {
         initial="hidden"
         animate="visible"
         onSubmit={handleSubmit}
+        autoComplete="off"
       >
         <Logo />
+        <Divider />
 
         <AnimatePresence>
           {error && (
@@ -99,7 +101,7 @@ export function LoginForm() {
             id="email"
             label="Email Address"
             name="email"
-            autoComplete="email"
+            autoComplete="off"
             autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -114,7 +116,7 @@ export function LoginForm() {
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
+            autoComplete="new-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
