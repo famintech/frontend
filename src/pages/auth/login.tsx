@@ -31,9 +31,9 @@ const LeftSection = styled(Box)(({ theme }) => ({
     backgroundImage: `repeating-linear-gradient(
       45deg,
       ${theme.palette.common.white} 0,
-      ${theme.palette.common.white} 1px,
+      ${theme.palette.common.white} 2px,
       transparent 1px,
-      transparent 4px
+      transparent 8px
     )`
   }
 }));
