@@ -1,13 +1,12 @@
 import { API_CONFIG, API_ENDPOINTS } from '@/config/api';
 import { useAuthStore } from '@/store/auth.store';
-import { User } from '@/types/user';
+import { Role, RolePermission } from '@/types/role';
 
-interface AuthResponse {
-  user: User;
-  permissions: string[];
-  roles: string[];
+interface TokenResponse {
   access_token: string;
   refresh_token: string;
+  requiresTwoFactor?: boolean;
+  userId?: string;
 }
 
 export function useAuth() {
@@ -15,7 +14,6 @@ export function useAuth() {
 
   const login = async (credentials: { email: string; password: string }) => {
     try {
-      console.log('Attempting login with:', credentials);
       const response = await fetch(`${API_CONFIG.BASE_URL}${API_ENDPOINTS.AUTH.LOGIN}`, {
         method: 'POST',
         headers: {
@@ -25,22 +23,44 @@ export function useAuth() {
       });
   
       if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Login failed:', response.status, errorText);
         throw new Error(`Login failed: ${response.status}`);
       }
   
-      const data: AuthResponse = await response.json();
-      
-      localStorage.setItem('access_token', data.access_token);
-      localStorage.setItem('refresh_token', data.refresh_token);
+      const tokenData: TokenResponse = await response.json();
   
-      setAuth({
-        user: data.user,
-        permissions: data.permissions,
-        roles: data.roles,
+      if (tokenData.requiresTwoFactor) {
+        return {
+          requiresTwoFactor: true,
+          userId: tokenData.userId,
+        };
+      }
+  
+      // Store tokens
+      localStorage.setItem('access_token', tokenData.access_token);
+      localStorage.setItem('refresh_token', tokenData.refresh_token);
+  
+      // Fetch user profile
+      const profileResponse = await fetch(`${API_CONFIG.BASE_URL}/users/profile`, {
+        headers: {
+          'Authorization': `Bearer ${tokenData.access_token}`,
+        },
       });
-      return data;
+  
+      if (!profileResponse.ok) {
+        throw new Error('Failed to fetch user profile');
+      }
+  
+      const userData = await profileResponse.json();
+      
+      setAuth({
+        user: userData,
+        permissions: userData.roles?.flatMap((role: Role) => 
+          role.permissions?.map((p: RolePermission) => p.permission.name) || []
+        ) || [],
+        roles: userData.roles?.map((role: Role) => role.name) || [],
+      });
+  
+      return tokenData;
     } catch (error) {
       console.error('Login error:', error);
       throw error;
