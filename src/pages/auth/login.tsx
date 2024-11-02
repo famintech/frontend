@@ -9,7 +9,7 @@ import {
   Container,
   Alert 
 } from '@mui/material';
-import styles from './login.module.css';
+import styles from './login.module.scss';
 
 export default function Login() {
   const navigate = useNavigate();
