@@ -1,7 +1,25 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/services/auth.service';
-import { Box, TextField, Button, Typography, Alert } from '@mui/material';
+import { Box, TextField, Button, Alert } from '@mui/material';
+import { styled } from '@mui/material/styles';
+
+const FormWrapper = styled('form')(({ theme }) => ({
+  width: '100%',
+  maxWidth: 400,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.spacing(3)
+}));
+
+const LogoPlaceholder = styled(Box)(({ theme }) => ({
+  width: '120px',
+  height: '120px',
+  backgroundColor: theme.palette.primary.main,
+  borderRadius: theme.shape.borderRadius,
+  marginBottom: theme.spacing(4),
+  alignSelf: 'center'
+}));
 
 export function LoginForm() {
   const navigate = useNavigate();
@@ -22,19 +40,16 @@ export function LoginForm() {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%', maxWidth: 400 }}>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Welcome Back
-      </Typography>
+    <FormWrapper onSubmit={handleSubmit}>
+      <LogoPlaceholder />
       
       {error && (
-        <Alert severity="error" sx={{ mb: 2 }}>
+        <Alert severity="error">
           {error}
         </Alert>
       )}
 
       <TextField
-        margin="normal"
         required
         fullWidth
         id="email"
@@ -47,7 +62,6 @@ export function LoginForm() {
       />
 
       <TextField
-        margin="normal"
         required
         fullWidth
         name="password"
@@ -63,10 +77,10 @@ export function LoginForm() {
         type="submit"
         fullWidth
         variant="contained"
-        sx={{ mt: 3, mb: 2 }}
+        size="large"
       >
         Sign In
       </Button>
-    </Box>
+    </FormWrapper>
   );
 }

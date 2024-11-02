@@ -44,7 +44,7 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Titillium Web", "Roboto", sans-serif',
+    fontFamily: '"Titillium Web", sans-serif',
   },
 });
 

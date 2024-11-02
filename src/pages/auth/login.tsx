@@ -1,34 +1,45 @@
 import { Box, styled } from '@mui/material';
 import { LoginForm } from './components/LoginForm';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-const MainContainer = styled(Box)({
+const MainContainer = styled(Box)(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: '1fr 2fr',
   height: '100%',
-  overflow: 'hidden'
-});
+  overflow: 'hidden',
+  [theme.breakpoints.down('md')]: {
+    gridTemplateColumns: '1fr',
+  }
+}));
 
-const LeftSection = styled(Box)({
+const LeftSection = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '#121212',
+  backgroundColor: theme.palette.background.paper,
   padding: '2rem',
   height: '100%'
-});
+}));
 
-const RightSection = styled(Box)({
-  backgroundColor: '#000000',
-  height: '100%'
-});
+const RightSection = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.custom.darkContrast,
+  height: '100%',
+  [theme.breakpoints.down('md')]: {
+    display: 'none'
+  }
+}));
 
 export default function Login() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <MainContainer>
       <LeftSection>
         <LoginForm />
       </LeftSection>
-      <RightSection />
+      {!isMobile && <RightSection />}
     </MainContainer>
   );
 }
