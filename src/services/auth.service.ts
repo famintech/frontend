@@ -21,11 +21,14 @@ export function useAuth() {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
+          'Origin': API_CONFIG.APP_URL,
         },
-        credentials: 'include',
-        mode: 'cors',
+        mode: 'no-cors', // Try this temporarily
         body: JSON.stringify(credentials),
       });
+  
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
   
       if (!response.ok) {
         const errorText = await response.text();
