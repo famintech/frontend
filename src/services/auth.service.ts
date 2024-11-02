@@ -19,6 +19,7 @@ export function useAuth() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify(credentials),
       });
   
@@ -40,10 +41,11 @@ export function useAuth() {
       localStorage.setItem('refresh_token', tokenData.refresh_token);
   
       // Fetch user profile
-      const profileResponse = await fetch(`${API_CONFIG.BASE_URL}/users/profile`, {
+      const profileResponse = await fetch(`${API_CONFIG.BASE_URL}${API_ENDPOINTS.USERS.PROFILE}`, {
         headers: {
           'Authorization': `Bearer ${tokenData.access_token}`,
         },
+        credentials: 'include',
       });
   
       if (!profileResponse.ok) {

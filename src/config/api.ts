@@ -13,5 +13,8 @@ export const API_ENDPOINTS = {
         VERIFY_EMAIL: '/auth/verify-email',
         REFRESH_TOKEN: '/auth/refresh-token',
         LOGOUT: '/auth/logout'
+    },
+    USERS: {
+        PROFILE: '/users/profile'
     }
 };
