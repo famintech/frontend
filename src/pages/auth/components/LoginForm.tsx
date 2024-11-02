@@ -85,6 +85,9 @@ export function LoginForm() {
             autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            sx={{
+              borderRadius: '0px'
+            }}
           />
         </motion.div>
 
