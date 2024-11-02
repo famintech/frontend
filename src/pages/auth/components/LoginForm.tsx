@@ -9,7 +9,7 @@ import { GlassContainer } from './GlassContainer';
 
 const FormWrapper = styled(motion.form)(({ theme }) => ({
   width: '100%',
-  maxWidth: 400,
+  // maxWidth: 400,
   display: 'flex',
   flexDirection: 'column',
   gap: theme.spacing(3)
