@@ -3,22 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/services/auth.service';
 import { Box, TextField, Button, Alert } from '@mui/material';
 import { styled } from '@mui/material/styles';
-
+import { Logo } from './Logo';
 const FormWrapper = styled('form')(({ theme }) => ({
   width: '100%',
   maxWidth: 400,
   display: 'flex',
   flexDirection: 'column',
   gap: theme.spacing(3)
-}));
-
-const LogoPlaceholder = styled(Box)(({ theme }) => ({
-  width: '120px',
-  height: '120px',
-  backgroundColor: theme.palette.primary.main,
-  borderRadius: theme.shape.borderRadius,
-  marginBottom: theme.spacing(4),
-  alignSelf: 'center'
 }));
 
 export function LoginForm() {
@@ -41,7 +32,7 @@ export function LoginForm() {
 
   return (
     <FormWrapper onSubmit={handleSubmit}>
-      <LogoPlaceholder />
+      <Logo />
       
       {error && (
         <Alert severity="error">
