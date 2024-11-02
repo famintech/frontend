@@ -29,11 +29,11 @@ const LeftSection = styled(Box)(({ theme }) => ({
     opacity: 0.03,
     zIndex: -1,
     backgroundImage: `repeating-linear-gradient(
-      45deg,
+      135deg,
       ${theme.palette.common.white} 0,
-      ${theme.palette.common.white} 2px,
+      ${theme.palette.common.white} 1px,
       transparent 1px,
-      transparent 6px
+      transparent 5px
     )`
   }
 }));
