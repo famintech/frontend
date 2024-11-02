@@ -15,19 +15,14 @@ export function useAuth() {
 
   const login = async (credentials: { email: string; password: string }) => {
     try {
-      console.log('Attempting login to:', `${API_CONFIG.BASE_URL}${API_ENDPOINTS.AUTH.LOGIN}`);
+      console.log('Attempting login with:', credentials);
       const response = await fetch(`${API_CONFIG.BASE_URL}${API_ENDPOINTS.AUTH.LOGIN}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
         },
-        credentials: 'include',
         body: JSON.stringify(credentials),
       });
-  
-      console.log('Response status:', response.status);
-      console.log('Response headers:', response.headers);
   
       if (!response.ok) {
         const errorText = await response.text();
@@ -36,12 +31,10 @@ export function useAuth() {
       }
   
       const data: AuthResponse = await response.json();
-      console.log('Login successful:', data);
-
-      // Store tokens in localStorage
+      
       localStorage.setItem('access_token', data.access_token);
       localStorage.setItem('refresh_token', data.refresh_token);
-
+  
       setAuth({
         user: data.user,
         permissions: data.permissions,
@@ -49,7 +42,7 @@ export function useAuth() {
       });
       return data;
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error('Login error:', error);
       throw error;
     }
   };
