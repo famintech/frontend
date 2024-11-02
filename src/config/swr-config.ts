@@ -1,5 +1,5 @@
 import { SWRConfiguration } from 'swr';
-import { useAuthenticatedFetch } from '@/hooks/use-authenticated-fetch';
+import { useAuthenticatedFetch } from '@/hooks/use-authenticated-fetch.ts';
 
 export function createSWRConfig(): SWRConfiguration {
   const authenticatedFetch = useAuthenticatedFetch();

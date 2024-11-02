@@ -24,6 +24,10 @@
 
     /* Path Aliases */
     "baseUrl": ".",
+    "types": [
+      "node",
+      "vite/client"
+    ],
     "paths": {
       "@/*": ["./src/*"]
     }

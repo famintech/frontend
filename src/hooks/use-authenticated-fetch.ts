@@ -1,5 +1,5 @@
-import { useAuth } from '@/services/auth.service';
-import { API_CONFIG } from '@/config/api';
+import { useAuth } from '@/services/auth.service.ts';
+import { API_CONFIG } from '@/config/api.ts';
 
 export function useAuthenticatedFetch() {
   const { createAuthenticatedFetch } = useAuth();
