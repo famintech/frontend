@@ -19,7 +19,23 @@ const LeftSection = styled(Box)(({ theme }) => ({
   justifyContent: 'center',
   backgroundColor: theme.palette.background.paper,
   padding: '2rem',
-  height: '100%'
+  height: '100%',
+  position: 'relative',
+  isolation: 'isolate',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    opacity: 0.03,
+    zIndex: -1,
+    backgroundImage: `repeating-linear-gradient(
+      45deg,
+      ${theme.palette.common.white} 0,
+      ${theme.palette.common.white} 1px,
+      transparent 1px,
+      transparent 12px
+    )`
+  }
 }));
 
 const RightSection = styled(Box)(({ theme }) => ({
