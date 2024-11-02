@@ -56,7 +56,7 @@ export function useAuth() {
   
       // Extract permissionIds from the roles
       const permissions = userData.roles?.flatMap((role: Role) => 
-        role.permissions?.map((p: RolePermission) => p.permissionId) || []
+        role.permissions?.map((p: RolePermission) => p.permission.name) || []
       ) || [];
       console.log('Processed permissions:', permissions);
   
