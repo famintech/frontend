@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/services/auth.service';
-import Starfield from 'react-starfield';
+import { default as Starfield } from 'react-starfield';
 import { 
   Box, 
   TextField, 
@@ -38,7 +38,7 @@ export default function Login() {
             starCount={1000}
             starColor={[255, 255, 255]}
             speedFactor={0.05}
-            backgroundColor="black"
+            backgroundColor="transparent"
           />
         </Box>
         <Container maxWidth="xs" className={styles.formWrapper}>
