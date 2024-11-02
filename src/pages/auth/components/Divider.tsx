@@ -41,7 +41,7 @@ export function Divider() {
   return (
     <DividerContainer>
       <Line />
-      <Text>or</Text>
+      <Text>SIGN IN</Text>
       <Line sx={{ transform: 'scaleX(-1)' }} />
     </DividerContainer>
   );

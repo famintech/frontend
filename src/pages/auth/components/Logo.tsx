@@ -7,7 +7,7 @@ const LogoWrapper = styled(motion.div)(({ theme }) => ({
   flexDirection: 'column',
   alignItems: 'center',
   gap: theme.spacing(2),
-  marginBottom: theme.spacing(4)
+  marginBottom: theme.spacing(2) // Reduced from 4 to 2
 }));
 
 const LogoImage = styled(motion.img)({
@@ -17,20 +17,13 @@ const LogoImage = styled(motion.img)({
 });
 
 const Title = styled(Typography)(({ theme }) => ({
-  color: theme.palette.common.white,
-  textTransform: 'uppercase',
-  letterSpacing: '2px',
-  textAlign: 'center',
-  fontWeight: 600
-}));
-
-const Subtitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.primary.main,
   textAlign: 'center',
   fontSize: '0.75rem',
   letterSpacing: '1px',
   opacity: 0.9,
-  maxWidth: '280px'
+  maxWidth: '280px',
+  textTransform: 'uppercase'
 }));
 
 const textVariants = {
@@ -58,10 +51,9 @@ export function Logo() {
         initial="hidden"
         animate="visible"
       >
-        <Title variant="h5">Sign In</Title>
-        <Subtitle variant="subtitle2">
+        <Title variant="subtitle2">
           Strategic Intelligence Resource and Execution Network
-        </Subtitle>
+        </Title>
       </motion.div>
     </LogoWrapper>
   );
