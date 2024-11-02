@@ -5,6 +5,7 @@ import { TextField, Button, Alert } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from './Logo';
+import { GlassContainer } from './GlassContainer';
 
 const FormWrapper = styled(motion.form)(({ theme }) => ({
   width: '100%',
@@ -50,70 +51,72 @@ export function LoginForm() {
   };
 
   return (
-    <FormWrapper
-      variants={formVariants}
-      initial="hidden"
-      animate="visible"
-      onSubmit={handleSubmit}
-    >
-      <Logo />
-      
-      <AnimatePresence>
-        {error && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-          >
-            <Alert severity="error">
-              {error}
-            </Alert>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <motion.div variants={itemVariants}>
-        <TextField
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          autoComplete="email"
-          autoFocus
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </motion.div>
-
-      <motion.div variants={itemVariants}>
-        <TextField
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </motion.div>
-
-      <motion.div 
-        variants={itemVariants}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+    <GlassContainer>
+      <FormWrapper
+        variants={formVariants}
+        initial="hidden"
+        animate="visible"
+        onSubmit={handleSubmit}
       >
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          size="large"
+        <Logo />
+
+        <AnimatePresence>
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+            >
+              <Alert severity="error">
+                {error}
+              </Alert>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <motion.div variants={itemVariants}>
+          <TextField
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </motion.div>
+
+        <motion.div variants={itemVariants}>
+          <TextField
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </motion.div>
+
+        <motion.div
+          variants={itemVariants}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
-          Sign In
-        </Button>
-      </motion.div>
-    </FormWrapper>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            size="large"
+          >
+            Sign In
+          </Button>
+        </motion.div>
+      </FormWrapper>
+    </GlassContainer>
   );
 }
