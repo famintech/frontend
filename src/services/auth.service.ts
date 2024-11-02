@@ -1,4 +1,4 @@
-import { API_ENDPOINTS } from '@/config/api';
+import { API_CONFIG, API_ENDPOINTS } from '@/config/api';
 import { useAuthStore } from '@/store/auth.store';
 import { User } from '@/types/user';
 
@@ -14,14 +14,14 @@ export function useAuth() {
   const { setAuth, clearAuth } = useAuthStore();
 
   const login = async (credentials: { email: string; password: string }) => {
-    const response = await fetch(`${API_ENDPOINTS.AUTH.LOGIN}`, {
+    const response = await fetch(`${API_CONFIG.BASE_URL}${API_ENDPOINTS.AUTH.LOGIN}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(credentials),
     });
-
+  
     if (!response.ok) {
       throw new Error('Login failed');
     }
@@ -42,7 +42,7 @@ export function useAuth() {
 
   const logout = async () => {
     const token = localStorage.getItem('refresh_token');
-    await fetch(`${API_ENDPOINTS.AUTH.LOGOUT}`, {
+    await fetch(`${API_CONFIG.BASE_URL}${API_ENDPOINTS.AUTH.LOGOUT}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
@@ -98,7 +98,7 @@ export function useAuth() {
   const refreshToken = async (): Promise<boolean> => {
     try {
       const token = localStorage.getItem('refresh_token');
-      const response = await fetch(`${API_ENDPOINTS.AUTH.REFRESH_TOKEN}`, {
+      const response = await fetch(`${API_CONFIG.BASE_URL}${API_ENDPOINTS.AUTH.REFRESH_TOKEN}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
