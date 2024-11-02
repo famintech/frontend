@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ProtectedRoute } from './protected-route';
-import Login from '@/pages/auth/login';
-import Dashboard from '@/pages/dashboard';
+import Login from '@/pages/auth/login.tsx';
+import Dashboard from '@/pages/dashboard/index.tsx';
 
 const router = createBrowserRouter([
   {
