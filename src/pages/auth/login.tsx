@@ -2,6 +2,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/services/auth.service';
 import Starfield from 'react-starfield';
+import { 
+  Box, 
+  TextField, 
+  Button, 
+  Typography, 
+  Container,
+  Alert 
+} from '@mui/material';
 import styles from './login.module.css';
 
 export default function Login() {
@@ -23,43 +31,64 @@ export default function Login() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.leftSection}>
-        <div className={styles.starfieldWrapper}>
+    <Box className={styles.container}>
+      <Box className={styles.leftSection}>
+        <Box className={styles.starfieldWrapper}>
           <Starfield
             starCount={1000}
             starColor={[255, 255, 255]}
             speedFactor={0.05}
             backgroundColor="black"
           />
-        </div>
-        <div className={styles.formWrapper}>
-          <h2>Welcome Back</h2>
-          <form onSubmit={handleSubmit}>
-            {error && <div className={styles.error}>{error}</div>}
-            <input
-              type="email"
+        </Box>
+        <Container maxWidth="xs" className={styles.formWrapper}>
+          <Typography variant="h4" component="h2" gutterBottom>
+            Welcome Back
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} noValidate>
+            {error && (
+              <Alert severity="error" sx={{ mb: 2 }}>
+                {error}
+              </Alert>
+            )}
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-              className={styles.input}
             />
-            <input
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
               type="password"
+              id="password"
+              autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              className={styles.input}
             />
-            <button type="submit" className={styles.button}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
               Login
-            </button>
-          </form>
-        </div>
-      </div>
-      <div className={styles.rightSection}>
+            </Button>
+          </Box>
+        </Container>
+      </Box>
+      <Box className={styles.rightSection}>
         {/* Content for right section will go here */}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
