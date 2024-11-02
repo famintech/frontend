@@ -22,24 +22,24 @@ export function useAuth() {
         credentials: 'include',
         body: JSON.stringify(credentials),
       });
-  
+
       if (!response.ok) {
         throw new Error(`Login failed: ${response.status}`);
       }
-  
+
       const tokenData: TokenResponse = await response.json();
-  
+
       if (tokenData.requiresTwoFactor) {
         return {
           requiresTwoFactor: true,
           userId: tokenData.userId,
         };
       }
-  
+
       // Store tokens
       localStorage.setItem('access_token', tokenData.access_token);
       localStorage.setItem('refresh_token', tokenData.refresh_token);
-  
+
       // Fetch user profile
       const profileResponse = await fetch(`${API_CONFIG.BASE_URL}${API_ENDPOINTS.USERS.PROFILE}`, {
         headers: {
@@ -47,21 +47,27 @@ export function useAuth() {
         },
         credentials: 'include',
       });
-  
+
       if (!profileResponse.ok) {
         throw new Error('Failed to fetch user profile');
       }
-  
+
       const userData = await profileResponse.json();
-      
+
+      console.log('User data received:', userData);
+      const permissions = userData?.roles?.flatMap((role: Role) =>
+        role?.permissions?.map((p: RolePermission) => p?.permission?.name).filter(Boolean) || []
+      ) || [];
+      console.log('Processed permissions:', permissions);
+      const roles = userData?.roles?.map((role: Role) => role?.name).filter(Boolean) || [];
+      console.log('Processed roles:', roles);
+
       setAuth({
         user: userData,
-        permissions: userData.roles?.flatMap((role: Role) => 
-          role.permissions?.map((p: RolePermission) => p.permission.name) || []
-        ) || [],
-        roles: userData.roles?.map((role: Role) => role.name) || [],
+        permissions,
+        roles,
       });
-  
+
       return tokenData;
     } catch (error) {
       console.error('Login error:', error);
