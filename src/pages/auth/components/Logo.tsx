@@ -57,19 +57,20 @@ export function Logo() {
 
   useEffect(() => {
     const sequence = async () => {
-      // Start logo spin immediately
-      logoControls.start({
+      // Start logo spin with glow at the end
+      await logoControls.start({
         rotateY: 720,
         filter: [
-          'brightness(0) invert(1)',
-          'brightness(1.5) invert(1)',
-          'brightness(0) invert(1)'
+          'brightness(0) invert(1)',  // Start normal
+          'brightness(0) invert(1)',  // Stay normal during spin
+          'brightness(2) invert(1)',  // Strong glow at end
+          'brightness(0) invert(1)'   // Back to normal
         ],
         transition: {
           duration: 1,
           ease: "easeInOut",
           filter: {
-            times: [0, 0.5, 1],
+            times: [0, 0.8, 0.9, 1], // Glow happens in last 20% of animation
             duration: 1
           }
         }
