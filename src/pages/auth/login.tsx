@@ -33,7 +33,7 @@ const LeftSection = styled(Box)(({ theme }) => ({
       ${theme.palette.common.white} 0,
       ${theme.palette.common.white} 1px,
       transparent 1px,
-      transparent 4.5px
+      transparent 6px
     )`
   }
 }));

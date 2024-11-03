@@ -81,7 +81,7 @@ export function Logo() {
           variants={{
             visible: {
               transition: {
-                staggerChildren: 0.05
+                staggerChildren: 0.025
               }
             }
           }}
@@ -104,7 +104,7 @@ export function Logo() {
           variants={{
             visible: {
               transition: {
-                staggerChildren: 0.05
+                staggerChildren: 0.025
               }
             }
           }}
