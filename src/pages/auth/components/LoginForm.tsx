@@ -60,10 +60,19 @@ const LinkText = styled(Link)(({ theme }) => ({
   }
 }));
 
+const SignUpLinkText = styled(Link)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  textDecoration: 'none',
+  fontSize: '0.875rem',
+  '&:hover': {
+    textDecoration: 'underline'
+  }
+}));
+
 const ForgotPasswordText = styled(Box)({
   textAlign: 'right',
   marginTop: '-8px',
-  // marginBottom: '16px'
+  marginBottom: '-8px'
 });
 
 const SignUpText = styled(Box)(({ theme }) => ({
@@ -169,7 +178,7 @@ export function LoginForm() {
 
         <SignUpText>
           Don't have an account?
-          <LinkText to="/auth/register">Sign Up</LinkText>
+          <SignUpLinkText to="/auth/register">Sign Up</SignUpLinkText>
         </SignUpText>
       </FormWrapper>
     </GlassContainer>
