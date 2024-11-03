@@ -32,7 +32,7 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
         backgroundColor: 'rgba(20, 27, 45, 0.4)',
         backdropFilter: 'blur(20px)',
         border: '1px solid rgba(15, 180, 228, 0.1)',
-        borderRadius: 2,
+        borderRadius: 0,
         boxShadow: `
           0 8px 32px 0 rgba(0, 0, 0, 0.37),
           inset 0 0 80px rgba(15, 180, 228, 0.03)
@@ -43,7 +43,7 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
           position: 'absolute',
           inset: 0,
           border: '1px solid transparent',
-          borderRadius: 8,
+          borderRadius: 0,
           background: 'linear-gradient(45deg, rgba(15, 180, 228, 0.15), rgba(15, 180, 228, 0)) border-box',
           WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
           WebkitMaskComposite: 'xor',
