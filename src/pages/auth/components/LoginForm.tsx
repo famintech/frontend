@@ -1,89 +1,21 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/services/auth.service';
-import { Button, Alert, Box } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Alert } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from './Logo';
 import { GlassContainer } from './GlassContainer';
 import { StyledTextField } from './StyledTextField';
 import { Divider } from './Divider';
-
-const FormWrapper = styled(motion.form)(({ theme }) => ({
-  width: '100%',
-  // maxWidth: 400,
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(3)
-}));
-
-const formVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      staggerChildren: 0.1
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0 }
-};
-
-const StyledButton = styled(Button)({
-  borderRadius: 0,
-  height: '48px',
-  textTransform: 'uppercase',
-  letterSpacing: '1px',
-  fontWeight: 600,
-  '&:before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: '1px',
-    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)',
-  }
-});
-
-const LinkText = styled(Link)(({ theme }) => ({
-  color: theme.palette.error.main,
-  textDecoration: 'none',
-  fontSize: '0.875rem',
-  '&:hover': {
-    textDecoration: 'underline'
-  }
-}));
-
-const SignUpLinkText = styled(Link)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  textDecoration: 'none',
-  fontSize: '0.875rem',
-  '&:hover': {
-    textDecoration: 'underline'
-  }
-}));
-
-const ForgotPasswordText = styled(Box)({
-  textAlign: 'right',
-  marginTop: '-8px',
-  marginBottom: '-8px'
-});
-
-const SignUpText = styled(Box)(({ theme }) => ({
-  textAlign: 'center',
-  marginTop: theme.spacing(2),
-  color: theme.palette.grey[500],
-  fontSize: '0.875rem',
-  '& a': {
-    marginLeft: '8px'
-  }
-}));
+import { formVariants, itemVariants } from './LoginForm.animations';
+import {
+  FormWrapper,
+  StyledButton,
+  LinkText,
+  SignUpLinkText,
+  ForgotPasswordText,
+  SignUpText
+} from './LoginForm.styles';
 
 export function LoginForm() {
   const navigate = useNavigate();
@@ -114,7 +46,7 @@ export function LoginForm() {
       >
         <Logo />
         <Divider />
-
+        
         <AnimatePresence>
           {error && (
             <motion.div
