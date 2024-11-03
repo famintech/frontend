@@ -60,9 +60,18 @@ export function Logo() {
       // Start logo spin immediately
       logoControls.start({
         rotateY: 720,
+        filter: [
+          'brightness(0) invert(1)',
+          'brightness(1.5) invert(1)',
+          'brightness(0) invert(1)'
+        ],
         transition: {
           duration: 1,
-          ease: "easeInOut"
+          ease: "easeInOut",
+          filter: {
+            times: [0, 0.5, 1],
+            duration: 1
+          }
         }
       });
 
