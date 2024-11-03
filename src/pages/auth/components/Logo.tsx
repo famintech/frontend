@@ -44,38 +44,16 @@ export function Logo() {
   const firstLine = "Strategic Intelligence Resource";
   const secondLine = "and Execution Network";
 
-  const container = {
-    hidden: { opacity: 1 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.05
-      }
-    }
-  };
-
-  const letterVariant = {
-    hidden: { opacity: 0, x: -5 },
-    visible: { opacity: 1, x: 0 }
-  };
-
   useEffect(() => {
-    const sequence = async () => {
-      // Wait for typing animation to complete
-      await new Promise(resolve => setTimeout(resolve, 
-        (firstLine.length + secondLine.length) * 50 + 500));
-      
-      // Spin logo
-      await logoControls.start({
-        rotateY: 720,
-        transition: {
-          duration: 1,
-          ease: "easeInOut"
-        }
-      });
-    };
-
-    sequence();
+    logoControls.start({
+      rotateY: 720,
+      transition: {
+        duration: 1,
+        ease: "easeInOut",
+        repeat: Infinity,
+        repeatDelay: 5
+      }
+    });
   }, [logoControls]);
 
   return (
@@ -87,24 +65,50 @@ export function Logo() {
       />
       <Title variant="subtitle2">
         <motion.div
-          variants={container}
           initial="hidden"
           animate="visible"
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.05
+              }
+            }
+          }}
         >
           {firstLine.split("").map((char, index) => (
-            <Letter key={index} variants={letterVariant}>
+            <Letter
+              key={index}
+              variants={{
+                hidden: { opacity: 0, x: -5 },
+                visible: { opacity: 1, x: 0 }
+              }}
+            >
               {char}
             </Letter>
           ))}
         </motion.div>
         <motion.div
-          variants={container}
           initial="hidden"
           animate="visible"
-          transition={{ delay: 1.5 }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                delay: 1.5,
+                staggerChildren: 0.05
+              }
+            }
+          }}
         >
           {secondLine.split("").map((char, index) => (
-            <Letter key={index} variants={letterVariant}>
+            <Letter
+              key={index}
+              variants={{
+                hidden: { opacity: 0, x: -5 },
+                visible: { opacity: 1, x: 0 }
+              }}
+            >
               {char}
             </Letter>
           ))}
