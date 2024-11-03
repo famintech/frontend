@@ -17,15 +17,25 @@ import { motion } from 'framer-motion';
 import { menuItems, MenuItem } from '@/config/menu.config';
 
 const NavItem = styled(ListItemButton)(({ theme }) => ({
-  borderRadius: theme.spacing(1),
-  marginBottom: theme.spacing(0.5),
-  '&.Mui-selected': {
-    backgroundColor: theme.palette.primary.main,
-    '&:hover': {
-      backgroundColor: theme.palette.primary.dark,
-    }
-  }
-}));
+    position: 'relative',
+    height: 64,
+    width: '100%',
+    backgroundColor: 'rgba(10, 14, 23, 0.8)',
+    clipPath: `polygon(
+      0.304% 1.335%,
+      56.164% 1.326%,
+      63.009% 19.749%,
+      78.551% 19.749%,
+      99.808% 76.962%,
+      99.808% 98.65%,
+      63.464% 98.65%,
+      54.923% 75.662%,
+      9.877% 75.662%,
+      0.493% 50.408%,
+      0.304% 1.335%
+    )`,
+    marginBottom: theme.spacing(1)
+  }));
 
 interface SidebarNavProps {
   isOpen: boolean;
