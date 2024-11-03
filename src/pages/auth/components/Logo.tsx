@@ -59,7 +59,7 @@ export function Logo() {
     const sequence = async () => {
       // Start logo spin with glow at the end
       await logoControls.start({
-        rotateY: 720,
+        rotateY: 320,
         filter: [
           'brightness(0) invert(1)',  // Start normal
           'brightness(0) invert(1)',  // Stay normal during spin
