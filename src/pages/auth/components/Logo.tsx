@@ -49,9 +49,7 @@ export function Logo() {
       rotateY: 720,
       transition: {
         duration: 1,
-        ease: "easeInOut",
-        repeat: Infinity,
-        repeatDelay: 5
+        ease: "easeInOut"
       }
     });
   }, [logoControls]);
@@ -91,9 +89,7 @@ export function Logo() {
           initial="hidden"
           animate="visible"
           variants={{
-            hidden: { opacity: 0 },
             visible: {
-              opacity: 1,
               transition: {
                 delay: 1.5,
                 staggerChildren: 0.05
