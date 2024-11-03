@@ -40,19 +40,32 @@ const Letter = styled(motion.span)({
 
 export function Logo() {
   const logoControls = useAnimationControls();
+  const firstLineControls = useAnimationControls();
+  const secondLineControls = useAnimationControls();
   
   const firstLine = "Strategic Intelligence Resource";
   const secondLine = "and Execution Network";
 
   useEffect(() => {
-    logoControls.start({
-      rotateY: 720,
-      transition: {
-        duration: 1,
-        ease: "easeInOut"
-      }
-    });
-  }, [logoControls]);
+    const sequence = async () => {
+      // Start logo spin immediately
+      logoControls.start({
+        rotateY: 720,
+        transition: {
+          duration: 1,
+          ease: "easeInOut"
+        }
+      });
+
+      // Start first line typing
+      await firstLineControls.start("visible");
+
+      // After first line completes, start second line
+      await secondLineControls.start("visible");
+    };
+
+    sequence();
+  }, [logoControls, firstLineControls, secondLineControls]);
 
   return (
     <LogoWrapper>
@@ -64,7 +77,7 @@ export function Logo() {
       <Title variant="subtitle2">
         <motion.div
           initial="hidden"
-          animate="visible"
+          animate={firstLineControls}
           variants={{
             visible: {
               transition: {
@@ -87,11 +100,10 @@ export function Logo() {
         </motion.div>
         <motion.div
           initial="hidden"
-          animate="visible"
+          animate={secondLineControls}
           variants={{
             visible: {
               transition: {
-                delay: 1.5,
                 staggerChildren: 0.05
               }
             }
