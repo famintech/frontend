@@ -33,45 +33,50 @@ const Title = styled(Typography)(({ theme }) => ({
   justifyContent: 'center'
 }));
 
+const Letter = styled(motion.span)({
+  display: 'inline-block',
+  whiteSpace: 'pre'
+});
+
 export function Logo() {
   const logoControls = useAnimationControls();
-  const firstLineControls = useAnimationControls();
-  const secondLineControls = useAnimationControls();
-
+  
   const firstLine = "Strategic Intelligence Resource";
   const secondLine = "and Execution Network";
 
+  const container = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05
+      }
+    }
+  };
+
+  const letterVariant = {
+    hidden: { opacity: 0, x: -5 },
+    visible: { opacity: 1, x: 0 }
+  };
+
   useEffect(() => {
     const sequence = async () => {
-      // Type first line
-      await firstLineControls.start({
-        opacity: 1,
-        transition: {
-          duration: 1
-        }
-      });
-
-      // Type second line
-      await secondLineControls.start({
-        opacity: 1,
-        transition: {
-          duration: 1
-        }
-      });
-
-      // Spin logo after typing animation
+      // Wait for typing animation to complete
+      await new Promise(resolve => setTimeout(resolve, 
+        (firstLine.length + secondLine.length) * 50 + 500));
+      
+      // Spin logo
       await logoControls.start({
         rotateY: 720,
         transition: {
           duration: 1,
-          ease: "easeInOut",
-          delay: 0.2
+          ease: "easeInOut"
         }
       });
     };
 
     sequence();
-  }, [logoControls, firstLineControls, secondLineControls]);
+  }, [logoControls]);
 
   return (
     <LogoWrapper>
@@ -81,18 +86,29 @@ export function Logo() {
         initial={{ rotateY: 0 }}
       />
       <Title variant="subtitle2">
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={firstLineControls}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="visible"
         >
-          {firstLine}
-        </motion.span>
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={secondLineControls}
+          {firstLine.split("").map((char, index) => (
+            <Letter key={index} variants={letterVariant}>
+              {char}
+            </Letter>
+          ))}
+        </motion.div>
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 1.5 }}
         >
-          {secondLine}
-        </motion.span>
+          {secondLine.split("").map((char, index) => (
+            <Letter key={index} variants={letterVariant}>
+              {char}
+            </Letter>
+          ))}
+        </motion.div>
       </Title>
     </LogoWrapper>
   );
