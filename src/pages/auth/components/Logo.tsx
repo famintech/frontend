@@ -8,7 +8,10 @@ const LogoWrapper = styled(motion.div)(({ theme }) => ({
   flexDirection: 'column',
   alignItems: 'center',
   gap: theme.spacing(2),
-  marginBottom: theme.spacing(0)
+  marginBottom: theme.spacing(0),
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(0, 1)
+  }
 }));
 
 const LogoImage = styled(motion.img)({
@@ -27,10 +30,16 @@ const Title = styled(Typography)(({ theme }) => ({
   opacity: 0.9,
   maxWidth: '280px',
   textTransform: 'uppercase',
-  height: '2.5em',
+  height: 'auto', 
+  minHeight: '2.5em',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '0.65rem',
+    letterSpacing: '0.5px',
+    maxWidth: '240px'
+  }
 }));
 
 const Letter = styled(motion.span)({
