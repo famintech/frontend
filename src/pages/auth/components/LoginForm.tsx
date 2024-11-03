@@ -52,7 +52,7 @@ const StyledButton = styled(Button)({
 });
 
 const LinkText = styled(Link)(({ theme }) => ({
-  color: theme.palette.primary.main,
+  color: theme.palette.error.main,
   textDecoration: 'none',
   fontSize: '0.875rem',
   '&:hover': {
@@ -63,7 +63,7 @@ const LinkText = styled(Link)(({ theme }) => ({
 const ForgotPasswordText = styled(Box)({
   textAlign: 'right',
   marginTop: '-8px',
-  marginBottom: '16px'
+  // marginBottom: '16px'
 });
 
 const SignUpText = styled(Box)(({ theme }) => ({
@@ -134,7 +134,7 @@ export function LoginForm() {
 
         <ForgotPasswordText>
           <LinkText to="/auth/forgot-password">
-            Forgot password?
+            Forgot password ?
           </LinkText>
         </ForgotPasswordText>
 
