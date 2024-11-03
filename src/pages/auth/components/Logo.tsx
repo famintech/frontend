@@ -1,19 +1,22 @@
 import { styled } from '@mui/material/styles';
-import { motion } from 'framer-motion';
+import { motion, useAnimationControls } from 'framer-motion';
 import { Typography } from '@mui/material';
+import { useEffect } from 'react';
 
 const LogoWrapper = styled(motion.div)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   gap: theme.spacing(2),
-  marginBottom: theme.spacing(0) // Reduced from 4 to 2
+  marginBottom: theme.spacing(0)
 }));
 
 const LogoImage = styled(motion.img)({
   width: '120px',
   height: '120px',
-  filter: 'brightness(0) invert(1)'
+  filter: 'brightness(0) invert(1)',
+  transformStyle: 'preserve-3d',
+  backfaceVisibility: 'hidden'
 });
 
 const Title = styled(Typography)(({ theme }) => ({
@@ -23,38 +26,74 @@ const Title = styled(Typography)(({ theme }) => ({
   letterSpacing: '1px',
   opacity: 0.9,
   maxWidth: '280px',
-  textTransform: 'uppercase'
+  textTransform: 'uppercase',
+  height: '2.5em',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center'
 }));
 
-const textVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut"
-    }
-  }
-};
-
 export function Logo() {
+  const logoControls = useAnimationControls();
+  const firstLineControls = useAnimationControls();
+  const secondLineControls = useAnimationControls();
+
+  const firstLine = "Strategic Intelligence Resource";
+  const secondLine = "and Execution Network";
+
+  useEffect(() => {
+    const sequence = async () => {
+      // Type first line
+      await firstLineControls.start({
+        opacity: 1,
+        transition: {
+          duration: 1
+        }
+      });
+
+      // Type second line
+      await secondLineControls.start({
+        opacity: 1,
+        transition: {
+          duration: 1
+        }
+      });
+
+      // Spin logo after typing animation
+      await logoControls.start({
+        rotateY: 720,
+        transition: {
+          duration: 1,
+          ease: "easeInOut",
+          delay: 0.2
+        }
+      });
+    };
+
+    sequence();
+  }, [logoControls, firstLineControls, secondLineControls]);
+
   return (
     <LogoWrapper>
       <LogoImage 
-        src="/logo.svg" 
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
+        src="/logo.svg"
+        animate={logoControls}
+        initial={{ rotateY: 0 }}
       />
-      <motion.div
-        variants={textVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <Title variant="subtitle2">
-          Strategic Intelligence Resource and Execution Network
-        </Title>
-      </motion.div>
+      <Title variant="subtitle2">
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={firstLineControls}
+        >
+          {firstLine}
+        </motion.span>
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={secondLineControls}
+        >
+          {secondLine}
+        </motion.span>
+      </Title>
     </LogoWrapper>
   );
 }
