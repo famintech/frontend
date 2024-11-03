@@ -8,7 +8,8 @@ const LayoutRoot = styled(Box)(({ theme }) => ({
   flex: '1 1 auto',
   maxWidth: '100%',
   height: '100%',
-  backgroundColor: theme.palette.background.default
+  backgroundColor: theme.palette.background.default,
+  padding: theme.spacing(2)
 }));
 
 const LayoutContainer = styled(Box)<{ isSidebarOpen: boolean }>(({ theme, isSidebarOpen }) => ({
@@ -16,13 +17,13 @@ const LayoutContainer = styled(Box)<{ isSidebarOpen: boolean }>(({ theme, isSide
   flex: '1 1 auto',
   flexDirection: 'column',
   width: '100%',
-  paddingLeft: isSidebarOpen ? 280 : theme.spacing(10),
+  paddingLeft: isSidebarOpen ? 264 : theme.spacing(8),
   transition: theme.transitions.create('padding', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
   [theme.breakpoints.down('md')]: {
-    paddingLeft: 0
+    paddingLeft: theme.spacing(2)
   }
 }));
 
