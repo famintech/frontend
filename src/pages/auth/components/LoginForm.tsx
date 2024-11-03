@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/services/auth.service';
-import { Button, Alert } from '@mui/material';
+import { Button, Alert, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from './Logo';
 import { GlassContainer } from './GlassContainer';
 import { StyledTextField } from './StyledTextField';
 import { Divider } from './Divider';
+
 const FormWrapper = styled(motion.form)(({ theme }) => ({
   width: '100%',
   // maxWidth: 400,
@@ -50,6 +51,31 @@ const StyledButton = styled(Button)({
   }
 });
 
+const LinkText = styled(Link)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  textDecoration: 'none',
+  fontSize: '0.875rem',
+  '&:hover': {
+    textDecoration: 'underline'
+  }
+}));
+
+const ForgotPasswordText = styled(Box)({
+  textAlign: 'right',
+  marginTop: '-8px',
+  marginBottom: '16px'
+});
+
+const SignUpText = styled(Box)(({ theme }) => ({
+  textAlign: 'center',
+  marginTop: theme.spacing(2),
+  color: theme.palette.grey[500],
+  fontSize: '0.875rem',
+  '& a': {
+    marginLeft: '8px'
+  }
+}));
+
 export function LoginForm() {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -87,9 +113,7 @@ export function LoginForm() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
             >
-              <Alert severity="error">
-                {error}
-              </Alert>
+              <Alert severity="error">{error}</Alert>
             </motion.div>
           )}
         </AnimatePresence>
@@ -107,6 +131,12 @@ export function LoginForm() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </motion.div>
+
+        <ForgotPasswordText>
+          <LinkText to="/auth/forgot-password">
+            Forgot password?
+          </LinkText>
+        </ForgotPasswordText>
 
         <motion.div variants={itemVariants}>
           <StyledTextField
@@ -136,6 +166,11 @@ export function LoginForm() {
             Sign In
           </StyledButton>
         </motion.div>
+
+        <SignUpText>
+          Don't have an account?
+          <LinkText to="/auth/register">Sign Up</LinkText>
+        </SignUpText>
       </FormWrapper>
     </GlassContainer>
   );
