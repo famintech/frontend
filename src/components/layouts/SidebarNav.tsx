@@ -59,18 +59,27 @@ const NavItem = styled(ListItemButton)(({ theme }) => ({
     bottom: 0,
     width: 80,
     height: 4,
-    backgroundColor: theme.palette.custom.accent1,
-    transition: 'box-shadow 0.3s ease',
+    backgroundColor: theme.palette.primary.main, // Default color
+    transition: 'all 0.3s ease',
   },
   '&:hover::after': {
+    backgroundColor: theme.palette.primary.main,
     boxShadow: `0 0 10px ${theme.palette.primary.main}, 
                 0 0 20px ${theme.palette.primary.main}, 
                 0 0 30px ${theme.palette.primary.main}`,
   },
   '&.Mui-selected::after': {
-    boxShadow: `0 0 10px ${theme.palette.primary.main}, 
-                0 0 20px ${theme.palette.primary.main}, 
-                0 0 30px ${theme.palette.primary.main}`,
+    backgroundColor: theme.palette.custom.accent1,
+    boxShadow: `0 0 10px ${theme.palette.custom.accent1}, 
+                0 0 20px ${theme.palette.custom.accent1}, 
+                0 0 30px ${theme.palette.custom.accent1}`,
+  },
+  // When selected and hovered, keep the accent1 color
+  '&.Mui-selected:hover::after': {
+    backgroundColor: theme.palette.custom.accent1,
+    boxShadow: `0 0 10px ${theme.palette.custom.accent1}, 
+                0 0 20px ${theme.palette.custom.accent1}, 
+                0 0 30px ${theme.palette.custom.accent1}`,
   },
   clipPath: `polygon(
     0.304% 1.335%,
