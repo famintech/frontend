@@ -22,24 +22,13 @@ const NavItem = styled(ListItemButton)(({ theme }) => ({
   height: 64,
   width: '100%',
   backgroundColor: 'rgba(10, 14, 23, 0.8)',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    left: 0,
-    top: '50%',
-    transform: 'translateY(-50%)',
-    width: 12,
-    height: 12,
-    backgroundColor: theme.palette.primary.main,
-    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', // square shape
-  },
   '&::after': {  // Add this new pseudo-element for the right square
     content: '""',
     position: 'absolute',
     right: 0,
     bottom: 0,
-    width: 40,  // Adjust width as needed
-    height: 4,  // Adjust height as needed
+    width: 60,  // Adjust width as needed
+    height: 8,  // Adjust height as needed
     backgroundColor: theme.palette.primary.main,
   },
   clipPath: `polygon(
