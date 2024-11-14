@@ -5,6 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import { SidebarHeader } from './SidebarHeader';
 import { SidebarNav } from './SidebarNav';
+import { FullscreenButton } from './FullscreenButton';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -40,6 +41,7 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
         onToggle={isMobile ? handleMobileToggle : onToggle}
         showToggle={false} // Hide the toggle in the header for both mobile and desktop
       />
+      <FullscreenButton />
       <SidebarNav isOpen={isMobile ? mobileOpen : isOpen} />
     </Box>
   );
