@@ -1,5 +1,9 @@
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SettingsIcon from '@mui/icons-material/Settings';
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import PublicIcon from '@mui/icons-material/Public';
+import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
+import AssistantIcon from '@mui/icons-material/Assistant';
 
 export interface MenuItem {
   id: string;
@@ -23,33 +27,27 @@ export const menuItems: MenuItem[] = [
     icon: <SettingsIcon />
   },
   {
-    id: 'settings',
-    title: 'Settings',
-    path: '/settings',
-    icon: <SettingsIcon />
+    id: 'e-hafal',
+    title: 'E-Hafal',
+    path: '/e-hafal',
+    icon: <LightbulbIcon />
   },
   {
-    id: 'settings',
-    title: 'Settings',
-    path: '/settings',
-    icon: <SettingsIcon />
+    id: 'top-secret',
+    title: 'Top Secret',
+    path: '/top-secret',
+    icon: <EnhancedEncryptionIcon />
   },
   {
-    id: 'settings',
-    title: 'Settings',
-    path: '/settings',
-    icon: <SettingsIcon />
+    id: 'master-globe',
+    title: 'Master Globe',
+    path: '/master-globe',
+    icon: <PublicIcon />
   },
   {
-    id: 'settings',
-    title: 'Settings',
-    path: '/settings',
-    icon: <SettingsIcon />
-  },
-  {
-    id: 'settings',
-    title: 'Settings',
-    path: '/settings',
-    icon: <SettingsIcon />
+    id: 'siren-ai',
+    title: 'Siren AI',
+    path: '/siren-ai',
+    icon: <AssistantIcon />
   },
 ];
