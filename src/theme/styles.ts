@@ -14,9 +14,13 @@ const flashAnimation = keyframes`
 // Add error flash animation
 const errorFlashAnimation = keyframes`
   0% { opacity: 1; background-color: #ff0000; }
-  25% { opacity: 0.3; background-color: #ff0000; }
+  12.5% { opacity: 0.3; background-color: #ff0000; }
+  25% { opacity: 1; background-color: #ff0000; }
+  37.5% { opacity: 0.3; background-color: #ff0000; }
   50% { opacity: 1; background-color: #ff0000; }
-  75% { opacity: 0.3; background-color: #ff0000; }
+  62.5% { opacity: 0.3; background-color: #ff0000; }
+  75% { opacity: 1; background-color: #ff0000; }
+  87.5% { opacity: 0.3; background-color: #ff0000; }
   100% { opacity: 1; background-color: #ff0000; }
 `;
 
@@ -75,7 +79,7 @@ export const NavItem = styled(ListItemButton)(({ theme }) => ({
     animation: `${flashAnimation} 0.4s linear`
   },
   '&.error-flashing::after': {
-    animation: `${errorFlashAnimation} 0.4s linear`,
+    animation: `${errorFlashAnimation} 0.8s linear`,
   },
   '&:hover::after': {
     backgroundColor: theme.palette.primary.main,
