@@ -16,6 +16,35 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import { motion } from 'framer-motion';
 import { menuItems, MenuItem } from '@/config/menu.config';
 
+const itemVariants = {
+  initial: { x: 0, opacity: 1 },
+  hover: {
+    x: 10,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 20
+    }
+  },
+  tap: {
+    scale: 0.98,
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 20
+    }
+  }
+};
+
+const AnimatedNavItem = styled(motion.div)(({ theme }) => ({
+  width: '100%',
+  '&:hover': {
+    '& > button': {
+      boxShadow: `0 0 15px ${theme.palette.primary.main}20`,
+    }
+  }
+}));
 
 const NavItem = styled(ListItemButton)(({ theme }) => ({
   position: 'relative',
@@ -30,7 +59,7 @@ const NavItem = styled(ListItemButton)(({ theme }) => ({
     bottom: 0,
     width: 80,
     height: 4,
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.custom.accent1,
     transition: 'box-shadow 0.3s ease',
   },
   '&:hover::after': {
@@ -63,7 +92,7 @@ interface SidebarNavProps {
   isOpen: boolean;
 }
 
-const HOVER_SOUND_URL = '/sounds/ui-sound-hover-1.mp3'; 
+const HOVER_SOUND_URL = '/sounds/ui-sound-hover-1.mp3';
 
 export function SidebarNav({ isOpen }: SidebarNavProps) {
   const location = useLocation();
@@ -80,7 +109,7 @@ export function SidebarNav({ isOpen }: SidebarNavProps) {
       audio.volume = 0.15;
       audioRef.current = audio;
     }
-    
+
     if (audioRef.current && now - lastPlayedTimeRef.current > 100) {
       audioRef.current.currentTime = 0;
       audioRef.current.play().catch(e => {
@@ -111,30 +140,55 @@ export function SidebarNav({ isOpen }: SidebarNavProps) {
     return (
       <ListItem key={item.id} disablePadding sx={{ display: 'block' }}>
         {isOpen ? (
-          <NavItem
-            selected={isSelected}
-            onClick={() => handleClick(item)}
-            onMouseEnter={playHoverSound}
+          <AnimatedNavItem
+            variants={itemVariants}
+            initial="initial"
+            whileHover="hover"
+            whileTap="tap"
+            animate={{
+              x: isSelected ? 5 : 0,
+              transition: { type: "spring", stiffness: 400, damping: 20 }
+            }}
           >
-            <ListItemIcon sx={{ mb: 1, minWidth: 40 }}>
-              {item.icon}
-            </ListItemIcon>
-            <ListItemText sx={{ mb: 1 }} primary={item.title} />
-            {hasChildren && (
-              isMenuOpen ? <ExpandLess /> : <ExpandMore />
-            )}
-          </NavItem>
-        ) : (
-          <Tooltip title={item.title} placement="right">
             <NavItem
               selected={isSelected}
               onClick={() => handleClick(item)}
-              sx={{ justifyContent: 'center' }}
+              onMouseEnter={playHoverSound}
             >
-              <ListItemIcon sx={{ minWidth: 'auto' }}>
+              <ListItemIcon sx={{ mb: 1, minWidth: 40 }}>
                 {item.icon}
               </ListItemIcon>
+              <ListItemText sx={{ mb: 1 }} primary={item.title} />
+              {hasChildren && (
+                isMenuOpen ? <ExpandLess /> : <ExpandMore />
+              )}
             </NavItem>
+          </AnimatedNavItem>
+        ) : (
+          <Tooltip title={item.title} placement="right">
+            <AnimatedNavItem
+              whileHover={{
+                x: 10,
+                transition: {
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 20
+                }
+              }}
+              initial={{ x: 0 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <NavItem
+                selected={isSelected}
+                onClick={() => handleClick(item)}
+                onMouseEnter={playHoverSound}
+                sx={{ justifyContent: 'center' }}
+              >
+                <ListItemIcon sx={{ minWidth: 'auto' }}>
+                  {item.icon}
+                </ListItemIcon>
+              </NavItem>
+            </AnimatedNavItem>
           </Tooltip>
         )}
 
