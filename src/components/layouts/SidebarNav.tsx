@@ -33,6 +33,15 @@ const NavItem = styled(ListItemButton)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', // square shape
   },
+  '&::after': {  // Add this new pseudo-element for the right square
+    content: '""',
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    width: 40,  // Adjust width as needed
+    height: 4,  // Adjust height as needed
+    backgroundColor: theme.palette.primary.main,
+  },
   clipPath: `polygon(
     0.304% 1.335%,
     56.164% 1.326%,
