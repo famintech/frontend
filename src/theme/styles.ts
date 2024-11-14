@@ -37,6 +37,16 @@ export const NavItem = styled(ListItemButton)(({ theme }) => ({
   backgroundColor: '#0a1d29',
   transition: 'all 0.3s ease',
   pointerEvents: 'auto',
+  // Customize the ripple effect
+  '& .MuiTouchRipple-child': {
+    backgroundColor: theme.palette.primary.main, // Normal ripple color
+  },
+  '&.error-ripple .MuiTouchRipple-child': {
+    backgroundColor: '#ff0000', // Red ripple for error state
+  },
+  '&.Mui-selected .MuiTouchRipple-child': {
+    backgroundColor: theme.palette.custom.accent1, // Selected state ripple color
+  },
   '&::after': {
     content: '""',
     position: 'absolute',

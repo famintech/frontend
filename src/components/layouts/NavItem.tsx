@@ -26,7 +26,7 @@ export function NavItem({
   onClick
 }: NavItemProps) {
   const playSound = useUiSound(HOVER_SOUND_URL, { volume: 0.15 });
-  const playErrorSound = useUiSound(ERROR_SOUND_URL, { volume: 0.5 });
+  const playErrorSound = useUiSound(ERROR_SOUND_URL, { volume: 1 });
   const [isFlashing, setIsFlashing] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -75,10 +75,11 @@ export function NavItem({
     }
   };
 
-  const getFlashClass = () => {
-    if (isError) return 'error-flashing';
-    if (isFlashing) return 'flashing';
-    return '';
+  const getClasses = () => {
+    const classes = [];
+    if (isError) classes.push('error-flashing', 'error-ripple');
+    if (isFlashing) classes.push('flashing');
+    return classes.join(' ');
   };
 
   if (!isOpen) {
@@ -96,7 +97,13 @@ export function NavItem({
             selected={isSelected}
             onClick={handleClick}
             onMouseEnter={handleHover}
-            className={getFlashClass()}
+            className={getClasses()}
+            TouchRippleProps={{
+              classes: {
+                child: isError ? 'error-ripple' : ''
+              },
+              center: false // false means ripple starts from click position
+            }}
             sx={{ justifyContent: 'center' }}
           >
             <ListItemIcon sx={{ minWidth: 'auto' }}>
@@ -121,7 +128,13 @@ export function NavItem({
         selected={isSelected}
         onClick={handleClick}
         onMouseEnter={handleHover}
-        className={getFlashClass()}
+        className={getClasses()}
+        TouchRippleProps={{
+          classes: {
+            child: isError ? 'error-ripple' : ''
+          },
+          center: false // false means ripple starts from click position
+        }}
       >
         <ListItemIcon sx={{ mb: 1, minWidth: 40 }}>
           {item.icon}
