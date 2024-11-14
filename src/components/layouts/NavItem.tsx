@@ -25,17 +25,32 @@ export function NavItem({
 }: NavItemProps) {
   const playSound = useUiSound(HOVER_SOUND_URL, { volume: 0.15 });
   const [isFlashing, setIsFlashing] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const handleHover = () => {
     playSound({ pitch: 1 }); // Normal pitch for hover
   };
 
   const handleClick = () => {
-    playSound({ pitch: 0.5 }); // Lower pitch for click
-    setIsFlashing(true);
-    onClick();
-    // Reset flash state after animation
-    setTimeout(() => setIsFlashing(false), 400);
+    // Check if route is defined (you might need to adjust this check based on your route structure)
+    const isRouteUndefined = !item.path || item.path === '#' || item.path === '';
+    
+    if (isRouteUndefined) {
+      setIsError(true);
+      playSound({ pitch: 0.3 }); // Lower pitch for error
+      setTimeout(() => setIsError(false), 400);
+    } else {
+      setIsFlashing(true);
+      playSound({ pitch: 0.5 }); // Normal click pitch
+      onClick();
+      setTimeout(() => setIsFlashing(false), 400);
+    }
+  };
+
+  const getFlashClass = () => {
+    if (isError) return 'error-flashing';
+    if (isFlashing) return 'flashing';
+    return '';
   };
 
   if (!isOpen) {
@@ -53,7 +68,7 @@ export function NavItem({
             selected={isSelected}
             onClick={handleClick}
             onMouseEnter={handleHover}
-            className={isFlashing ? 'flashing' : ''}
+            className={getFlashClass()}
             sx={{ justifyContent: 'center' }}
           >
             <ListItemIcon sx={{ minWidth: 'auto' }}>
@@ -78,7 +93,7 @@ export function NavItem({
         selected={isSelected}
         onClick={handleClick}
         onMouseEnter={handleHover}
-        className={isFlashing ? 'flashing' : ''}
+        className={getFlashClass()}
       >
         <ListItemIcon sx={{ mb: 1, minWidth: 40 }}>
           {item.icon}
