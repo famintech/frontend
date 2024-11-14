@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { routerConfig } from '@/routes/index';
 
 const HOVER_SOUND_URL = '/sounds/ui-sound-hover-1.mp3';
+const ERROR_SOUND_URL = '/sounds/ui-sound-click-error-1.mp3';
 
 interface NavItemProps {
   item: MenuItem;
@@ -25,6 +26,7 @@ export function NavItem({
   onClick
 }: NavItemProps) {
   const playSound = useUiSound(HOVER_SOUND_URL, { volume: 0.15 });
+  const playErrorSound = useUiSound(ERROR_SOUND_URL, { volume: 0.5 });
   const [isFlashing, setIsFlashing] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -52,9 +54,18 @@ export function NavItem({
   };
 
   const handleClick = () => {
+    // Special handling for top-secret route
+    if (item.id === 'top-secret') {
+      setIsError(true);
+      playErrorSound();
+      setTimeout(() => setIsError(false), 400);
+      return;
+    }
+
+    // Normal route handling
     if (!item.children && item.path && !isRouteImplemented(item.path)) {
       setIsError(true);
-      playSound({ pitch: 0.3 }); // Lower pitch for error
+      playSound({ pitch: 0.3 }); // Lower pitch for normal errors
       setTimeout(() => setIsError(false), 400);
     } else {
       setIsFlashing(true);
