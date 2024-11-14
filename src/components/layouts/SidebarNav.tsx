@@ -15,27 +15,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { motion } from 'framer-motion';
 import { menuItems, MenuItem } from '@/config/menu.config';
-
-const itemVariants = {
-  initial: { x: 0, opacity: 1 },
-  hover: {
-    x: 20, // Increased from 10 to 20 for more movement
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 400,
-      damping: 20
-    }
-  },
-  tap: {
-    scale: 0.98,
-    transition: {
-      type: "spring",
-      stiffness: 400,
-      damping: 20
-    }
-  }
-};
+import { SidebarNavProps } from '@/types/sidebar-nav-props';
 
 const AnimatedNavItem = styled(motion.div)(({ theme }) => ({
   width: '100%',
@@ -43,15 +23,17 @@ const AnimatedNavItem = styled(motion.div)(({ theme }) => ({
     '& > button': {
       boxShadow: `0 0 15px ${theme.palette.primary.main}20`,
     }
-  }
+  },
+  pointerEvents: 'none'
 }));
 
 const NavItem = styled(ListItemButton)(({ theme }) => ({
   position: 'relative',
   height: 64,
   width: '100%',
-  backgroundColor: '#0a1d29',
+  backgroundColor: 'rgba(10, 14, 23, 0.8)',
   transition: 'all 0.3s ease',
+  pointerEvents: 'auto',
   '&::after': {
     content: '""',
     position: 'absolute',
@@ -59,7 +41,7 @@ const NavItem = styled(ListItemButton)(({ theme }) => ({
     bottom: 0,
     width: 80,
     height: 4,
-    backgroundColor: theme.palette.primary.main, // Default color
+    backgroundColor: theme.palette.primary.main,
     transition: 'all 0.3s ease',
   },
   '&:hover::after': {
@@ -74,7 +56,6 @@ const NavItem = styled(ListItemButton)(({ theme }) => ({
                 0 0 20px ${theme.palette.custom.accent1}, 
                 0 0 30px ${theme.palette.custom.accent1}`,
   },
-  // When selected and hovered, keep the accent1 color
   '&.Mui-selected:hover::after': {
     backgroundColor: theme.palette.custom.accent1,
     boxShadow: `0 0 10px ${theme.palette.custom.accent1}, 
@@ -96,10 +77,6 @@ const NavItem = styled(ListItemButton)(({ theme }) => ({
   )`,
   marginBottom: theme.spacing(0)
 }));
-
-interface SidebarNavProps {
-  isOpen: boolean;
-}
 
 const HOVER_SOUND_URL = '/sounds/ui-sound-hover-1.mp3';
 
@@ -128,7 +105,6 @@ export function SidebarNav({ isOpen }: SidebarNavProps) {
     }
   };
 
-
   const handleClick = (item: MenuItem) => {
     if (item.children) {
       setOpenMenus(prev =>
@@ -150,14 +126,16 @@ export function SidebarNav({ isOpen }: SidebarNavProps) {
       <ListItem key={item.id} disablePadding sx={{ display: 'block' }}>
         {isOpen ? (
           <AnimatedNavItem
-            variants={itemVariants}
-            initial="initial"
-            whileHover="hover"
-            whileTap="tap"
-            animate={{
-              x: isSelected ? 5 : 0,
-              transition: { type: "spring", stiffness: 400, damping: 20 }
+            whileHover={{
+              x: 20,
+              transition: { 
+                type: "spring", 
+                stiffness: 400, 
+                damping: 20 
+              }
             }}
+            initial={{ x: 0 }}
+            whileTap={{ scale: 0.98 }}
           >
             <NavItem
               selected={isSelected}
