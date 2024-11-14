@@ -16,26 +16,38 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import { motion } from 'framer-motion';
 import { menuItems, MenuItem } from '@/config/menu.config';
 
+
 const NavItem = styled(ListItemButton)(({ theme }) => ({
-    position: 'relative',
-    height: 64,
-    width: '100%',
-    backgroundColor: 'rgba(10, 14, 23, 0.8)',
-    clipPath: `polygon(
-      0.304% 1.335%,
-      56.164% 1.326%,
-      63.009% 19.749%,
-      78.551% 19.749%,
-      99.808% 76.962%,
-      99.808% 98.65%,
-      63.464% 98.65%,
-      54.923% 75.662%,
-      9.877% 75.662%,
-      0.493% 50.408%,
-      0.304% 1.335%
-    )`,
-    marginBottom: theme.spacing(0)
-  }));
+  position: 'relative',
+  height: 64,
+  width: '100%',
+  backgroundColor: 'rgba(10, 14, 23, 0.8)',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    left: 0,
+    top: '50%',
+    transform: 'translateY(-50%)',
+    width: 12,
+    height: 12,
+    backgroundColor: theme.palette.primary.main,
+    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', // square shape
+  },
+  clipPath: `polygon(
+    0.304% 1.335%,
+    56.164% 1.326%,
+    63.009% 19.749%,
+    78.551% 19.749%,
+    99.808% 76.962%,
+    99.808% 98.65%,
+    63.464% 98.65%,
+    54.923% 75.662%,
+    9.877% 75.662%,
+    0.493% 50.408%,
+    0.304% 1.335%
+  )`,
+  marginBottom: theme.spacing(0)
+}));
 
 interface SidebarNavProps {
   isOpen: boolean;
@@ -48,8 +60,8 @@ export function SidebarNav({ isOpen }: SidebarNavProps) {
 
   const handleClick = (item: MenuItem) => {
     if (item.children) {
-      setOpenMenus(prev => 
-        prev.includes(item.id) 
+      setOpenMenus(prev =>
+        prev.includes(item.id)
           ? prev.filter(id => id !== item.id)
           : [...prev, item.id]
       );
@@ -91,7 +103,7 @@ export function SidebarNav({ isOpen }: SidebarNavProps) {
             </NavItem>
           </Tooltip>
         )}
-        
+
         {hasChildren && (
           <Collapse in={isMenuOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding sx={{ pl: 2 }}>

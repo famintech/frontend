@@ -5,6 +5,7 @@ WORKDIR /app
 
 # Install dependencies
 COPY package.json yarn.lock ./
+RUN yarn config set network-timeout 600000 -g
 RUN yarn install --frozen-lockfile
 
 # Build the app
@@ -18,6 +19,7 @@ WORKDIR /app
 
 # Install production dependencies
 COPY package.json yarn.lock server.js ./
+RUN yarn config set network-timeout 600000 -g
 RUN yarn install --production --frozen-lockfile
 
 # Copy built assets
