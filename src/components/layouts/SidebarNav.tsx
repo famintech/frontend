@@ -34,7 +34,7 @@ const NavItem = styled(ListItemButton)(({ theme }) => ({
       0.493% 50.408%,
       0.304% 1.335%
     )`,
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(0)
   }));
 
 interface SidebarNavProps {
@@ -70,10 +70,10 @@ export function SidebarNav({ isOpen }: SidebarNavProps) {
             selected={isSelected}
             onClick={() => handleClick(item)}
           >
-            <ListItemIcon sx={{ minWidth: 40 }}>
+            <ListItemIcon sx={{ mb: 2, minWidth: 40 }}>
               {item.icon}
             </ListItemIcon>
-            <ListItemText primary={item.title} />
+            <ListItemText sx={{ mb: 2 }} primary={item.title} />
             {hasChildren && (
               isMenuOpen ? <ExpandLess /> : <ExpandMore />
             )}
