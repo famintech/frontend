@@ -1,82 +1,14 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Collapse,
-  Tooltip
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
+import { Box, List, ListItem, Collapse } from '@mui/material';
 import { motion } from 'framer-motion';
 import { menuItems, MenuItem } from '@/config/menu.config';
-import { SidebarNavProps } from '@/types/sidebar-nav-props';
+import { NavItem } from './NavItem';
+import { useHoverSound } from '@/hooks/use-hover-sound';
 
-const AnimatedNavItem = styled(motion.div)(({ theme }) => ({
-  width: '100%',
-  '&:hover': {
-    '& > button': {
-      boxShadow: `0 0 15px ${theme.palette.primary.main}20`,
-    }
-  },
-  pointerEvents: 'none'
-}));
-
-const NavItem = styled(ListItemButton)(({ theme }) => ({
-  position: 'relative',
-  height: 64,
-  width: '100%',
-  backgroundColor: '#0a1d29',
-  transition: 'all 0.3s ease',
-  pointerEvents: 'auto',
-  '&::after': {
-    content: '""',
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-    width: 80,
-    height: 4,
-    backgroundColor: theme.palette.primary.main,
-    transition: 'all 0.3s ease',
-  },
-  '&:hover::after': {
-    backgroundColor: theme.palette.primary.main,
-    boxShadow: `0 0 10px ${theme.palette.primary.main}, 
-                0 0 20px ${theme.palette.primary.main}, 
-                0 0 30px ${theme.palette.primary.main}`,
-  },
-  '&.Mui-selected::after': {
-    backgroundColor: theme.palette.custom.accent1,
-    boxShadow: `0 0 10px ${theme.palette.custom.accent1}, 
-                0 0 20px ${theme.palette.custom.accent1}, 
-                0 0 30px ${theme.palette.custom.accent1}`,
-  },
-  '&.Mui-selected:hover::after': {
-    backgroundColor: theme.palette.custom.accent1,
-    boxShadow: `0 0 10px ${theme.palette.custom.accent1}, 
-                0 0 20px ${theme.palette.custom.accent1}, 
-                0 0 30px ${theme.palette.custom.accent1}`,
-  },
-  clipPath: `polygon(
-    0.304% 1.335%,
-    56.164% 1.326%,
-    63.009% 19.749%,
-    78.551% 19.749%,
-    99.808% 76.962%,
-    99.808% 98.65%,
-    63.464% 98.65%,
-    54.923% 75.662%,
-    9.877% 75.662%,
-    0.493% 50.408%,
-    0.304% 1.335%
-  )`,
-  marginBottom: theme.spacing(0)
-}));
+interface SidebarNavProps {
+  isOpen: boolean;
+}
 
 const HOVER_SOUND_URL = '/sounds/ui-sound-hover-1.mp3';
 
@@ -84,26 +16,7 @@ export function SidebarNav({ isOpen }: SidebarNavProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const [openMenus, setOpenMenus] = useState<string[]>([]);
-
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const lastPlayedTimeRef = useRef<number>(0);
-
-  const playHoverSound = () => {
-    const now = Date.now();
-    if (!audioRef.current) {
-      const audio = new Audio(HOVER_SOUND_URL);
-      audio.volume = 0.15;
-      audioRef.current = audio;
-    }
-
-    if (audioRef.current && now - lastPlayedTimeRef.current > 100) {
-      audioRef.current.currentTime = 0;
-      audioRef.current.play().catch(e => {
-        console.log('Error playing sound:', e);
-      });
-      lastPlayedTimeRef.current = now;
-    }
-  };
+  const playHoverSound = useHoverSound(HOVER_SOUND_URL);
 
   const handleClick = (item: MenuItem) => {
     if (item.children) {
@@ -119,70 +32,23 @@ export function SidebarNav({ isOpen }: SidebarNavProps) {
 
   const renderMenuItem = (item: MenuItem) => {
     const isSelected = location.pathname === item.path;
-    const hasChildren = Boolean(item.children?.length);
     const isMenuOpen = openMenus.includes(item.id);
 
     return (
       <ListItem key={item.id} disablePadding sx={{ display: 'block' }}>
-        {isOpen ? (
-          <AnimatedNavItem
-            whileHover={{
-              x: 20,
-              transition: { 
-                type: "spring", 
-                stiffness: 400, 
-                damping: 20 
-              }
-            }}
-            initial={{ x: 0 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <NavItem
-              selected={isSelected}
-              onClick={() => handleClick(item)}
-              onMouseEnter={playHoverSound}
-            >
-              <ListItemIcon sx={{ mb: 1, minWidth: 40 }}>
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText sx={{ mb: 1 }} primary={item.title} />
-              {hasChildren && (
-                isMenuOpen ? <ExpandLess /> : <ExpandMore />
-              )}
-            </NavItem>
-          </AnimatedNavItem>
-        ) : (
-          <Tooltip title={item.title} placement="right">
-            <AnimatedNavItem
-              whileHover={{
-                x: 10,
-                transition: {
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 20
-                }
-              }}
-              initial={{ x: 0 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <NavItem
-                selected={isSelected}
-                onClick={() => handleClick(item)}
-                onMouseEnter={playHoverSound}
-                sx={{ justifyContent: 'center' }}
-              >
-                <ListItemIcon sx={{ minWidth: 'auto' }}>
-                  {item.icon}
-                </ListItemIcon>
-              </NavItem>
-            </AnimatedNavItem>
-          </Tooltip>
-        )}
+        <NavItem
+          item={item}
+          isOpen={isOpen}
+          isSelected={isSelected}
+          isMenuOpen={isMenuOpen}
+          onHover={playHoverSound}
+          onClick={() => handleClick(item)}
+        />
 
-        {hasChildren && (
+        {item.children && (
           <Collapse in={isMenuOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding sx={{ pl: 2 }}>
-              {item.children!.map((child) => renderMenuItem(child))}
+              {item.children.map((child) => renderMenuItem(child))}
             </List>
           </Collapse>
         )}
