@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Box, Drawer, useMediaQuery } from '@mui/material';
+import { Box, Drawer, useMediaQuery, IconButton } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import MenuIcon from '@mui/icons-material/Menu';
 import { SidebarHeader } from './SidebarHeader';
 import { SidebarNav } from './SidebarNav';
 
@@ -37,7 +38,7 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
       <SidebarHeader 
         isOpen={isMobile ? mobileOpen : isOpen} 
         onToggle={isMobile ? handleMobileToggle : onToggle}
-        showToggle={isMobile} // Add this prop
+        showToggle={false} // Hide the toggle in the header for both mobile and desktop
       />
       <SidebarNav isOpen={isMobile ? mobileOpen : isOpen} />
     </Box>
@@ -45,22 +46,43 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
 
   if (isMobile) {
     return (
-      <Drawer
-        variant="temporary"
-        anchor="left"
-        open={mobileOpen}
-        onClose={() => setMobileOpen(false)}
-        ModalProps={{ keepMounted: true }}
-        sx={{
-          '& .MuiDrawer-paper': {
-            width: 280,
-            border: 'none',
-            backgroundColor: 'transparent'
-          }
-        }}
-      >
-        {content}
-      </Drawer>
+      <>
+        {/* Mobile Toggle Button - Always visible */}
+        <IconButton
+          onClick={handleMobileToggle}
+          sx={{
+            position: 'fixed',
+            left: 16,
+            top: 16,
+            zIndex: (theme) => theme.zIndex.drawer + 2,
+            color: 'primary.main',
+            backgroundColor: 'rgba(10, 14, 23, 0.8)',
+            '&:hover': {
+              backgroundColor: 'rgba(10, 14, 23, 0.9)',
+            }
+          }}
+        >
+          <MenuIcon />
+        </IconButton>
+
+        {/* Mobile Drawer */}
+        <Drawer
+          variant="temporary"
+          anchor="left"
+          open={mobileOpen}
+          onClose={() => setMobileOpen(false)}
+          ModalProps={{ keepMounted: true }}
+          sx={{
+            '& .MuiDrawer-paper': {
+              width: 280,
+              border: 'none',
+              backgroundColor: 'transparent'
+            }
+          }}
+        >
+          {content}
+        </Drawer>
+      </>
     );
   }
 
