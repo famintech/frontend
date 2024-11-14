@@ -20,6 +20,15 @@ const errorFlashAnimation = keyframes`
   100% { opacity: 1; background-color: #ff0000; }
 `;
 
+// Add error flash animation for the whole polygon
+const errorPolygonFlashAnimation = keyframes`
+  0% { background-color: #0a1d29; }
+  25% { background-color: rgba(255, 0, 0, 0.7); }
+  50% { background-color: #0a1d29; }
+  75% { background-color: rgba(255, 0, 0, 0.7); }
+  100% { background-color: #0a1d29; }
+`;
+
 export const AnimatedNavItem = styled(motion.div)(({ theme }) => ({
   width: '100%',
   '&:hover': {
@@ -39,13 +48,18 @@ export const NavItem = styled(ListItemButton)(({ theme }) => ({
   pointerEvents: 'auto',
   // Customize the ripple effect
   '& .MuiTouchRipple-child': {
-    backgroundColor: theme.palette.primary.main, // Normal ripple color
+    backgroundColor: theme.palette.primary.main,
+    animationDuration: '400ms !important', // Adjust ripple duration here
   },
   '&.error-ripple .MuiTouchRipple-child': {
-    backgroundColor: '#ff0000', // Red ripple for error state
+    backgroundColor: '#ff0000',
+    animationDuration: '800ms !important', // Longer duration for error ripple
   },
   '&.Mui-selected .MuiTouchRipple-child': {
-    backgroundColor: theme.palette.custom.accent1, // Selected state ripple color
+    backgroundColor: theme.palette.custom.accent1,
+  },
+  '&.error-polygon': {
+    animation: `${errorPolygonFlashAnimation} 0.8s linear`
   },
   '&::after': {
     content: '""',
@@ -61,7 +75,7 @@ export const NavItem = styled(ListItemButton)(({ theme }) => ({
     animation: `${flashAnimation} 0.4s linear`
   },
   '&.error-flashing::after': {
-    animation: `${errorFlashAnimation} 0.4s linear`
+    animation: `${errorFlashAnimation} 0.4s linear`,
   },
   '&:hover::after': {
     backgroundColor: theme.palette.primary.main,

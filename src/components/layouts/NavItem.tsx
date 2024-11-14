@@ -29,6 +29,7 @@ export function NavItem({
   const playErrorSound = useUiSound(ERROR_SOUND_URL, { volume: 1 });
   const [isFlashing, setIsFlashing] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isPolygonError, setIsPolygonError] = useState(false);
 
   const isRouteImplemented = (path: string) => {
     // Safely access nested routes with optional chaining
@@ -57,8 +58,12 @@ export function NavItem({
     // Special handling for top-secret route
     if (item.id === 'top-secret') {
       setIsError(true);
+      setIsPolygonError(true);
       playErrorSound();
-      setTimeout(() => setIsError(false), 400);
+      setTimeout(() => {
+        setIsError(false);
+        setIsPolygonError(false);
+      }, 800); // Match this with animation duration
       return;
     }
 
@@ -79,6 +84,7 @@ export function NavItem({
     const classes = [];
     if (isError) classes.push('error-flashing', 'error-ripple');
     if (isFlashing) classes.push('flashing');
+    if (isPolygonError) classes.push('error-polygon');
     return classes.join(' ');
   };
 
@@ -102,8 +108,8 @@ export function NavItem({
               classes: {
                 child: isError ? 'error-ripple' : ''
               },
-              center: false // false means ripple starts from click position
-            }}
+              center: false, // false means ripple starts from click position
+            }}   
             sx={{ justifyContent: 'center' }}
           >
             <ListItemIcon sx={{ minWidth: 'auto' }}>
