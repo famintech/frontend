@@ -19,26 +19,6 @@ export const menuItems: MenuItem[] = [
     icon: <DashboardIcon />
   },
   {
-    id: 'analytics',
-    title: 'Analytics',
-    path: '/analytics',
-    icon: <AnalyticsIcon />,
-    children: [
-      {
-        id: 'reports',
-        title: 'Reports',
-        path: '/analytics/reports',
-        icon: <AnalyticsIcon />
-      }
-    ]
-  },
-  {
-    id: 'users',
-    title: 'User Management',
-    path: '/users',
-    icon: <PeopleIcon />
-  },
-  {
     id: 'settings',
     title: 'Settings',
     path: '/settings',

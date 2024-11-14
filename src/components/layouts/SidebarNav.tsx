@@ -22,14 +22,26 @@ const NavItem = styled(ListItemButton)(({ theme }) => ({
   height: 64,
   width: '100%',
   backgroundColor: 'rgba(10, 14, 23, 0.8)',
-  '&::after': {  // Add this new pseudo-element for the right square
+  transition: 'all 0.3s ease',
+  '&::after': {
     content: '""',
     position: 'absolute',
     right: 0,
     bottom: 0,
-    width: 60,  // Adjust width as needed
-    height: 8,  // Adjust height as needed
+    width: 40,
+    height: 4,
     backgroundColor: theme.palette.primary.main,
+    transition: 'box-shadow 0.3s ease',
+  },
+  '&:hover::after': {
+    boxShadow: `0 0 10px ${theme.palette.primary.main}, 
+                0 0 20px ${theme.palette.primary.main}, 
+                0 0 30px ${theme.palette.primary.main}`,
+  },
+  '&.Mui-selected::after': {
+    boxShadow: `0 0 10px ${theme.palette.primary.main}, 
+                0 0 20px ${theme.palette.primary.main}, 
+                0 0 30px ${theme.palette.primary.main}`,
   },
   clipPath: `polygon(
     0.304% 1.335%,
