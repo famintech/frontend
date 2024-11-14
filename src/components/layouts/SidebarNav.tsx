@@ -73,24 +73,14 @@ export function SidebarNav({ isOpen }: SidebarNavProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const lastPlayedTimeRef = useRef<number>(0);
 
-  // Preload audio on mount
-  useEffect(() => {
-    const audio = new Audio(HOVER_SOUND_URL);
-    audio.preload = 'auto';
-    audio.volume = 0.15;
-    
-    // Load the audio
-    audio.load();
-    audioRef.current = audio;
-
-    // Cleanup
-    return () => {
-      audioRef.current = null;
-    };
-  }, []);
-
   const playHoverSound = () => {
     const now = Date.now();
+    if (!audioRef.current) {
+      const audio = new Audio(HOVER_SOUND_URL);
+      audio.volume = 0.15;
+      audioRef.current = audio;
+    }
+    
     if (audioRef.current && now - lastPlayedTimeRef.current > 100) {
       audioRef.current.currentTime = 0;
       audioRef.current.play().catch(e => {
