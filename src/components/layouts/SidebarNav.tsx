@@ -75,27 +75,16 @@ export function SidebarNav({ isOpen }: SidebarNavProps) {
 
   // Preload audio on mount
   useEffect(() => {
-    const audio = new Audio();
-    audio.preload = 'auto'; // Force preloading
+    const audio = new Audio(HOVER_SOUND_URL);
+    audio.preload = 'auto';
     audio.volume = 0.15;
     
-    // Create source element for better preloading control
-    const source = document.createElement('source');
-    source.src = HOVER_SOUND_URL;
-    source.type = 'audio/mpeg';
-    
-    // Optional: Listen for when it's loaded
-    audio.addEventListener('loadeddata', () => {
-      console.log('Sound effect preloaded and ready');
-    });
-
     // Load the audio
     audio.load();
     audioRef.current = audio;
 
     // Cleanup
     return () => {
-      audio.remove();
       audioRef.current = null;
     };
   }, []);
@@ -105,13 +94,12 @@ export function SidebarNav({ isOpen }: SidebarNavProps) {
     if (audioRef.current && now - lastPlayedTimeRef.current > 100) {
       audioRef.current.currentTime = 0;
       audioRef.current.play().catch(e => {
-        if (process.env.NODE_ENV === 'development') {
-          console.log('Error playing sound:', e);
-        }
+        console.log('Error playing sound:', e);
       });
       lastPlayedTimeRef.current = now;
     }
   };
+
 
   const handleClick = (item: MenuItem) => {
     if (item.children) {
