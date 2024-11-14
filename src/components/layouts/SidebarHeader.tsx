@@ -8,7 +8,6 @@ const HeaderRoot = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   padding: theme.spacing(3),
   height: 64,
-  borderBottom: `1px solid ${theme.palette.divider}`
 }));
 
 const LogoImage = styled('img')({
