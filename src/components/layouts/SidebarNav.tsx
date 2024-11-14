@@ -50,7 +50,7 @@ const NavItem = styled(ListItemButton)(({ theme }) => ({
   position: 'relative',
   height: 64,
   width: '100%',
-  backgroundColor: 'rgba(10, 14, 23, 0.8)',
+  backgroundColor: '#0a1d29',
   transition: 'all 0.3s ease',
   '&::after': {
     content: '""',
