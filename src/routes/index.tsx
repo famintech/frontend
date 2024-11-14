@@ -4,7 +4,8 @@ import Login from '@/pages/auth/login';
 import { DashboardLayout } from '@/components/layouts/DashboardLayout';
 import Dashboard from '@/pages/dashboard';
 
-const router = createBrowserRouter([
+// Export the router configuration
+export const routerConfig = [
   {
     path: '/login',
     element: <Login />
@@ -49,7 +50,9 @@ const router = createBrowserRouter([
       }
     ]
   }
-]);
+];
+
+const router = createBrowserRouter(routerConfig);
 
 export function Router() {
   return <RouterProvider router={router} />;

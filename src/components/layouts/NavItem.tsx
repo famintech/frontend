@@ -5,6 +5,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { useUiSound } from '@/hooks/use-ui-sound';
 import { useState } from 'react';
+import { routerConfig } from '@/routes/index';
 
 const HOVER_SOUND_URL = '/sounds/ui-sound-hover-1.mp3';
 
@@ -27,15 +28,31 @@ export function NavItem({
   const [isFlashing, setIsFlashing] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  const isRouteImplemented = (path: string) => {
+    // Safely access nested routes with optional chaining
+    const routes = routerConfig[1]?.children?.[0]?.children;
+    if (!routes) return false;
+
+    const findRoute = (routes: any[], path: string): boolean => {
+      for (const route of routes) {
+        if (route.path === path.replace('/', '') && route.element) return true;
+        if (route.children) {
+          const found = findRoute(route.children, path);
+          if (found) return true;
+        }
+      }
+      return false;
+    };
+    
+    return findRoute(routes, path);
+  };
+
   const handleHover = () => {
     playSound({ pitch: 1 }); // Normal pitch for hover
   };
 
   const handleClick = () => {
-    // Check if route is defined (you might need to adjust this check based on your route structure)
-    const isRouteUndefined = !item.path || item.path === '#' || item.path === '';
-    
-    if (isRouteUndefined) {
+    if (!item.children && item.path && !isRouteImplemented(item.path)) {
       setIsError(true);
       playSound({ pitch: 0.3 }); // Lower pitch for error
       setTimeout(() => setIsError(false), 400);
