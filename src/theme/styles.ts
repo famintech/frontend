@@ -11,17 +11,23 @@ const flashAnimation = keyframes`
   100% { opacity: 1; }
 `;
 
-// Add error flash animation
+// Add error flash animation with white base color
 const errorFlashAnimation = keyframes`
   0% { opacity: 1; background-color: #ff0000; }
-  12.5% { opacity: 0.3; background-color: #ff0000; }
+  12.5% { opacity: 1; background-color: #ffffff; }
   25% { opacity: 1; background-color: #ff0000; }
-  37.5% { opacity: 0.3; background-color: #ff0000; }
+  37.5% { opacity: 1; background-color: #ffffff; }
   50% { opacity: 1; background-color: #ff0000; }
-  62.5% { opacity: 0.3; background-color: #ff0000; }
+  62.5% { opacity: 1; background-color: #ffffff; }
   75% { opacity: 1; background-color: #ff0000; }
-  87.5% { opacity: 0.3; background-color: #ff0000; }
+  87.5% { opacity: 1; background-color: #ffffff; }
   100% { opacity: 1; background-color: #ff0000; }
+`;
+
+// Add icon color animation
+const iconFlashAnimation = keyframes`
+  0% { color: #ffffff; }
+  100% { color: #ffffff; }
 `;
 
 // Add error flash animation for the whole polygon
@@ -50,6 +56,13 @@ export const NavItem = styled(ListItemButton)(({ theme }) => ({
   backgroundColor: '#0a1d29',
   transition: 'all 0.3s ease',
   pointerEvents: 'auto',
+  '& .MuiListItemIcon-root': {
+    color: theme.palette.primary.main, // Default icon color
+    transition: 'color 0.3s ease',
+  },
+  '&.error-flashing .MuiListItemIcon-root': {
+    animation: `${iconFlashAnimation} 0.8s linear` // Icon turns white during error flash
+  },
   // Customize the ripple effect
   '& .MuiTouchRipple-child': {
     backgroundColor: theme.palette.primary.main,
