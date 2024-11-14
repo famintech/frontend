@@ -19,7 +19,7 @@ import { menuItems, MenuItem } from '@/config/menu.config';
 const itemVariants = {
   initial: { x: 0, opacity: 1 },
   hover: {
-    x: 10,
+    x: 20, // Increased from 10 to 20 for more movement
     opacity: 1,
     transition: {
       type: "spring",
