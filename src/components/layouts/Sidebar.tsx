@@ -22,6 +22,10 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
     }
   }, [location.pathname, isMobile]);
 
+  const handleMobileToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
   const content = (
     <Box
       sx={{
@@ -30,8 +34,12 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
         height: '100%',
       }}
     >
-      <SidebarHeader isOpen={isOpen} onToggle={onToggle} />
-      <SidebarNav isOpen={isOpen} />
+      <SidebarHeader 
+        isOpen={isMobile ? mobileOpen : isOpen} 
+        onToggle={isMobile ? handleMobileToggle : onToggle}
+        showToggle={isMobile} // Add this prop
+      />
+      <SidebarNav isOpen={isMobile ? mobileOpen : isOpen} />
     </Box>
   );
 

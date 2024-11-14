@@ -18,9 +18,10 @@ const LogoImage = styled('img')({
 interface SidebarHeaderProps {
   isOpen: boolean;
   onToggle: () => void;
+  showToggle: boolean; // Add this prop
 }
 
-export function SidebarHeader({ isOpen, onToggle }: SidebarHeaderProps) {
+export function SidebarHeader({ isOpen, onToggle, showToggle }: SidebarHeaderProps) {
   return (
     <HeaderRoot>
       <motion.div
@@ -31,12 +32,14 @@ export function SidebarHeader({ isOpen, onToggle }: SidebarHeaderProps) {
       >
         <LogoImage src="/logo.svg" alt="Logo" />
       </motion.div>
-      <IconButton
-        onClick={onToggle}
-        sx={{ color: 'primary.main' }}
-      >
-        <MenuIcon />
-      </IconButton>
+      {showToggle && ( // Only show toggle button if showToggle is true
+        <IconButton
+          onClick={onToggle}
+          sx={{ color: 'primary.main' }}
+        >
+          <MenuIcon />
+        </IconButton>
+      )}
     </HeaderRoot>
   );
 }
