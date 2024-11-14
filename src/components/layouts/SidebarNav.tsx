@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -73,15 +73,42 @@ export function SidebarNav({ isOpen }: SidebarNavProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const lastPlayedTimeRef = useRef<number>(0);
 
+  // Preload audio on mount
+  useEffect(() => {
+    const audio = new Audio();
+    audio.preload = 'auto'; // Force preloading
+    audio.volume = 0.15;
+    
+    // Create source element for better preloading control
+    const source = document.createElement('source');
+    source.src = HOVER_SOUND_URL;
+    source.type = 'audio/mpeg';
+    
+    // Optional: Listen for when it's loaded
+    audio.addEventListener('loadeddata', () => {
+      console.log('Sound effect preloaded and ready');
+    });
+
+    // Load the audio
+    audio.load();
+    audioRef.current = audio;
+
+    // Cleanup
+    return () => {
+      audio.remove();
+      audioRef.current = null;
+    };
+  }, []);
+
   const playHoverSound = () => {
     const now = Date.now();
-    if (now - lastPlayedTimeRef.current > 100) {
-      if (!audioRef.current) {
-        audioRef.current = new Audio(HOVER_SOUND_URL);
-        audioRef.current.volume = 0.15; // You might want to lower the volume for this specific sound
-      }
+    if (audioRef.current && now - lastPlayedTimeRef.current > 100) {
       audioRef.current.currentTime = 0;
-      audioRef.current.play().catch(e => console.log('Error playing sound:', e));
+      audioRef.current.play().catch(e => {
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Error playing sound:', e);
+        }
+      });
       lastPlayedTimeRef.current = now;
     }
   };
