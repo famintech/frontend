@@ -29,7 +29,7 @@ export function NavItem({
   };
 
   const handleClick = () => {
-    playSound({ playbackRate: 1.5 }); // Higher pitch for click
+    playSound({ playbackRate: 0.5 }); // Higher pitch for click
     onClick();
   };
 
