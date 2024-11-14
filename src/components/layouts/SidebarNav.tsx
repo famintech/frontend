@@ -4,19 +4,15 @@ import { Box, List, ListItem, Collapse } from '@mui/material';
 import { motion } from 'framer-motion';
 import { menuItems, MenuItem } from '@/config/menu.config';
 import { NavItem } from './NavItem';
-import { useHoverSound } from '@/hooks/use-hover-sound';
 
 interface SidebarNavProps {
   isOpen: boolean;
 }
 
-const HOVER_SOUND_URL = '/sounds/ui-sound-hover-1.mp3';
-
 export function SidebarNav({ isOpen }: SidebarNavProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const [openMenus, setOpenMenus] = useState<string[]>([]);
-  const playHoverSound = useHoverSound(HOVER_SOUND_URL);
 
   const handleClick = (item: MenuItem) => {
     if (item.children) {
@@ -41,7 +37,6 @@ export function SidebarNav({ isOpen }: SidebarNavProps) {
           isOpen={isOpen}
           isSelected={isSelected}
           isMenuOpen={isMenuOpen}
-          onHover={playHoverSound}
           onClick={() => handleClick(item)}
         />
 

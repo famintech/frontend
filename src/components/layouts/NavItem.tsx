@@ -3,13 +3,15 @@ import { MenuItem } from '@/config/menu.config';
 import { AnimatedNavItem, NavItem as StyledNavItem } from '@/theme/styles';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import { useUiSound } from '@/hooks/use-ui-sound';
+
+const HOVER_SOUND_URL = '/sounds/ui-sound-hover-1.mp3';
 
 interface NavItemProps {
   item: MenuItem;
   isOpen: boolean;
   isSelected: boolean;
   isMenuOpen?: boolean;
-  onHover: () => void;
   onClick: () => void;
 }
 
@@ -18,9 +20,19 @@ export function NavItem({
   isOpen, 
   isSelected, 
   isMenuOpen, 
-  onHover, 
   onClick 
 }: NavItemProps) {
+  const playSound = useUiSound(HOVER_SOUND_URL);
+
+  const handleHover = () => {
+    playSound({ playbackRate: 1 }); // Normal pitch for hover
+  };
+
+  const handleClick = () => {
+    playSound({ playbackRate: 1.5 }); // Higher pitch for click
+    onClick();
+  };
+
   if (!isOpen) {
     return (
       <Tooltip title={item.title} placement="right">
@@ -34,8 +46,8 @@ export function NavItem({
         >
           <StyledNavItem
             selected={isSelected}
-            onClick={onClick}
-            onMouseEnter={onHover}
+            onClick={handleClick}
+            onMouseEnter={handleHover}
             sx={{ justifyContent: 'center' }}
           >
             <ListItemIcon sx={{ minWidth: 'auto' }}>
@@ -58,8 +70,8 @@ export function NavItem({
     >
       <StyledNavItem
         selected={isSelected}
-        onClick={onClick}
-        onMouseEnter={onHover}
+        onClick={handleClick}
+        onMouseEnter={handleHover}
       >
         <ListItemIcon sx={{ mb: 1, minWidth: 40 }}>
           {item.icon}
