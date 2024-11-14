@@ -21,5 +21,35 @@ export const menuItems: MenuItem[] = [
     title: 'Settings',
     path: '/settings',
     icon: <SettingsIcon />
-  }
+  },
+  {
+    id: 'settings',
+    title: 'Settings',
+    path: '/settings',
+    icon: <SettingsIcon />
+  },
+  {
+    id: 'settings',
+    title: 'Settings',
+    path: '/settings',
+    icon: <SettingsIcon />
+  },
+  {
+    id: 'settings',
+    title: 'Settings',
+    path: '/settings',
+    icon: <SettingsIcon />
+  },
+  {
+    id: 'settings',
+    title: 'Settings',
+    path: '/settings',
+    icon: <SettingsIcon />
+  },
+  {
+    id: 'settings',
+    title: 'Settings',
+    path: '/settings',
+    icon: <SettingsIcon />
+  },
 ];
