@@ -15,21 +15,21 @@ interface NavItemProps {
   onClick: () => void;
 }
 
-export function NavItem({ 
-  item, 
-  isOpen, 
-  isSelected, 
-  isMenuOpen, 
-  onClick 
+export function NavItem({
+  item,
+  isOpen,
+  isSelected,
+  isMenuOpen,
+  onClick
 }: NavItemProps) {
-  const playSound = useUiSound(HOVER_SOUND_URL);
+  const playSound = useUiSound(HOVER_SOUND_URL, { volume: 0.15 });
 
   const handleHover = () => {
-    playSound({ playbackRate: 1 }); // Normal pitch for hover
+    playSound({ pitch: 1 }); // Normal pitch for hover
   };
 
   const handleClick = () => {
-    playSound({ playbackRate: 0.5 }); // Higher pitch for click
+    playSound({ pitch: 0.5 }); // Higher pitch for click
     onClick();
   };
 
