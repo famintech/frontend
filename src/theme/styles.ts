@@ -2,6 +2,18 @@ import { styled } from '@mui/material/styles';
 import { ListItemButton } from '@mui/material';
 import { motion } from 'framer-motion';
 
+// Add flash animation variants
+export const squareVariants = {
+  flash: {
+    opacity: [1, 0.3, 1, 0.3, 1],
+    transition: {
+      duration: 0.4,
+      times: [0, 0.25, 0.5, 0.75, 1],
+      ease: "linear"
+    }
+  }
+};
+
 export const AnimatedNavItem = styled(motion.div)(({ theme }) => ({
   width: '100%',
   '&:hover': {
@@ -12,6 +24,7 @@ export const AnimatedNavItem = styled(motion.div)(({ theme }) => ({
   pointerEvents: 'none'
 }));
 
+// Keep existing NavItem unchanged but add flash animation class
 export const NavItem = styled(ListItemButton)(({ theme }) => ({
   position: 'relative',
   height: 64,
@@ -28,6 +41,9 @@ export const NavItem = styled(ListItemButton)(({ theme }) => ({
     height: 4,
     backgroundColor: theme.palette.primary.main,
     transition: 'all 0.3s ease',
+  },
+  '&.flashing::after': {
+    animation: 'flash 0.4s linear'
   },
   '&:hover::after': {
     backgroundColor: theme.palette.primary.main,

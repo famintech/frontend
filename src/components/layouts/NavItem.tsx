@@ -4,6 +4,7 @@ import { AnimatedNavItem, NavItem as StyledNavItem } from '@/theme/styles';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { useUiSound } from '@/hooks/use-ui-sound';
+import { useState } from 'react';
 
 const HOVER_SOUND_URL = '/sounds/ui-sound-hover-1.mp3';
 
@@ -23,14 +24,18 @@ export function NavItem({
   onClick
 }: NavItemProps) {
   const playSound = useUiSound(HOVER_SOUND_URL, { volume: 0.15 });
+  const [isFlashing, setIsFlashing] = useState(false);
 
   const handleHover = () => {
     playSound({ pitch: 1 }); // Normal pitch for hover
   };
 
   const handleClick = () => {
-    playSound({ pitch: 0.5 }); // Higher pitch for click
+    playSound({ pitch: 0.5 }); // Lower pitch for click
+    setIsFlashing(true);
     onClick();
+    // Reset flash state after animation
+    setTimeout(() => setIsFlashing(false), 400);
   };
 
   if (!isOpen) {
@@ -48,6 +53,7 @@ export function NavItem({
             selected={isSelected}
             onClick={handleClick}
             onMouseEnter={handleHover}
+            className={isFlashing ? 'flashing' : ''}
             sx={{ justifyContent: 'center' }}
           >
             <ListItemIcon sx={{ minWidth: 'auto' }}>
@@ -72,6 +78,7 @@ export function NavItem({
         selected={isSelected}
         onClick={handleClick}
         onMouseEnter={handleHover}
+        className={isFlashing ? 'flashing' : ''}
       >
         <ListItemIcon sx={{ mb: 1, minWidth: 40 }}>
           {item.icon}
