@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -28,7 +28,7 @@ const NavItem = styled(ListItemButton)(({ theme }) => ({
     position: 'absolute',
     right: 0,
     bottom: 0,
-    width: 40,
+    width: 80,
     height: 4,
     backgroundColor: theme.palette.primary.main,
     transition: 'box-shadow 0.3s ease',
@@ -63,10 +63,28 @@ interface SidebarNavProps {
   isOpen: boolean;
 }
 
+const HOVER_SOUND_URL = '/sounds/ui-sound-hover-1.mp3'; 
+
 export function SidebarNav({ isOpen }: SidebarNavProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const [openMenus, setOpenMenus] = useState<string[]>([]);
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const lastPlayedTimeRef = useRef<number>(0);
+
+  const playHoverSound = () => {
+    const now = Date.now();
+    if (now - lastPlayedTimeRef.current > 100) {
+      if (!audioRef.current) {
+        audioRef.current = new Audio(HOVER_SOUND_URL);
+        audioRef.current.volume = 0.15; // You might want to lower the volume for this specific sound
+      }
+      audioRef.current.currentTime = 0;
+      audioRef.current.play().catch(e => console.log('Error playing sound:', e));
+      lastPlayedTimeRef.current = now;
+    }
+  };
 
   const handleClick = (item: MenuItem) => {
     if (item.children) {
@@ -91,11 +109,12 @@ export function SidebarNav({ isOpen }: SidebarNavProps) {
           <NavItem
             selected={isSelected}
             onClick={() => handleClick(item)}
+            onMouseEnter={playHoverSound}
           >
-            <ListItemIcon sx={{ mb: 2, minWidth: 40 }}>
+            <ListItemIcon sx={{ mb: 1, minWidth: 40 }}>
               {item.icon}
             </ListItemIcon>
-            <ListItemText sx={{ mb: 2 }} primary={item.title} />
+            <ListItemText sx={{ mb: 1 }} primary={item.title} />
             {hasChildren && (
               isMenuOpen ? <ExpandLess /> : <ExpandMore />
             )}
