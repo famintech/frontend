@@ -3,28 +3,25 @@ import { styled } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 
 // Styled Components
-const SciFiTable = styled(Paper)({
-    background: 'rgba(10, 25, 41, 0.8)',
+const SciFiTable = styled(Paper)(({ theme }) => ({
     backdropFilter: 'blur(10px)',
-    border: '1px solid rgba(0, 255, 140, 0.2)',
-    borderRadius: '8px',
+    border: `1px solid ${theme.palette.primary.main}`,
     width: '95%', // Reduced width
     margin: '0 auto', // Center the table
-});
+}));
 
-const HeaderCell = styled(TableCell)({
-    color: '#00ff8c',
+const HeaderCell = styled(TableCell)(({ theme }) => ({
+    color: theme.palette.primary.main,
     fontWeight: 'bold',
-    borderBottom: '2px solid rgba(0, 255, 140, 0.3)',
-    textTransform: 'uppercase',
+    borderBottom: `2px solid ${theme.palette.primary.main}`,
     letterSpacing: '2px',
     fontSize: '0.9rem',
-});
+}));
 
-const DataCell = styled(TableCell)({
+const DataCell = styled(TableCell)(({ theme }) => ({
     color: '#fff',
-    borderBottom: '1px solid rgba(0, 255, 140, 0.1)',
-});
+    borderBottom: `1px solid ${theme.palette.primary.main}`,
+}));
 
 // Updated columns
 const columns = [
