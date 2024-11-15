@@ -26,7 +26,7 @@ export const HeaderCell = styled(TableCell)(({ theme }) => ({
     borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
     borderTop: 'none',
     padding: '16px 8px',
-    background: 'rgba(0, 0, 0, 0.2)',
+    background: 'rgba(255, 255, 255, 0.05)',
 }));
 
 export const DataCell = styled(TableCell)(({ }) => ({
@@ -34,7 +34,7 @@ export const DataCell = styled(TableCell)(({ }) => ({
     borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
     borderTop: 'none',
     padding: '16px 8px',
-    background: 'rgba(0, 0, 0, 0.2)',
+    background: 'rgba(255, 255, 255, 0.05)',
 }));
 
 export const TableRowStyled = styled(TableRow)({
