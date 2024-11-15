@@ -3,8 +3,8 @@ import { styled } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 
 // Styled Components
-const SciFiTable = styled(Paper)(({ theme }) => ({
-    border: `1px solid ${theme.palette.primary.main}`,
+const SciFiTable = styled(Paper)(({ }) => ({
+    border: `1px solid`,
     width: '95%', // Reduced width
     margin: '0 auto', // Center the table
     borderRadius: 0,
@@ -14,7 +14,7 @@ const SciFiTable = styled(Paper)(({ theme }) => ({
 const HeaderCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.primary.main,
     fontWeight: 'bold',
-    borderBottom: `2px solid ${theme.palette.primary.main}`,
+    borderBottom: `2px solid`,
     fontSize: '0.9rem',
 }));
 
