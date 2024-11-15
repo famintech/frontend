@@ -1,4 +1,4 @@
-import { Box, Table, TableBody, TableContainer, TableHead } from '@mui/material';
+import { Table, TableBody, TableContainer, TableHead } from '@mui/material';
 import { 
     SciFiTable, 
     HeaderCell, 
@@ -8,6 +8,7 @@ import {
     rowVariants 
 } from '@/theme/datatable';
 import { useFormatEhafalDatatable } from '@/hooks/use-format-ehafal-datatable';
+import { EHafalDatatableProgressBar } from '@/components/EHafalDatatableProgressBar';
 
 // Updated columns
 const columns = [
@@ -72,6 +73,7 @@ const data = [
 
 export default function EHafal() {
     const { formatProgress } = useFormatEhafalDatatable();
+
     return (
         <SciFiTable elevation={0}>
             <TableContainer>
@@ -88,6 +90,7 @@ export default function EHafal() {
                     <TableBody>
                         {data.map((row, index) => {
                             const progress = formatProgress(row.progress);
+                            const numericProgress = parseInt(row.progress);
                             
                             return (
                                 <MotionTableRow
@@ -102,9 +105,10 @@ export default function EHafal() {
                                     <DataCell align="center">{row.scope}</DataCell>
                                     <DataCell align="center">{row.status}</DataCell>
                                     <DataCell align="center">
-                                        <Box component="span" sx={{ color: progress.color }}>
-                                            {progress.value}
-                                        </Box>
+                                        <EHafalDatatableProgressBar
+                                            value={numericProgress}
+                                            color={progress.color}
+                                        />
                                     </DataCell>
                                     <DataCell align="center">{row.startTime}</DataCell>
                                     <DataCell align="center">{row.duration}</DataCell>
