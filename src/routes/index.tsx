@@ -3,7 +3,7 @@ import { ProtectedRoute } from './protected-route';
 import Login from '@/pages/auth/login';
 import { DashboardLayout } from '@/components/layouts/DashboardLayout';
 import Dashboard from '@/pages/dashboard';
-
+import EHafal from '@/pages/ehafal/index';
 // Export the router configuration
 export const routerConfig = [
   {
@@ -22,29 +22,12 @@ export const routerConfig = [
             element: <Dashboard />
           },
           {
-            path: 'analytics',
-            children: [
-              {
-                index: true,
-                // element: <Analytics />
-              },
-              {
-                path: 'reports',
-                // element: <Reports />
-              }
-            ]
-          },
-          {
-            path: 'users',
-            // element: <Users />
-          },
-          {
             path: 'settings',
             // element: <Settings />
           },
           {
-            path: '',
-            element: <Dashboard />
+            path: 'e-hafal',
+            element: <EHafal />
           }
         ]
       }
