@@ -1,4 +1,4 @@
-import { Table, TableBody, TableContainer, TableHead } from '@mui/material';
+import { Box, Table, TableBody, TableContainer, TableHead } from '@mui/material';
 import { 
     SciFiTable, 
     HeaderCell, 
@@ -75,25 +75,33 @@ export default function EHafal() {
                         </TableRowStyled>
                     </TableHead>
                     <TableBody>
-                        {data.map((row, index) => (
-                            <MotionTableRow
-                                key={row.id}
-                                initial="hidden"
-                                animate="visible"
-                                custom={index}
-                                variants={rowVariants}
-                            >
-                                <DataCell align="center">{row.id}</DataCell>
-                                <DataCell align="center">{row.target}</DataCell>
-                                <DataCell align="center">{row.scope}</DataCell>
-                                <DataCell align="center">{row.status}</DataCell>
-                                <DataCell align="center">{formatProgress(row.progress).value}</DataCell>
-                                <DataCell align="center">{row.startTime}</DataCell>
-                                <DataCell align="center">{row.duration}</DataCell>
-                                <DataCell align="center">{row.difficulty}</DataCell>
-                                <DataCell align="center">{row.priority}</DataCell>
-                            </MotionTableRow>
-                        ))}
+                        {data.map((row, index) => {
+                            const progress = formatProgress(row.progress);
+                            
+                            return (
+                                <MotionTableRow
+                                    key={row.id}
+                                    initial="hidden"
+                                    animate="visible"
+                                    custom={index}
+                                    variants={rowVariants}
+                                >
+                                    <DataCell align="center">{row.id}</DataCell>
+                                    <DataCell align="center">{row.target}</DataCell>
+                                    <DataCell align="center">{row.scope}</DataCell>
+                                    <DataCell align="center">{row.status}</DataCell>
+                                    <DataCell align="center">
+                                        <Box component="span" sx={{ color: progress.color }}>
+                                            {progress.value}
+                                        </Box>
+                                    </DataCell>
+                                    <DataCell align="center">{row.startTime}</DataCell>
+                                    <DataCell align="center">{row.duration}</DataCell>
+                                    <DataCell align="center">{row.difficulty}</DataCell>
+                                    <DataCell align="center">{row.priority}</DataCell>
+                                </MotionTableRow>
+                            );
+                        })}
                     </TableBody>
                 </Table>
             </TableContainer>
