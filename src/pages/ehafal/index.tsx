@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 // Styled Components
 const SciFiTable = styled(Paper)(({ }) => ({
-    border: `1px solid`,
+    border: `1px solid alpha(white, 0.2)`,
     width: '95%', // Reduced width
     margin: '0 auto', // Center the table
     borderRadius: 0,
