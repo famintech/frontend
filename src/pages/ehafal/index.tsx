@@ -57,6 +57,17 @@ const data = [
         difficulty: 'Hard',
         priority: 'High',
     },
+    {
+        id: 'MEM-004',
+        target: 'Surah Al-Kahfi',
+        scope: 'Verse 1-3',
+        status: 'Pending',
+        progress: '45%',
+        startTime: '2024-03-18 10:00',
+        duration: '5h',
+        difficulty: 'Hard',
+        priority: 'High',
+    }
 ];
 
 export default function EHafal() {
