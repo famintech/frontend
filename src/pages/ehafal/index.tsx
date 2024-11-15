@@ -4,23 +4,44 @@ import { motion } from 'framer-motion';
 
 // Styled Components
 const SciFiTable = styled(Paper)(({ }) => ({
-    border: `1px solid alpha(white, 0.2)`,
-    width: '95%', // Reduced width
-    margin: '0 auto', // Center the table
+    width: '95%',
+    margin: '0 auto',
     borderRadius: 0,
     background: 'none',
+    '& .MuiTableContainer-root': {
+        background: 'transparent',
+    },
+    '& .MuiTable-root': {
+        borderCollapse: 'separate',
+        borderSpacing: '0 2px', // Add slight spacing between rows
+    }
 }));
 
 const HeaderCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.primary.main,
     fontWeight: 'bold',
-    borderBottom: `2px solid`,
     fontSize: '0.9rem',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+    borderTop: 'none',
+    padding: '16px 8px',
+    background: 'rgba(0, 0, 0, 0.2)',
 }));
 
-const DataCell = styled(TableCell)(({  }) => ({
+const DataCell = styled(TableCell)(({ }) => ({
     color: '#fff',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+    borderTop: 'none',
+    padding: '16px 8px',
+    background: 'rgba(0, 0, 0, 0.2)',
 }));
+
+const TableRowStyled = styled(TableRow)({
+    '&:hover': {
+        '& td': {
+            background: 'rgba(0, 0, 0, 0.3)',
+        }
+    }
+});
 
 // Updated columns
 const columns = [
@@ -93,17 +114,17 @@ const MotionRow = styled(motion.div)({
 
 export default function EHafal() {
     return (
-        <SciFiTable>
+        <SciFiTable elevation={0}>
             <TableContainer>
                 <Table>
                     <TableHead>
-                        <TableRow>
+                        <TableRowStyled>
                             {columns.map((column) => (
                                 <HeaderCell key={column.id} align="center">
                                     {column.label}
                                 </HeaderCell>
                             ))}
-                        </TableRow>
+                        </TableRowStyled>
                     </TableHead>
                     <TableBody>
                         {data.map((row, index) => (
