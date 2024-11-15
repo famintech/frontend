@@ -7,6 +7,7 @@ import {
     MotionTableRow,
     rowVariants 
 } from '@/theme/datatable';
+import { useFormatEhafalDatatable } from '@/hooks/use-format-ehafal-datatable';
 
 // Updated columns
 const columns = [
@@ -59,6 +60,7 @@ const data = [
 ];
 
 export default function EHafal() {
+    const { formatProgress } = useFormatEhafalDatatable();
     return (
         <SciFiTable elevation={0}>
             <TableContainer>
@@ -85,7 +87,7 @@ export default function EHafal() {
                                 <DataCell align="center">{row.target}</DataCell>
                                 <DataCell align="center">{row.scope}</DataCell>
                                 <DataCell align="center">{row.status}</DataCell>
-                                <DataCell align="center">{row.progress}</DataCell>
+                                <DataCell align="center">{formatProgress(row.progress).value}</DataCell>
                                 <DataCell align="center">{row.startTime}</DataCell>
                                 <DataCell align="center">{row.duration}</DataCell>
                                 <DataCell align="center">{row.difficulty}</DataCell>
