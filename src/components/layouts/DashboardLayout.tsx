@@ -27,6 +27,25 @@ const LayoutContainer = styled(Box)<{ isSidebarOpen: boolean }>(({ theme, isSide
   }
 }));
 
+const HeaderSection = styled(Box)(({ theme }) => ({
+  height: '80px',
+  marginBottom: theme.spacing(3),
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(2),
+  backgroundColor: 'rgba(10, 29, 41, 0.5)',
+  backdropFilter: 'blur(8px)',
+  borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+}));
+
+const MainContent = styled(Box)(({ theme }) => ({
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.spacing(3),
+  minHeight: 0,
+}));
+
 export function DashboardLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
@@ -41,7 +60,12 @@ export function DashboardLayout() {
         onToggle={toggleSidebar}
       />
       <LayoutContainer isSidebarOpen={isSidebarOpen}>
-        <Outlet />
+        <HeaderSection>
+          {/* Add header content here if needed */}
+        </HeaderSection>
+        <MainContent>
+          <Outlet />
+        </MainContent>
       </LayoutContainer>
     </LayoutRoot>
   );
