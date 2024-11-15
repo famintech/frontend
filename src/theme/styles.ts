@@ -13,15 +13,15 @@ const flashAnimation = keyframes`
 
 // Add error flash animation with white base color
 const errorFlashAnimation = keyframes`
-  0% { opacity: 1; background-color: #ff0000; }
-  12.5% { opacity: 1; background-color: #ffffff; }
-  25% { opacity: 1; background-color: #ff0000; }
-  37.5% { opacity: 1; background-color: #ffffff; }
-  50% { opacity: 1; background-color: #ff0000; }
-  62.5% { opacity: 1; background-color: #ffffff; }
-  75% { opacity: 1; background-color: #ff0000; }
-  87.5% { opacity: 1; background-color: #ffffff; }
-  100% { opacity: 1; background-color: #ff0000; }
+  0% { opacity: 1; background-color: #ff0000; box-shadow: none; }
+  12.5% { opacity: 1; background-color: #ffffff; box-shadow: none; }
+  25% { opacity: 1; background-color: #ff0000; box-shadow: none; }
+  37.5% { opacity: 1; background-color: #ffffff; box-shadow: none; }
+  50% { opacity: 1; background-color: #ff0000; box-shadow: none; }
+  62.5% { opacity: 1; background-color: #ffffff; box-shadow: none; }
+  75% { opacity: 1; background-color: #ff0000; box-shadow: none; }
+  87.5% { opacity: 1; background-color: #ffffff; box-shadow: none; }
+  100% { opacity: 1; background-color: #ff0000; box-shadow: none; }
 `;
 
 // Add icon color animation
@@ -93,6 +93,10 @@ export const NavItem = styled(ListItemButton)(({ theme }) => ({
   },
   '&.error-flashing::after': {
     animation: `${errorFlashAnimation} 0.8s linear`,
+    boxShadow: 'none',
+  },
+  '&.error-flashing:hover::after': {
+    boxShadow: 'none', 
   },
   '&:hover::after': {
     backgroundColor: theme.palette.primary.main,
