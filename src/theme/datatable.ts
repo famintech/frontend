@@ -2,7 +2,6 @@ import { Paper, TableCell, TableRow } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 
-// Create a motion component type for TableRow
 const MotionComponent = motion.tr;
 
 export const SciFiTable = styled(Paper)(({ }) => ({
@@ -14,45 +13,60 @@ export const SciFiTable = styled(Paper)(({ }) => ({
         background: 'transparent',
     },
     '& .MuiTable-root': {
-        borderCollapse: 'separate',
-        borderSpacing: '0 2px',
+        borderCollapse: 'collapse',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
     }
 }));
 
-export const HeaderCell = styled(TableCell)(({ }) => ({
-    color: '#fff',
+export const HeaderCell = styled(TableCell)(({ theme }) => ({
+    color: theme.palette.primary.main,
     fontWeight: 'bold',
     fontSize: '0.9rem',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-    borderTop: 'none',
     padding: '16px 8px',
     background: '#0a1d29',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    borderTop: 'none',
+    '&:first-of-type': {
+        borderLeft: 'none',
+    },
+    '&:last-of-type': {
+        borderRight: 'none',
+    }
 }));
 
 export const DataCell = styled(TableCell)(({ }) => ({
     color: '#fff',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-    borderTop: 'none',
     padding: '16px 8px',
     background: '#0a1d29',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    transition: 'all 0.2s ease-in-out',
+    '&:first-of-type': {
+        borderLeft: 'none',
+    },
+    '&:last-of-type': {
+        borderRight: 'none',
+    }
 }));
 
 export const TableRowStyled = styled(TableRow)({
-    '&:hover': {
-        '& td': {
-            background: 'rgba(0, 0, 0, 0.3)',
-        }
+    '&:hover td': {
+        background: 'rgba(10, 29, 41, 0.8)',
+    },
+    '&:last-child td': {
+        borderBottom: 'none',
     }
 });
 
-// Export the motion component directly
 export const MotionTableRow = styled(MotionComponent)({
     '&:hover td': {
-        background: 'rgba(0, 0, 0, 0.3)',
+        background: 'rgba(10, 29, 41, 0.8)',
+    },
+    '&:last-child td': {
+        borderBottom: 'none',
     }
 });
 
-// Animation variants
+// Animation variants remain the same
 export const rowVariants = {
     hidden: { opacity: 0, x: -20 },
     visible: (i: number) => ({
