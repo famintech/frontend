@@ -28,13 +28,11 @@ const LayoutContainer = styled(Box)<{ isSidebarOpen: boolean }>(({ theme, isSide
 }));
 
 const HeaderSection = styled(Box)(({ theme }) => ({
-  height: '80px',
+  height: '40px',
   marginBottom: theme.spacing(3),
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(2),
-  backgroundColor: 'rgba(10, 29, 41, 0.5)',
-  backdropFilter: 'blur(8px)',
   borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
 }));
 
