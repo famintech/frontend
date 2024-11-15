@@ -7,6 +7,8 @@ const SciFiTable = styled(Paper)(({ theme }) => ({
     border: `1px solid ${theme.palette.primary.main}`,
     width: '95%', // Reduced width
     margin: '0 auto', // Center the table
+    borderRadius: 0,
+    background: 'none',
 }));
 
 const HeaderCell = styled(TableCell)(({ theme }) => ({
