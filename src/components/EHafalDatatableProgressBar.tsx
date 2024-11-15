@@ -27,6 +27,7 @@ const ProgressValue = styled(Box)({
 
 const StripedBackground = styled(motion.div)<{ $color: string }>(({ $color }) => ({
   height: '100%',
+  width: '200%', // Make it wider to ensure continuous animation
   backgroundImage: `linear-gradient(
     45deg,
     ${$color} 25%,
@@ -60,11 +61,12 @@ export function EHafalDatatableProgressBar({ value, color }: ProgressBarProps) {
         <StripedBackground
           $color={color}
           initial={{ x: 0 }}
-          animate={{ x: 24 }}
+          animate={{ x: -24 }} // Negative value to move left
           transition={{
-            duration: 1,
+            duration: 0.5,
             repeat: Infinity,
-            ease: "linear"
+            ease: "linear",
+            repeatType: "loop"
           }}
         />
       </ProgressFill>
