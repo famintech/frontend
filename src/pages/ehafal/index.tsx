@@ -1,47 +1,12 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { motion } from 'framer-motion';
-
-// Styled Components
-const SciFiTable = styled(Paper)(({ }) => ({
-    width: '95%',
-    margin: '0 auto',
-    borderRadius: 0,
-    background: 'none',
-    '& .MuiTableContainer-root': {
-        background: 'transparent',
-    },
-    '& .MuiTable-root': {
-        borderCollapse: 'separate',
-        borderSpacing: '0 2px', // Add slight spacing between rows
-    }
-}));
-
-const HeaderCell = styled(TableCell)(({ theme }) => ({
-    color: theme.palette.primary.main,
-    fontWeight: 'bold',
-    fontSize: '0.9rem',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-    borderTop: 'none',
-    padding: '16px 8px',
-    background: 'rgba(0, 0, 0, 0.2)',
-}));
-
-const DataCell = styled(TableCell)(({ }) => ({
-    color: '#fff',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-    borderTop: 'none',
-    padding: '16px 8px',
-    background: 'rgba(0, 0, 0, 0.2)',
-}));
-
-const TableRowStyled = styled(TableRow)({
-    '&:hover': {
-        '& td': {
-            background: 'rgba(0, 0, 0, 0.3)',
-        }
-    }
-});
+import { Table, TableBody, TableContainer, TableHead } from '@mui/material';
+import { 
+    SciFiTable, 
+    HeaderCell, 
+    DataCell, 
+    TableRowStyled, 
+    MotionTableRow,
+    rowVariants 
+} from '@/theme/datatable';
 
 // Updated columns
 const columns = [
@@ -93,25 +58,6 @@ const data = [
     },
 ];
 
-// Row animation variants
-const rowVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: (i: number) => ({
-        opacity: 1,
-        x: 0,
-        transition: {
-            delay: i * 0.1,
-            duration: 0.5,
-            ease: "easeOut"
-        }
-    })
-};
-
-const MotionRow = styled(motion.div)({
-    display: 'table-row',
-    width: '100%',
-});
-
 export default function EHafal() {
     return (
         <SciFiTable elevation={0}>
@@ -128,7 +74,7 @@ export default function EHafal() {
                     </TableHead>
                     <TableBody>
                         {data.map((row, index) => (
-                            <MotionRow
+                            <MotionTableRow
                                 key={row.id}
                                 initial="hidden"
                                 animate="visible"
@@ -144,7 +90,7 @@ export default function EHafal() {
                                 <DataCell align="center">{row.duration}</DataCell>
                                 <DataCell align="center">{row.difficulty}</DataCell>
                                 <DataCell align="center">{row.priority}</DataCell>
-                            </MotionRow>
+                            </MotionTableRow>
                         ))}
                     </TableBody>
                 </Table>
