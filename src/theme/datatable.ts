@@ -19,14 +19,14 @@ export const SciFiTable = styled(Paper)(({ }) => ({
     }
 }));
 
-export const HeaderCell = styled(TableCell)(({ theme }) => ({
-    color: theme.palette.primary.main,
+export const HeaderCell = styled(TableCell)(({ }) => ({
+    color: '#fff',
     fontWeight: 'bold',
     fontSize: '0.9rem',
     borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
     borderTop: 'none',
     padding: '16px 8px',
-    background: 'rgba(255, 255, 255, 0.05)',
+    background: '#0a1d29',
 }));
 
 export const DataCell = styled(TableCell)(({ }) => ({
@@ -34,7 +34,7 @@ export const DataCell = styled(TableCell)(({ }) => ({
     borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
     borderTop: 'none',
     padding: '16px 8px',
-    background: 'rgba(255, 255, 255, 0.05)',
+    background: '#0a1d29',
 }));
 
 export const TableRowStyled = styled(TableRow)({
