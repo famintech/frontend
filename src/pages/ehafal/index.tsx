@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 
 // Styled Components
 const SciFiTable = styled(Paper)(({ theme }) => ({
-    backdropFilter: 'blur(10px)',
     border: `1px solid ${theme.palette.primary.main}`,
     width: '95%', // Reduced width
     margin: '0 auto', // Center the table
@@ -14,13 +13,11 @@ const HeaderCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.primary.main,
     fontWeight: 'bold',
     borderBottom: `2px solid ${theme.palette.primary.main}`,
-    letterSpacing: '2px',
     fontSize: '0.9rem',
 }));
 
-const DataCell = styled(TableCell)(({ theme }) => ({
+const DataCell = styled(TableCell)(({  }) => ({
     color: '#fff',
-    borderBottom: `1px solid ${theme.palette.primary.main}`,
 }));
 
 // Updated columns
