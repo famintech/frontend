@@ -55,9 +55,9 @@ const ProgressFill = styled(motion.div)<{ $color: string }>(({ $color }) => ({
 export function EHafalDatatableProgressBar({ 
   value, 
   color, 
-  stripeDensity = 6, 
+  stripeDensity = 4, 
   stripeThickness = 4,
-  animationSpeed = 0.7 
+  animationSpeed = 0.5 
 }: ProgressBarProps) {
   const patternSize = Math.sqrt(2) * stripeDensity;
 
