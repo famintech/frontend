@@ -44,5 +44,17 @@ export const useFormatEhafalDatatable = () => {
     };
   };
 
-  return { formatProgress };
+  const formatStartTime = (dateTimeString: string): string => {
+    const date = new Date(dateTimeString);
+    return date.toLocaleString('en-GB', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+  };
+
+  return { formatProgress, formatStartTime };
 };

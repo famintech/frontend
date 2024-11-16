@@ -68,11 +68,22 @@ const data = [
         duration: '5h',
         difficulty: 'Hard',
         priority: 'High',
+    },
+    {
+        id: 'MEM-005',
+        target: 'Surah Al-Kahfi',
+        scope: 'Verse 1-10',
+        status: 'Pending',
+        progress: '2.5%',
+        startTime: '2024-03-18 10:00',
+        duration: '5h',
+        difficulty: 'Hard',
+        priority: 'High',
     }
 ];
 
 export default function EHafal() {
-    const { formatProgress } = useFormatEhafalDatatable();
+    const { formatProgress, formatStartTime } = useFormatEhafalDatatable();
 
     return (
         <SciFiTable elevation={0}>
@@ -91,6 +102,7 @@ export default function EHafal() {
                         {data.map((row, index) => {
                             const progress = formatProgress(row.progress);
                             const numericProgress = parseInt(row.progress);
+                            const formattedStartTime = formatStartTime(row.startTime);
                             
                             return (
                                 <MotionTableRow
@@ -110,7 +122,7 @@ export default function EHafal() {
                                             color={progress.color}
                                         />
                                     </DataCell>
-                                    <DataCell align="center">{row.startTime}</DataCell>
+                                    <DataCell align="center">{formattedStartTime}</DataCell>
                                     <DataCell align="center">{row.duration}</DataCell>
                                     <DataCell align="center">{row.difficulty}</DataCell>
                                     <DataCell align="center">{row.priority}</DataCell>
