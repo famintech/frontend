@@ -4,6 +4,9 @@ import { motion } from 'framer-motion';
 interface ProgressBarProps {
   value: number;
   color: string;
+  stripeDensity?: number; // pixels between stripes
+  stripeThickness?: number; // pixels of stripe thickness
+  animationSpeed?: number; // seconds per cycle
 }
 
 const ProgressContainer = styled(Box)({
@@ -25,17 +28,21 @@ const ProgressValue = styled(Box)({
   textShadow: '0 0 4px rgba(0,0,0,0.5)',
 });
 
-const StripedBackground = styled(motion.div)<{ $color: string }>(({ }) => ({
+const StripedBackground = styled(motion.div)<{ 
+  $color: string;
+  $stripeDensity: number;
+  $stripeThickness: number;
+}>(({ $stripeDensity, $stripeThickness }) => ({
   position: 'absolute',
   inset: 0,
   backgroundImage: `repeating-linear-gradient(
     45deg,
     rgba(255, 255, 255, 0.15) 0px,
-    rgba(255, 255, 255, 0.15) 12px,
-    transparent 12px,
-    transparent 24px
+    rgba(255, 255, 255, 0.15) ${$stripeThickness}px,
+    transparent ${$stripeThickness}px,
+    transparent ${$stripeDensity}px
   )`,
-  backgroundSize: '34px 34px',
+  backgroundSize: `${Math.sqrt(2) * $stripeDensity}px ${Math.sqrt(2) * $stripeDensity}px`,
 }));
 
 const ProgressFill = styled(motion.div)<{ $color: string }>(({ $color }) => ({
@@ -45,7 +52,15 @@ const ProgressFill = styled(motion.div)<{ $color: string }>(({ $color }) => ({
   overflow: 'hidden',
 }));
 
-export function EHafalDatatableProgressBar({ value, color }: ProgressBarProps) {
+export function EHafalDatatableProgressBar({ 
+  value, 
+  color, 
+  stripeDensity = 24, // default value
+  stripeThickness = 12, // default value
+  animationSpeed = 0.7 // default value
+}: ProgressBarProps) {
+  const patternSize = Math.sqrt(2) * stripeDensity;
+
   return (
     <ProgressContainer>
       <ProgressFill
@@ -56,11 +71,13 @@ export function EHafalDatatableProgressBar({ value, color }: ProgressBarProps) {
       >
         <StripedBackground
           $color={color}
+          $stripeDensity={stripeDensity}
+          $stripeThickness={stripeThickness}
           animate={{
-            x: [-34, 0]
+            x: [-patternSize, 0]
           }}
           transition={{
-            duration: 0.7,
+            duration: animationSpeed,
             repeat: Infinity,
             ease: "linear",
           }}
