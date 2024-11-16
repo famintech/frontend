@@ -53,7 +53,7 @@ export const useFormatEhafalDatatable = () => {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'
-    });
+    }).replace(/am|pm/i, (match) => match.toUpperCase());
   };
 
   return { formatProgress, formatStartTime };
