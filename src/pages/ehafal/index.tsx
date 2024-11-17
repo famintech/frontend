@@ -84,7 +84,7 @@ const data = [
 ];
 
 export default function EHafal() {
-    const { formatProgress, formatStartTime, formatDifficulty, formatPriority } = useFormatEhafalDatatable();
+    const { formatProgress, formatStartTime, formatDifficulty, formatPriority, formatDuration } = useFormatEhafalDatatable();
 
     return (
         <SciFiTable elevation={0}>
@@ -106,7 +106,7 @@ export default function EHafal() {
                             const formattedStartTime = formatStartTime(row.startTime);
                             const formattedDifficulty = formatDifficulty(row.difficulty);
                             const formattedPriority = formatPriority(row.priority);
-                            
+                            const formattedDuration = formatDuration(row.startTime);
                             return (
                                 <MotionTableRow
                                     key={row.id}
@@ -126,7 +126,7 @@ export default function EHafal() {
                                         />
                                     </DataCell>
                                     <DataCell align="center">{formattedStartTime}</DataCell>
-                                    <DataCell align="center">{row.duration}</DataCell>
+                                    <DataCell align="center">{formattedDuration}</DataCell>
                                     <DataCell align="center">
                                         <EHafalBadge
                                             value={formattedDifficulty.value}
