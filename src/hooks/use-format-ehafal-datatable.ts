@@ -126,11 +126,11 @@ export const useFormatEhafalDatatable = () => {
     
     // Format the duration string
     if (days > 0) {
-      return `${days}d ${hours}h ${minutes}m`;
+      return `${days} days ${hours} hours ${minutes} minutes`;
     } else if (hours > 0) {
-      return `${hours}h ${minutes}m`;
+      return `${hours} hours ${minutes} minutes`;
     } else {
-      return `${minutes}m`;
+      return `${minutes} minutes`;
     }
   };
 
