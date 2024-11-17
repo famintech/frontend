@@ -9,6 +9,7 @@ import {
 } from '@/theme/datatable';
 import { useFormatEhafalDatatable } from '@/hooks/use-format-ehafal-datatable';
 import { EHafalDatatableProgressBar } from '@/components/EHafalDatatableProgressBar';
+import { EHafalBadge } from '@/components/EHafalBadge';
 
 // Updated columns
 const columns = [
@@ -83,7 +84,7 @@ const data = [
 ];
 
 export default function EHafal() {
-    const { formatProgress, formatStartTime } = useFormatEhafalDatatable();
+    const { formatProgress, formatStartTime, formatDifficulty, formatPriority } = useFormatEhafalDatatable();
 
     return (
         <SciFiTable elevation={0}>
@@ -103,6 +104,8 @@ export default function EHafal() {
                             const progress = formatProgress(row.progress);
                             const numericProgress = parseInt(row.progress);
                             const formattedStartTime = formatStartTime(row.startTime);
+                            const formattedDifficulty = formatDifficulty(row.difficulty);
+                            const formattedPriority = formatPriority(row.priority);
                             
                             return (
                                 <MotionTableRow
@@ -124,8 +127,18 @@ export default function EHafal() {
                                     </DataCell>
                                     <DataCell align="center">{formattedStartTime}</DataCell>
                                     <DataCell align="center">{row.duration}</DataCell>
-                                    <DataCell align="center">{row.difficulty}</DataCell>
-                                    <DataCell align="center">{row.priority}</DataCell>
+                                    <DataCell align="center">
+                                        <EHafalBadge
+                                            value={formattedDifficulty.value}
+                                            color={formattedDifficulty.color}
+                                        />
+                                    </DataCell>
+                                    <DataCell align="center">
+                                        <EHafalBadge
+                                            value={formattedPriority.value}
+                                            color={formattedPriority.color}
+                                        />
+                                    </DataCell>
                                 </MotionTableRow>
                             );
                         })}

@@ -3,6 +3,11 @@ interface FormattedProgress {
   color: string;
 }
 
+interface FormattedBadge {
+  value: string;
+  color: string;
+}
+
 export const useFormatEhafalDatatable = () => {
   const formatProgress = (progress: string): FormattedProgress => {
     const numericProgress = parseInt(progress);
@@ -56,5 +61,60 @@ export const useFormatEhafalDatatable = () => {
     }).replace(/am|pm/i, (match) => match.toUpperCase());
   };
 
-  return { formatProgress, formatStartTime };
+  const formatDifficulty = (difficulty: string): FormattedBadge => {
+    switch (difficulty.toLowerCase()) {
+      case 'easy':
+        return {
+          value: difficulty,
+          color: '#00F5FF' // Cyan
+        };
+      case 'medium':
+        return {
+          value: difficulty,
+          color: '#FFB100' // Orange
+        };
+      case 'hard':
+        return {
+          value: difficulty,
+          color: '#FF3366' // Pink-Red
+        };
+      default:
+        return {
+          value: difficulty,
+          color: '#888888'
+        };
+    }
+  };
+
+  const formatPriority = (priority: string): FormattedBadge => {
+    switch (priority.toLowerCase()) {
+      case 'high':
+        return {
+          value: priority,
+          color: '#FF3366' // Pink-Red
+        };
+      case 'medium':
+        return {
+          value: priority,
+          color: '#FFB100' // Orange
+        };
+      case 'low':
+        return {
+          value: priority,
+          color: '#00F5FF' // Cyan
+        };
+      default:
+        return {
+          value: priority,
+          color: '#888888'
+        };
+    }
+  };
+
+  return { 
+    formatProgress, 
+    formatStartTime,
+    formatDifficulty,
+    formatPriority
+  };
 };
