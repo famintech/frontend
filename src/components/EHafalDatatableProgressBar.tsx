@@ -57,7 +57,7 @@ export function EHafalDatatableProgressBar({
   color, 
   stripeDensity = 6, 
   stripeThickness = 4,
-  animationSpeed = 0.7 
+  animationSpeed = 0.3
 }: ProgressBarProps) {
   const patternSize = Math.sqrt(2) * stripeDensity;
 
