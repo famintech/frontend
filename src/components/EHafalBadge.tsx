@@ -1,17 +1,17 @@
-import { Box, styled } from '@mui/material';
+import { styled } from '@mui/material';
+import { motion } from 'framer-motion';
 
 interface BadgeProps {
   value: string;
   color: string;
 }
 
-const BadgeContainer = styled(Box)<{ $color: string }>(({ $color }) => ({
-  padding: '4px 12px',
-  borderRadius: '4px',
-  backgroundColor: `${$color}15`, // 15 is hex for 10% opacity
+const BadgeContainer = styled(motion.div)<{ $color: string }>(({ $color }) => ({
+  padding: '2px 8px', // Reduced padding
+  backgroundColor: `${$color}15`,
   border: `1px solid ${$color}`,
   color: $color,
-  fontSize: '0.85rem',
+  fontSize: '0.75rem', // Smaller font size
   fontWeight: 'bold',
   display: 'inline-flex',
   alignItems: 'center',
@@ -21,6 +21,7 @@ const BadgeContainer = styled(Box)<{ $color: string }>(({ $color }) => ({
   textTransform: 'uppercase',
   letterSpacing: '0.5px',
   boxShadow: `0 0 8px ${$color}40`,
+  minWidth: '60px', // Ensure minimum width for consistency
   '&::before': {
     content: '""',
     position: 'absolute',
@@ -48,7 +49,22 @@ const BadgeContainer = styled(Box)<{ $color: string }>(({ $color }) => ({
 
 export function EHafalBadge({ value, color }: BadgeProps) {
   return (
-    <BadgeContainer $color={color}>
+    <BadgeContainer
+      $color={color}
+      initial={{ scale: 0.9, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      whileHover={{ 
+        scale: 1.05,
+        boxShadow: `0 0 12px ${color}60`,
+        transition: { duration: 0.2 }
+      }}
+      whileTap={{ scale: 0.95 }}
+      transition={{
+        type: "spring",
+        stiffness: 400,
+        damping: 17
+      }}
+    >
       {value}
     </BadgeContainer>
   );
