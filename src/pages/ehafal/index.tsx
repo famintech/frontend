@@ -1,16 +1,16 @@
 import { Table, TableBody, TableContainer, TableHead } from '@mui/material';
-import { 
-    SciFiTable, 
-    HeaderCell, 
-    DataCell, 
-    TableRowStyled, 
+import {
+    SciFiTable,
+    HeaderCell,
+    DataCell,
+    TableRowStyled,
     MotionTableRow,
-    rowVariants 
+    rowVariants
 } from '@/theme/datatable';
 import { useFormatEhafalDatatable } from '@/hooks/use-format-ehafal-datatable';
 import { EHafalDatatableProgressBar } from '@/components/EHafalDatatableProgressBar';
 import { EHafalBadge } from '@/components/EHafalBadge';
-
+import { useTheme } from '@mui/material/styles';
 // Updated columns
 const columns = [
     { id: 'id', label: 'ID' },
@@ -77,7 +77,7 @@ const data = [
         status: 'Pending',
         progress: '2.5%',
         startTime: '2024-03-18 10:00',
-        duration: '5h',
+        duration: '5h', 
         difficulty: 'Hard',
         priority: 'High',
     }
@@ -85,6 +85,7 @@ const data = [
 
 export default function EHafal() {
     const { formatProgress, formatStartTime, formatDifficulty, formatPriority, formatDuration } = useFormatEhafalDatatable();
+    const theme = useTheme();
 
     return (
         <SciFiTable elevation={0}>
@@ -126,7 +127,22 @@ export default function EHafal() {
                                         />
                                     </DataCell>
                                     <DataCell align="center">{formattedStartTime}</DataCell>
-                                    <DataCell align="center">{formattedDuration}</DataCell>
+                                    <DataCell align="center">
+                                        {formattedDuration.days && (
+                                            <span>
+                                                <span style={{ color: theme.palette.primary.main }}>{formattedDuration.days.value}</span>
+                                                {' days '}
+                                            </span>
+                                        )}
+                                        {formattedDuration.hours && (
+                                            <span>
+                                                <span style={{ color: theme.palette.primary.main }}>{formattedDuration.hours.value}</span>
+                                                {' hours '}
+                                            </span>
+                                        )}
+                                        <span style={{ color: theme.palette.primary.main }}>{formattedDuration.minutes.value}</span>
+                                        {' minutes'}
+                                    </DataCell>
                                     <DataCell align="center">
                                         <EHafalBadge
                                             value={formattedDifficulty.value}

@@ -9,6 +9,12 @@ interface FormattedBadge {
   color: string;
 }
 
+interface FormattedDuration {
+  days?: { value: number };
+  hours?: { value: number };
+  minutes: { value: number };
+}
+
 export const useFormatEhafalDatatable = () => {
   const formatProgress = (progress: string): FormattedProgress => {
     const numericProgress = parseInt(progress);
@@ -112,27 +118,21 @@ export const useFormatEhafalDatatable = () => {
     }
   };
 
-  const formatDuration = (startTimeString: string): string => {
-    // Create Date objects for start time and current time in Kuala Lumpur timezone
+  const formatDuration = (startTimeString: string): FormattedDuration => {
     const startTime = new Date(startTimeString);
     const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kuala_Lumpur' }));
     
-    // Calculate difference in milliseconds
     const diffMs = now.getTime() - startTime.getTime();
     
-    // Convert to various units
     const days = Math.floor(diffMs / (24 * 60 * 60 * 1000));
     const hours = Math.floor((diffMs % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
     const minutes = Math.floor((diffMs % (60 * 60 * 1000)) / (60 * 1000));
     
-    // Format the duration string
-    if (days > 0) {
-      return `${days} days ${hours} hours ${minutes} minutes`;
-    } else if (hours > 0) {
-      return `${hours} hours ${minutes} minutes`;
-    } else {
-      return `${minutes} minutes`;
-    }
+    return {
+      ...(days > 0 ? { days: { value: days } } : {}),
+      ...(hours > 0 ? { hours: { value: hours } } : {}),
+      minutes: { value: minutes }
+    };
   };
 
   return { 
