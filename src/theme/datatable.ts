@@ -18,8 +18,8 @@ export const SciFiTable = styled(Paper)(({ }) => ({
     }
 }));
 
-export const HeaderCell = styled(TableCell)(({ theme }) => ({
-    color: theme.palette.primary.main,
+export const HeaderCell = styled(TableCell)(({ }) => ({
+    color: '#fff',
     fontWeight: 'bold',
     fontSize: '0.9rem',
     padding: '16px 8px',

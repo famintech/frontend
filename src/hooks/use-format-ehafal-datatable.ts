@@ -1,3 +1,4 @@
+
 interface FormattedProgress {
   value: string;
   color: string;
