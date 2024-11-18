@@ -1,5 +1,5 @@
 import { Table, TableBody, TableContainer } from '@mui/material';
-import { SciFiTable } from '@/features/ehafal/components/table/styles/components/table.styles';
+import { SciFiTable } from '@/features/ehafal/components/table/styles/components';
 import { EHafalTableProps } from '@/features/ehafal/types/table';
 import { TableRow } from '@/features/ehafal/components/table/TableRow';
 import { HeaderRow } from '@/features/ehafal/components/table/HeaderRow';

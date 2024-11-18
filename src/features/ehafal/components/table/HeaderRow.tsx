@@ -1,5 +1,5 @@
 import { TableHead } from '@mui/material';
-import { HeaderCell, TableRowStyled } from '@/features/ehafal/components/table/styles/datatable';
+import { HeaderCell, TableRowStyled } from '@/features/ehafal/components/table/styles/elements';
 import { HeaderRowProps } from '@/features/ehafal/types/table';
 
 export const HeaderRow = ({ columns }: HeaderRowProps) => (

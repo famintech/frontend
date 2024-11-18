@@ -1,13 +1,14 @@
-import { toolkitVariants, ToolkitContainer } from "@/features/ehafal/components/table/styles/datatable";
+import { toolkitVariants } from "@/features/ehafal/components/table/styles/animations";
+import { ToolbarContainer } from "@/features/ehafal/components/table/styles/components";
 
 export const Toolbar = () => {
     return (
-        <ToolkitContainer
+        <ToolbarContainer
             initial="hidden"
             animate="visible"
             variants={toolkitVariants}
         >
-            {/* Toolkit content will go here */}
-        </ToolkitContainer>
+            {/* Toolbar content will go here */}
+        </ToolbarContainer>
     );
 };

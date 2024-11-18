@@ -1,5 +1,5 @@
-import { MotionTableRow } from '@/features/ehafal/components/table/styles/elements/row.styles';
-import { rowVariants } from '@/features/ehafal/components/table/styles/animations/row-variants';
+import { MotionTableRow } from '@/features/ehafal/components/table/styles/elements';
+import { rowVariants } from '@/features/ehafal/components/table/styles/animations';
 import { useEHafalTableFormatter } from '@/features/ehafal/hooks/use-table-formatter';
 import { TableRowProps } from '@/features/ehafal/types/table';
 import { BasicCell, ProgressCell, BadgeCell, DurationCell } from '@/features/ehafal/components/table/cells';

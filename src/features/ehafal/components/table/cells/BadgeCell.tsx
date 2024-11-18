@@ -1,4 +1,4 @@
-import { DataCell } from '@/features/ehafal/components/table/styles/datatable';
+import { DataCell } from '@/features/ehafal/components/table/styles/elements';
 import { Badge } from '@/features/ehafal/components/table/Badge';
 import { BadgeCellProps } from '@/features/ehafal/types/table';
 

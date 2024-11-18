@@ -1,4 +1,4 @@
-import { DataCell } from '@/features/ehafal/components/table/styles/datatable';
+import { DataCell } from '@/features/ehafal/components/table/styles/elements';
 import { useTheme } from '@mui/material/styles';
 import { DurationCellProps } from '@/features/ehafal/types/table';
 
