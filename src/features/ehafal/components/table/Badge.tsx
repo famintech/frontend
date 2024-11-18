@@ -2,6 +2,7 @@ import { BadgeProps } from '@/features/ehafal/types/table';
 import { BadgeContainer } from '@/features/ehafal/components/table/styles/components';
 
 export function Badge({ value, color }: BadgeProps) {
+  console.log('Badge color:', color); // Add this temporarily for debugging
   return (
     <BadgeContainer
       $color={color}
