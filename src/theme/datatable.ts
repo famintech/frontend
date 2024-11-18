@@ -107,10 +107,10 @@ export const rowVariants = {
 
 export const ToolkitContainer = styled(motion.div)({
     width: '95%',
+    margin: '0 auto 1rem auto', // Added margin to match SciFiTable and add bottom spacing
     padding: '1rem',
     background: '#0a0e17',
     border: '1px solid rgba(255, 255, 255, 0.1)',
-    borderRadius: '4px',
 });
 
 export const toolkitVariants = {
