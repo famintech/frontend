@@ -79,7 +79,7 @@ export const rowVariants = {
         opacity: 1,
         x: 0,
         transition: {
-            delay: i * 0.3,
+            delay: i * 0.2,
             duration: 0.5,
             ease: "easeOut"
         }
