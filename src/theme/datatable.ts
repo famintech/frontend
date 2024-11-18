@@ -104,3 +104,27 @@ export const rowVariants = {
         }
     })
 };
+
+export const ToolkitContainer = styled(motion.div)({
+    width: '100%',
+    padding: '1rem',
+    marginBottom: '1rem',
+    background: '#0a0e17',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    borderRadius: '4px',
+});
+
+export const toolkitVariants = {
+    hidden: { 
+        opacity: 0,
+        y: -20
+    },
+    visible: { 
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.3,
+            ease: "easeOut"
+        }
+    }
+};

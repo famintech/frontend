@@ -12,6 +12,7 @@ import { EHafalDatatableProgressBar } from '@/components/EHafalDatatableProgress
 import { EHafalBadge } from '@/components/EHafalBadge';
 import { useTheme } from '@mui/material/styles';
 import { useUiSound } from '@/hooks/use-ui-sound';
+import { TableToolkit } from '@/components/EHafalDatatableTookit';
 
 const DATA_APPEAR_SOUND = '/sounds/ui-sound-hover-1.mp3';
 
@@ -105,8 +106,10 @@ export default function EHafal() {
     };
 
     return (
-        <SciFiTable elevation={0}>
-            <TableContainer>
+        <>
+            <TableToolkit />
+            <SciFiTable elevation={0}>
+                <TableContainer>
                 <Table>
                     <TableHead>
                         <TableRowStyled>
@@ -178,7 +181,8 @@ export default function EHafal() {
                         })}
                     </TableBody>
                 </Table>
-            </TableContainer>
-        </SciFiTable>
+                </TableContainer>
+            </SciFiTable>
+        </>
     );
 }
