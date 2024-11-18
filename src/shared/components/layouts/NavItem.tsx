@@ -3,7 +3,7 @@ import { MenuItem } from '@/config/menu.config';
 import { AnimatedNavItem, NavItem as StyledNavItem } from '@/theme/sidebar';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import { useUiSound } from '@/hooks/use-ui-sound';
+import { useUiSound } from '@/shared/hooks/use-ui-sound';
 import { useState } from 'react';
 import { routerConfig } from '@/routes/index';
 
