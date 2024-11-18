@@ -13,15 +13,15 @@ import { EHafalBadge } from '@/components/EHafalBadge';
 import { useTheme } from '@mui/material/styles';
 // Updated columns
 const columns = [
-    { id: 'id', label: 'ID' },
-    { id: 'target', label: 'Target' },
-    { id: 'scope', label: 'Scope' },
-    { id: 'status', label: 'Status' },
-    { id: 'progress', label: 'Progress' },
-    { id: 'startTime', label: 'Started' },
-    { id: 'duration', label: 'Duration' },
-    { id: 'difficulty', label: 'Difficulty' },
-    { id: 'priority', label: 'Priority' },
+    { id: 'id', label: 'ID', width: '8%' },
+    { id: 'target', label: 'Target', width: '15%' },
+    { id: 'scope', label: 'Scope', width: '12%' },
+    { id: 'status', label: 'Status', width: '10%' },
+    { id: 'progress', label: 'Progress', width: '15%' },
+    { id: 'startTime', label: 'Started', width: '12%' },
+    { id: 'duration', label: 'Duration', width: '12%' },
+    { id: 'difficulty', label: 'Difficulty', width: '8%' },
+    { id: 'priority', label: 'Priority', width: '8%' },
 ];
 
 // Updated dummy data
@@ -94,7 +94,7 @@ export default function EHafal() {
                     <TableHead>
                         <TableRowStyled>
                             {columns.map((column) => (
-                                <HeaderCell key={column.id} align="center">
+                                <HeaderCell key={column.id} align="center" width={column.width}>
                                     {column.label}
                                 </HeaderCell>
                             ))}
@@ -116,18 +116,18 @@ export default function EHafal() {
                                     custom={index}
                                     variants={rowVariants}
                                 >
-                                    <DataCell align="center">{row.id}</DataCell>
-                                    <DataCell align="center">{row.target}</DataCell>
-                                    <DataCell align="center">{row.scope}</DataCell>
-                                    <DataCell align="center">{row.status}</DataCell>
-                                    <DataCell align="center">
+                                    <DataCell align="center" width={columns[0].width}>{row.id}</DataCell>
+                                    <DataCell align="center" width={columns[1].width}>{row.target}</DataCell>
+                                    <DataCell align="center" width={columns[2].width}>{row.scope}</DataCell>
+                                    <DataCell align="center" width={columns[3].width}>{row.status}</DataCell>
+                                    <DataCell align="center" width={columns[4].width}>
                                         <EHafalDatatableProgressBar
                                             value={numericProgress}
                                             color={progress.color}
                                         />
                                     </DataCell>
-                                    <DataCell align="center">{formattedStartTime}</DataCell>
-                                    <DataCell align="center">
+                                    <DataCell align="center" width={columns[5].width}>{formattedStartTime}</DataCell>
+                                    <DataCell align="center" width={columns[6].width}>
                                         {formattedDuration.days && (
                                             <span>
                                                 <span style={{ color: theme.palette.primary.main }}>{formattedDuration.days.value}</span>
@@ -143,13 +143,13 @@ export default function EHafal() {
                                         <span style={{ color: theme.palette.primary.main }}>{formattedDuration.minutes.value}</span>
                                         {' minutes'}
                                     </DataCell>
-                                    <DataCell align="center">
+                                    <DataCell align="center" width={columns[7].width}>
                                         <EHafalBadge
                                             value={formattedDifficulty.value}
                                             color={formattedDifficulty.color}
                                         />
                                     </DataCell>
-                                    <DataCell align="center">
+                                    <DataCell align="center" width={columns[8].width}>
                                         <EHafalBadge
                                             value={formattedPriority.value}
                                             color={formattedPriority.color}
