@@ -96,9 +96,9 @@ export default function EHafal() {
     const handleAnimationStart = (index: number) => {
         // Delay the sound slightly to match the animation
         setTimeout(() => {
-            const pitch = 1.3 - (index * 0.08); // Adjusted pitch range
+            // const pitch = 1.3 - (index * 0.08); // Adjusted pitch range
             playSound({
-                pitch,
+                pitch: 1.5,
                 volume: 0.2
             });
         }, index * 200); // Match the animation delay
