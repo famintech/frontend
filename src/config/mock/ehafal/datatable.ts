@@ -1,14 +1,4 @@
-export interface EHafalData {
-    id: string;
-    target: string;
-    scope: string;
-    status: string;
-    progress: string;
-    startTime: string;
-    duration: string;
-    difficulty: string;
-    priority: string;
-}
+import { EHafalData } from "@/config/types/ehafal/datatable";
 
 export const mockData: EHafalData[] = [
     {

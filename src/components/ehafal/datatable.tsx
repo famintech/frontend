@@ -12,27 +12,9 @@ import { EHafalDatatableProgressBar } from '@/components/ehafal/datatable-progre
 import { EHafalBadge } from '@/components/ehafal/datatable-badge';
 import { useTheme } from '@mui/material/styles';
 import { useUiSound } from '@/hooks/use-ui-sound';
+import { EHafalDatatableProps } from '@/config/types/ehafal/datatable';
 
 const DATA_APPEAR_SOUND = '/sounds/ui-sound-hover-1.mp3';
-
-interface EHafalDatatableProps {
-    data: Array<{
-        id: string;
-        target: string;
-        scope: string;
-        status: string;
-        progress: string;
-        startTime: string;
-        duration: string;
-        difficulty: string;
-        priority: string;
-    }>;
-    columns: Array<{
-        id: string;
-        label: string;
-        width: string;
-    }>;
-}
 
 export const EHafalDatatable = ({ data, columns }: EHafalDatatableProps) => {
     const { formatProgress, formatStartTime, formatDifficulty, formatPriority, formatDuration } = useFormatEhafalDatatable();
