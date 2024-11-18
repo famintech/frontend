@@ -50,4 +50,22 @@ export const menuItems: MenuItem[] = [
     path: '/siren-ai',
     icon: <AssistantIcon />
   },
+  {
+    id: 'grabfood',
+    title: 'GrabFood',
+    path: '/grabfood',
+    icon: <LightbulbIcon />
+  },
+  {
+    id: 'financial',
+    title: 'Financial',
+    path: '/financial',
+    icon: <LightbulbIcon />
+  },
+  {
+    id: 'workout',
+    title: 'Workout',
+    path: '/workout',
+    icon: <LightbulbIcon />
+  }
 ];
