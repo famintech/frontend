@@ -21,10 +21,10 @@ export const DialogHeader = styled(DialogTitle)({
 });
 
 export const DialogBody = styled(DialogContent)({
-    padding: '32px 24px 24px 24px',  // Increased top padding
+    padding: '40px 24px 24px 24px',  // Increased top padding even more
     display: 'flex',
     flexDirection: 'column',
-    gap: '24px',  // Increased gap between form fields
+    gap: '24px',
 });
 
 export const DialogFooter = styled(DialogActions)({
@@ -99,6 +99,7 @@ export const ActionButton = styled('button')({
     color: '#fff',
     padding: '8px 16px',
     fontSize: '0.9rem',
+    fontFamily: 'inherit',  // Added this line
     cursor: 'pointer',
     '&:hover': {
         backgroundColor: 'rgba(255, 255, 255, 0.15)',
