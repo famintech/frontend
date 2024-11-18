@@ -104,3 +104,13 @@ export interface ToolbarProps {
     searchQuery: string;
     onSearchChange: (value: string) => void;
 }
+
+export interface ToolbarProps {
+    searchQuery: string;
+    onSearchChange: (value: string) => void;
+    scopes: string[];
+    selectedScopes: string[];
+    onScopeChange: (scopes: string[]) => void;
+    selectedPriorities: Priority[];
+    onPriorityChange: (priorities: Priority[]) => void;
+}
