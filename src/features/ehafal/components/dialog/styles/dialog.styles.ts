@@ -23,7 +23,7 @@ export const DialogHeader = styled(DialogTitle)({
 export const DialogBody = styled(DialogContent)({
     padding: 0,  // Reset MUI's default padding
     '& > *:first-of-type': {
-        marginTop: '40px',  // Add margin to first child
+        marginTop: '24px',  // Add margin to first child
     },
     '& > *': {
         padding: '0 24px',  // Add horizontal padding to all children
