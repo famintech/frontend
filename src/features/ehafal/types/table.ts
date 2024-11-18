@@ -131,3 +131,8 @@ export interface PriorityFilterProps {
     selectedPriorities: Priority[];
     onPriorityChange: (priorities: Priority[]) => void;
 }
+
+export interface CreateDialogProps {
+    open: boolean;
+    onClose: () => void;
+}

@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { toolkitVariants, buttonVariants } from "@/features/ehafal/components/table/styles/animations";
 import { ToolbarContainer, FilterContainer } from "@/features/ehafal/components/table/styles/components";
 import { CreateButton, StyledAddIcon, CreateButtonText } from "@/features/ehafal/components/table/styles/components/actions.styles";
 import { SearchFilter, ScopeFilter, PriorityFilter } from '@/features/ehafal/components/table/filters';
 import { ToolbarProps } from "@/features/ehafal/types/table";
+import { CreateDialog } from "@/features/ehafal/components/dialog";
 
 export const Toolbar = ({ 
     searchQuery, 
@@ -13,6 +15,8 @@ export const Toolbar = ({
     selectedPriorities,
     onPriorityChange 
 }: ToolbarProps) => {
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
     return (
         <ToolbarContainer
             initial="hidden"
@@ -41,11 +45,16 @@ export const Toolbar = ({
                     variants={buttonVariants}
                     initial="hidden"
                     animate="visible"
+                    onClick={() => setIsDialogOpen(true)}
                 >
                     <StyledAddIcon />
                     <CreateButtonText>Create</CreateButtonText>
                 </CreateButton>
             </FilterContainer>
+            <CreateDialog
+                open={isDialogOpen}
+                onClose={() => setIsDialogOpen(false)}
+            />
         </ToolbarContainer>
     );
 };
