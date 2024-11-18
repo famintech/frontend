@@ -1,12 +1,7 @@
 import { useState } from 'react';
 import { ClickAwayListener } from '@mui/material';
-import { FilterButton, DropdownContainer, CheckboxList, FilterSearch, CheckboxItem, StyledCheckbox } from '../styles/components/filter.styles';
-
-interface ScopeFilterProps {
-    scopes: string[];
-    selectedScopes: string[];
-    onScopeChange: (scopes: string[]) => void;
-}
+import { FilterButton, DropdownContainer, CheckboxList, FilterSearch, CheckboxItem, StyledCheckbox } from '@/features/ehafal/components/table/styles/components';
+import { ScopeFilterProps } from '@/features/ehafal/types';
 
 export const ScopeFilter = ({ scopes, selectedScopes, onScopeChange }: ScopeFilterProps) => {
     const [isOpen, setIsOpen] = useState(false);

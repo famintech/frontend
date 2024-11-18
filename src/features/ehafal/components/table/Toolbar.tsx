@@ -1,9 +1,6 @@
-import { Search as SearchIcon } from '@mui/icons-material';
-import { InputAdornment } from '@mui/material';
 import { toolkitVariants } from "@/features/ehafal/components/table/styles/animations";
-import { ToolbarContainer, SearchInput, SearchContainer, FilterContainer } from "@/features/ehafal/components/table/styles/components";
-import { ScopeFilter } from './filters/ScopeFilter';
-import { PriorityFilter } from './filters/PriorityFilter';
+import { ToolbarContainer, FilterContainer } from "@/features/ehafal/components/table/styles/components";
+import { SearchFilter, ScopeFilter, PriorityFilter } from '@/features/ehafal/components/table/filters';
 import { ToolbarProps } from "@/features/ehafal/types/table";
 
 export const Toolbar = ({ 
@@ -26,18 +23,10 @@ export const Toolbar = ({
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: 0.2 }}
             >
-                <SearchContainer>
-                    <SearchInput
-                        placeholder="Search by target name..."
-                        value={searchQuery}
-                        onChange={(e) => onSearchChange(e.target.value)}
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <SearchIcon sx={{ color: 'rgba(255, 255, 255, 0.7)' }} />
-                            </InputAdornment>
-                        }
-                    />
-                </SearchContainer>
+                <SearchFilter
+                    searchQuery={searchQuery}
+                    onSearchChange={onSearchChange}
+                />
                 <ScopeFilter
                     scopes={scopes}
                     selectedScopes={selectedScopes}

@@ -114,3 +114,19 @@ export interface ToolbarProps {
     selectedPriorities: Priority[];
     onPriorityChange: (priorities: Priority[]) => void;
 }
+
+export interface ScopeFilterProps {
+    scopes: string[];
+    selectedScopes: string[];
+    onScopeChange: (scopes: string[]) => void;
+}
+
+export interface SearchFilterProps {
+    searchQuery: string;
+    onSearchChange: (value: string) => void;
+}
+
+export interface PriorityFilterProps {
+    selectedPriorities: Priority[];
+    onPriorityChange: (priorities: Priority[]) => void;
+}

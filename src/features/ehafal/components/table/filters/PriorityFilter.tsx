@@ -2,11 +2,7 @@ import { useState } from 'react';
 import { ClickAwayListener } from '@mui/material';
 import { Priority } from '@/features/ehafal/types/enums';
 import { FilterButton, DropdownContainer, CheckboxItem, StyledCheckbox } from '../styles/components/filter.styles';
-
-interface PriorityFilterProps {
-    selectedPriorities: Priority[];
-    onPriorityChange: (priorities: Priority[]) => void;
-}
+import { PriorityFilterProps } from '@/features/ehafal/types';
 
 export const PriorityFilter = ({ selectedPriorities, onPriorityChange }: PriorityFilterProps) => {
     const [isOpen, setIsOpen] = useState(false);
