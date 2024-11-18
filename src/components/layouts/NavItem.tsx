@@ -74,7 +74,7 @@ export function NavItem({
       setTimeout(() => setIsError(false), 400);
     } else {
       setIsFlashing(true);
-      playSound({ pitch: 1.5 }); // Normal click pitch
+      playSound({ pitch: 0.5 }); // Normal click pitch
       onClick();
       setTimeout(() => setIsFlashing(false), 400);
     }

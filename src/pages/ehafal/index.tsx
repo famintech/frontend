@@ -11,6 +11,10 @@ import { useFormatEhafalDatatable } from '@/hooks/use-format-ehafal-datatable';
 import { EHafalDatatableProgressBar } from '@/components/EHafalDatatableProgressBar';
 import { EHafalBadge } from '@/components/EHafalBadge';
 import { useTheme } from '@mui/material/styles';
+import { useUiSound } from '@/hooks/use-ui-sound';
+
+const DATA_APPEAR_SOUND = '/sounds/ui-sound-hover-1.mp3';
+
 // Updated columns
 const columns = [
     { id: 'id', label: 'ID', width: '8%' },
@@ -77,7 +81,7 @@ const data = [
         status: 'Pending',
         progress: '2.5%',
         startTime: '2024-03-18 10:00',
-        duration: '5h', 
+        duration: '5h',
         difficulty: 'Hard',
         priority: 'High',
     }
@@ -86,6 +90,15 @@ const data = [
 export default function EHafal() {
     const { formatProgress, formatStartTime, formatDifficulty, formatPriority, formatDuration } = useFormatEhafalDatatable();
     const theme = useTheme();
+    const playSound = useUiSound(DATA_APPEAR_SOUND, { volume: 0.15 });
+
+     // Create a function to handle animation start
+     const handleAnimationStart = (index: number) => {
+        // Play sound with different pitch based on row index
+        // Lower indices will have higher pitch, creating a descending tone effect
+        const pitch = 1.5 - (index * 0.1); // This will create pitches: 1.5, 1.4, 1.3, etc.
+        playSound({ pitch });
+    };
 
     return (
         <SciFiTable elevation={0}>
@@ -115,6 +128,7 @@ export default function EHafal() {
                                     animate="visible"
                                     custom={index}
                                     variants={rowVariants}
+                                    onAnimationStart={() => handleAnimationStart(index)}
                                 >
                                     <DataCell align="center" width={columns[0].width}>{row.id}</DataCell>
                                     <DataCell align="center" width={columns[1].width}>{row.target}</DataCell>

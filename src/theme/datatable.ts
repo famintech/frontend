@@ -73,14 +73,33 @@ export const MotionTableRow = styled(MotionComponent)({
 });
 
 // Animation variants remain the same
+// export const rowVariants = {
+//     hidden: { opacity: 0, x: -20 },
+//     visible: (i: number) => ({
+//         opacity: 1,
+//         x: 0,
+//         transition: {
+//             delay: i * 0.2,
+//             duration: 0.5,
+//             ease: "easeOut"
+//         }
+//     })
+// };
+
 export const rowVariants = {
-    hidden: { opacity: 0, x: -20 },
+    hidden: { 
+        opacity: 0, 
+        x: -20,
+        transition: {
+            duration: 0
+        }
+    },
     visible: (i: number) => ({
         opacity: 1,
         x: 0,
         transition: {
-            delay: i * 0.2,
-            duration: 0.5,
+            delay: i * 0.15, // Slightly faster delay between rows
+            duration: 0.3,
             ease: "easeOut"
         }
     })
