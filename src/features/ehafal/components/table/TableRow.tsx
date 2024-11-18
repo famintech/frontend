@@ -1,9 +1,7 @@
 import { MotionTableRow } from '@/features/ehafal/components/table/styles/elements';
 import { rowVariants } from '@/features/ehafal/components/table/styles/animations';
-import { useProgressFormatter } from '@/features/ehafal/hooks/use-progress-formatter';
-import { useBadgeFormatter } from '@/features/ehafal/hooks/use-badge-formatter';
-import { useTimeFormatter } from '@/features/ehafal/hooks/use-time-formatter';
-import { TableRowProps } from '@/features/ehafal/types/table';
+import { useProgressFormatter, useBadgeFormatter, useTimeFormatter } from '@/features/ehafal/hooks';
+import { TableRowProps } from '@/features/ehafal/types';
 import { BasicCell, ProgressCell, BadgeCell, DurationCell } from '@/features/ehafal/components/table/cells';
 
 export const TableRow = ({ row, columns, index, onAnimationStart }: TableRowProps) => {
