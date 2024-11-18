@@ -36,7 +36,7 @@ export const HeaderCell = styled(TableCell)(({ }) => ({
 
 export const DataCell = styled(TableCell)(({ }) => ({
     color: '#fff',
-    padding: '8px 8px',
+    padding: '8px 4px',
     background: '#0a1d29',
     border: '1px solid rgba(255, 255, 255, 0.1)',
     transition: 'all 0.2s ease-in-out',
