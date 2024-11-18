@@ -1,10 +1,10 @@
 import { DataCell } from '@/theme/datatable';
-import { EHafalBadge } from '@/components/ehafal/datatable/datatable-badge';
-import { BadgeCellProps } from '@/features/ehafal/types/datatable';
+import { Badge } from '@/features/ehafal/components/table/badge';
+import { BadgeCellProps } from '@/features/ehafal/types/table';
 
 export const BadgeCell = ({ badge, width }: BadgeCellProps) => (
     <DataCell align="center" width={width}>
-        <EHafalBadge
+        <Badge
             value={badge.value}
             color={badge.color}
         />

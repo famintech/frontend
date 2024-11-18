@@ -1,10 +1,10 @@
 import { DataCell } from '@/theme/datatable';
-import { EHafalDatatableProgressBar } from '@/components/ehafal/datatable/datatable-progress-bar';
-import { ProgressCellProps } from '@/features/ehafal/types/datatable';
+import { ProgressBar } from '@/features/ehafal/components/table/progress-bar';
+import { ProgressCellProps } from '@/features/ehafal/types/table';
 
 export const ProgressCell = ({ progress, width }: ProgressCellProps) => (
     <DataCell align="center" width={width}>
-        <EHafalDatatableProgressBar
+        <ProgressBar
             value={parseInt(progress.value)}
             color={progress.color}
         />

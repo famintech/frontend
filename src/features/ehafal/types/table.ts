@@ -1,4 +1,4 @@
-export interface EHafalData {
+export interface Data {
     id: string;
     target: string;
     scope: string;
@@ -10,19 +10,19 @@ export interface EHafalData {
     priority: string;
 }
 
-export interface EHafalColumn {
+export interface Column {
     id: string;
     label: string;
     width: string;
 }
 
-export interface EHafalDatatableProps {
-    data: EHafalData[];
-    columns: EHafalColumn[];
+export interface DatatableProps {
+    data: Data[];
+    columns: Column[];
 }
 
 export interface HeaderRowProps {
-    columns: EHafalColumn[];
+    columns: Column[];
 }
 
 export interface FormattedProgress {
@@ -47,8 +47,8 @@ export interface DurationCellProps {
 }
 
 export interface TableRowProps {
-    row: EHafalData;
-    columns: EHafalColumn[];
+    row: Data;
+    columns: Column[];
     index: number;
     onAnimationStart: (index: number) => void;
 }
@@ -81,4 +81,9 @@ export interface ProgressCellProps {
 export interface BadgeCellProps {
     badge: FormattedBadge;
     width: string;
+}
+
+export interface BadgeProps {
+    value: string;
+    color: string;
 }

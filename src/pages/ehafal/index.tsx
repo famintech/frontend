@@ -1,13 +1,13 @@
-import { TableToolkit } from "@/components/ehafal/datatable/datatable-toolkit";
-import { EHafalDatatable } from "@/components/ehafal/datatable/datatable";
-import { columns } from "@/config/ehafal/datatable/columns";
+import { Toolbar } from "@/features/ehafal/components/table/toolbar";
+import { DataTable } from "@/features/ehafal/components/table/table";
+import { columns } from "@/features/ehafal/config/columns";
 import { mockData } from "@/config/mock/ehafal/datatable";
 
 export default function EHafal() {
     return (
         <>
-            <TableToolkit />
-            <EHafalDatatable
+            <Toolbar />
+            <DataTable
                 columns={columns}
                 data={mockData}
             />

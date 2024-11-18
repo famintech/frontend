@@ -1,6 +1,6 @@
 import { toolkitVariants, ToolkitContainer } from "@/theme/datatable";
 
-export const TableToolkit = () => {
+export const Toolbar = () => {
     return (
         <ToolkitContainer
             initial="hidden"

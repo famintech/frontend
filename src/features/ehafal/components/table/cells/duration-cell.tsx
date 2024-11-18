@@ -1,6 +1,6 @@
 import { DataCell } from '@/theme/datatable';
 import { useTheme } from '@mui/material/styles';
-import { DurationCellProps } from '@/features/ehafal/types/datatable';
+import { DurationCellProps } from '@/features/ehafal/types/table';
 
 export const DurationCell = ({ duration, width }: DurationCellProps) => {
     const theme = useTheme();

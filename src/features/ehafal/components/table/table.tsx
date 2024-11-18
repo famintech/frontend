@@ -1,11 +1,11 @@
 import { Table, TableBody, TableContainer } from '@mui/material';
 import { SciFiTable } from '@/theme/datatable';
-import { EHafalDatatableProps } from '@/features/ehafal/types/datatable';
-import { TableRow } from '../../../features/ehafal/components/table/datatable-row';
-import { HeaderRow } from '../../../features/ehafal/components/table/datatable-header-row';
-import { useDataTableAnimation } from '@/hooks/use-ehafal-table-animation';
+import { DatatableProps } from '@/features/ehafal/types/table';
+import { TableRow } from '@/features/ehafal/components/table/table-row';
+import { HeaderRow } from '@/features/ehafal/components/table/header-row';
+import { useDataTableAnimation } from '@/features/ehafal/hooks/use-table-animation';
 
-export const EHafalDatatable = ({ data, columns }: EHafalDatatableProps) => {
+export const DataTable = ({ data, columns }: DatatableProps) => {
     const { handleAnimationStart } = useDataTableAnimation();
 
     return (

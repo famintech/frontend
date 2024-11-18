@@ -1,6 +1,6 @@
 import { MotionTableRow, rowVariants } from '@/theme/datatable';
-import { useFormatEhafalTable } from '@/features/ehafal/hooks/use-ehafal-table-formater';
-import { TableRowProps } from '@/features/ehafal/types/datatable';
+import { useTableFormater } from '@/features/ehafal/hooks/use-table-formater';
+import { TableRowProps } from '@/features/ehafal/types/table';
 import { BasicCell } from '@/features/ehafal/components/table/cells/basic-cell';
 import { ProgressCell } from '@/features/ehafal/components/table/cells/progress-cell';
 import { BadgeCell } from '@/features/ehafal/components/table/cells/badge-cell';
@@ -13,7 +13,7 @@ export const TableRow = ({ row, columns, index, onAnimationStart }: TableRowProp
         formatDifficulty, 
         formatPriority, 
         formatDuration 
-    } = useFormatEhafalTable();
+    } = useTableFormater();
 
     const formattedData = {
         progress: formatProgress(row.progress),
