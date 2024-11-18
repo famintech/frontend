@@ -99,3 +99,8 @@ export interface StripedBackgroundProps {
     $stripeDensity: number;
     $stripeThickness: number;
 }
+
+export interface ToolbarProps {
+    searchQuery: string;
+    onSearchChange: (value: string) => void;
+}
