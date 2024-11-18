@@ -18,7 +18,7 @@ export const CreateButton = styled(motion.button)({
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     textTransform: 'none',
     marginLeft: 'auto',
-    padding: '6px 16px',
+    padding: '6px 10px',
     borderRadius: 0,
     border: '1px solid rgba(255, 255, 255, 0.2)',
     display: 'flex',
