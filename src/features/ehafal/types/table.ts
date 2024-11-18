@@ -87,3 +87,13 @@ export interface BadgeProps {
     value: string;
     color: string;
 }
+
+export interface HeaderCellProps {
+    width?: string;
+}
+
+export interface StripedBackgroundProps {
+    $color: string;
+    $stripeDensity: number;
+    $stripeThickness: number;
+}
