@@ -51,7 +51,7 @@ export function NavItem({
   };
 
   const handleHover = () => {
-    playSound({ pitch: 0.2 }); // Normal pitch for hover
+    playSound({ pitch: 2 }); // Normal pitch for hover
   };
 
   const handleClick = () => {
@@ -74,7 +74,7 @@ export function NavItem({
       setTimeout(() => setIsError(false), 400);
     } else {
       setIsFlashing(true);
-      playSound({ pitch: 1 }); // Normal click pitch
+      playSound({ pitch: 0.7 }); // Normal click pitch
       onClick();
       setTimeout(() => setIsFlashing(false), 400);
     }
