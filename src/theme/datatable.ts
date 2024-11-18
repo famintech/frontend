@@ -106,9 +106,8 @@ export const rowVariants = {
 };
 
 export const ToolkitContainer = styled(motion.div)({
-    width: '100%',
+    width: '95%',
     padding: '1rem',
-    marginBottom: '1rem',
     background: '#0a0e17',
     border: '1px solid rgba(255, 255, 255, 0.1)',
     borderRadius: '4px',
