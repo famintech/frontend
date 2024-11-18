@@ -23,7 +23,7 @@ export const HeaderCell = styled(TableCell)(({ }) => ({
     fontWeight: 'bold',
     fontSize: '0.9rem',
     padding: '16px 8px',
-    background: '#0a1d29',
+    background: '#0a0e17',
     border: '1px solid rgba(255, 255, 255, 0.1)',
     borderTop: 'none',
     '&:first-of-type': {
