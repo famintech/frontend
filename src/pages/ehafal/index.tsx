@@ -14,14 +14,14 @@ import { useTheme } from '@mui/material/styles';
 // Updated columns
 const columns = [
     { id: 'id', label: 'ID', width: '8%' },
-    { id: 'target', label: 'Target', width: '15%' },
-    { id: 'scope', label: 'Scope', width: '12%' },
-    { id: 'status', label: 'Status', width: '10%' },
-    { id: 'progress', label: 'Progress', width: '15%' },
+    { id: 'target', label: 'Target', width: '25%' },
+    { id: 'scope', label: 'Scope', width: '9%' },
+    { id: 'status', label: 'Status', width: '8%' },
+    { id: 'progress', label: 'Progress', width: '7%' },
     { id: 'startTime', label: 'Started', width: '12%' },
-    { id: 'duration', label: 'Duration', width: '12%' },
-    { id: 'difficulty', label: 'Difficulty', width: '8%' },
-    { id: 'priority', label: 'Priority', width: '8%' },
+    { id: 'duration', label: 'Duration', width: '18%' },
+    { id: 'difficulty', label: 'Difficulty', width: '6%' },
+    { id: 'priority', label: 'Priority', width: '6%' },
 ];
 
 // Updated dummy data
