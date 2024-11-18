@@ -15,7 +15,7 @@ export function Badge({ value, color }: BadgeProps) {
       whileTap={{ scale: 0.95 }}
       transition={{
         type: "spring",
-        stiffness: 400,
+        stiffness: 401,
         damping: 17
       }}
     >
