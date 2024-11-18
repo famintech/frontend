@@ -72,7 +72,8 @@ export const EHafalDatatable = ({ data, columns }: EHafalDatatableProps) => {
                                     <DataCell align="center" width={columns[5].width}>{formattedStartTime}</DataCell>
                                     <DurationCell
                                         duration={formattedDuration}
-                                        width={columns[6].width} />
+                                        width={columns[6].width}
+                                    />
                                     <DataCell align="center" width={columns[7].width}>
                                         <EHafalBadge
                                             value={formattedDifficulty.value}
