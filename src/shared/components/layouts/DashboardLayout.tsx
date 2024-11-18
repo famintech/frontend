@@ -40,7 +40,7 @@ const MainContent = styled(Box)(({ theme }) => ({
   flex: 1,
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.spacing(3),
+  gap: theme.spacing(0),
   minHeight: 0,
 }));
 
