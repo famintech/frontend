@@ -1,5 +1,5 @@
-import { DataCell } from '@/features/ehafal/themes/datatable';
-import { ProgressBar } from '@/features/ehafal/components/table/progress-bar';
+import { DataCell } from '@/features/ehafal/components/table/styles/datatable';
+import { ProgressBar } from '@/features/ehafal/components/table/ProgressBar';
 import { ProgressCellProps } from '@/features/ehafal/types/table';
 
 export const ProgressCell = ({ progress, width }: ProgressCellProps) => (

@@ -85,5 +85,11 @@ export const menuItems: MenuItem[] = [
     title: 'To Do',
     path: '/todo',
     icon: <LightbulbIcon />
+  },
+  {
+    id: 'puasa',
+    title: 'Puasa',
+    path: '/puasa',
+    icon: <LightbulbIcon />
   }
 ];

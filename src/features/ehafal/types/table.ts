@@ -16,7 +16,7 @@ export interface Column {
     width: string;
 }
 
-export interface DatatableProps {
+export interface EHafalTableProps {
     data: TableData[];
     columns: Column[];
 }

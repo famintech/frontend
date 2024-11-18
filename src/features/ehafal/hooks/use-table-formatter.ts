@@ -1,6 +1,7 @@
 import { FormattedProgress, FormattedBadge, FormattedDuration } from "@/features/ehafal/types/table";
+import { PROGRESS_COLORS, DIFFICULTY_COLORS, PRIORITY_COLORS } from "@/features/ehafal/constants/table-formatting";
 
-export const useTableFormater = () => {
+export const useEHafalTableFormatter = () => {
   const formatProgress = (progress: string): FormattedProgress => {
     const numericProgress = parseInt(progress);
     
@@ -8,36 +9,36 @@ export const useTableFormater = () => {
     if (numericProgress === 100) {
       return {
         value: `+${numericProgress}%`,
-        color: '#06B46C' // Bright green for 100%
+        color: PROGRESS_COLORS.COMPLETE
       };
     }
     if (numericProgress >= 75) {
       return {
         value: `+${numericProgress}%`,
-        color: '#14C38E' // Green for 75-99%
+        color: PROGRESS_COLORS.HIGH
       };
     }
     if (numericProgress >= 50) {
       return {
         value: `+${numericProgress}%`,
-        color: '#00A9FF' // Blue for 50-74%
+        color: PROGRESS_COLORS.MEDIUM
       };
     }
     if (numericProgress >= 25) {
       return {
         value: `+${numericProgress}%`,
-        color: '#FFB100' // Orange for 25-49%
+        color: PROGRESS_COLORS.LOW
       };
     }
     if (numericProgress > 0) {
       return {
         value: `+${numericProgress}%`,
-        color: '#FF6B6B' // Red-orange for 1-24%
+        color: PROGRESS_COLORS.VERY_LOW
       };
     }
     return {
       value: `${numericProgress}%`,
-      color: '#FF0032' // Deep red for 0%
+      color: PROGRESS_COLORS.NONE
     };
   };
 
@@ -58,22 +59,22 @@ export const useTableFormater = () => {
       case 'easy':
         return {
           value: difficulty,
-          color: '#00F5FF' // Cyan
+          color: DIFFICULTY_COLORS.EASY
         };
       case 'medium':
         return {
           value: difficulty,
-          color: '#FFB100' // Orange
+          color: DIFFICULTY_COLORS.MEDIUM
         };
       case 'hard':
         return {
           value: difficulty,
-          color: '#FF3366' // Pink-Red
+          color: DIFFICULTY_COLORS.HARD
         };
       default:
         return {
           value: difficulty,
-          color: '#888888'
+          color: DIFFICULTY_COLORS.DEFAULT
         };
     }
   };
@@ -83,22 +84,22 @@ export const useTableFormater = () => {
       case 'high':
         return {
           value: priority,
-          color: '#FF3366' // Pink-Red
+          color: PRIORITY_COLORS.HIGH
         };
       case 'medium':
         return {
           value: priority,
-          color: '#FFB100' // Orange
+          color: PRIORITY_COLORS.MEDIUM
         };
       case 'low':
         return {
           value: priority,
-          color: '#00F5FF' // Cyan
+          color: PRIORITY_COLORS.LOW
         };
       default:
         return {
           value: priority,
-          color: '#888888'
+          color: PRIORITY_COLORS.DEFAULT
         };
     }
   };

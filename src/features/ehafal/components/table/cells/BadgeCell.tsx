@@ -1,5 +1,5 @@
-import { DataCell } from '@/features/ehafal/themes/datatable';
-import { Badge } from '@/features/ehafal/components/table/badge';
+import { DataCell } from '@/features/ehafal/components/table/styles/datatable';
+import { Badge } from '@/features/ehafal/components/table/Badge';
 import { BadgeCellProps } from '@/features/ehafal/types/table';
 
 export const BadgeCell = ({ badge, width }: BadgeCellProps) => (
