@@ -1,13 +1,15 @@
+import { Status, Difficulty, Priority } from "@/features/ehafal/types/enums";
+
 export interface TableData {
     id: string;
     target: string;
     scope: string;
-    status: string;
+    status: Status;
     progress: string;
     startTime: string;
     duration: string;
-    difficulty: string;
-    priority: string;
+    difficulty: Difficulty;
+    priority: Priority;
 }
 
 export interface Column {

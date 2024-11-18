@@ -1,17 +1,15 @@
 import { MotionTableRow } from '@/features/ehafal/components/table/styles/elements';
 import { rowVariants } from '@/features/ehafal/components/table/styles/animations';
-import { useEHafalTableFormatter } from '@/features/ehafal/hooks/use-table-formatter';
+import { useProgressFormatter } from '@/features/ehafal/hooks/use-progress-formatter';
+import { useBadgeFormatter } from '@/features/ehafal/hooks/use-badge-formatter';
+import { useTimeFormatter } from '@/features/ehafal/hooks/use-time-formatter';
 import { TableRowProps } from '@/features/ehafal/types/table';
 import { BasicCell, ProgressCell, BadgeCell, DurationCell } from '@/features/ehafal/components/table/cells';
 
 export const TableRow = ({ row, columns, index, onAnimationStart }: TableRowProps) => {
-    const { 
-        formatProgress, 
-        formatStartTime, 
-        formatDifficulty, 
-        formatPriority, 
-        formatDuration 
-    } = useEHafalTableFormatter();
+    const { formatProgress } = useProgressFormatter();
+    const { formatDifficulty, formatPriority } = useBadgeFormatter();
+    const { formatStartTime, formatDuration } = useTimeFormatter();
 
     const formattedData = {
         progress: formatProgress(row.progress),
