@@ -1,4 +1,4 @@
-export interface Data {
+export interface TableData {
     id: string;
     target: string;
     scope: string;
@@ -17,7 +17,7 @@ export interface Column {
 }
 
 export interface DatatableProps {
-    data: Data[];
+    data: TableData[];
     columns: Column[];
 }
 
@@ -47,7 +47,7 @@ export interface DurationCellProps {
 }
 
 export interface TableRowProps {
-    row: Data;
+    row: TableData;
     columns: Column[];
     index: number;
     onAnimationStart: (index: number) => void;

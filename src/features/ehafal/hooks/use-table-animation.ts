@@ -1,7 +1,7 @@
-import { useUiSound } from './use-ui-sound';
-import { DataTableAnimationOptions } from '@/features/ehafal/types/datatable';
+import { useUiSound } from '@/shared/hooks/use-ui-sound';
+import { DataTableAnimationOptions } from '@/features/ehafal/types/table';
 
-export const useDataTableAnimation = (options: DataTableAnimationOptions = {}) => {
+export const useTableAnimation = (options: DataTableAnimationOptions = {}) => {
     const {
         soundUrl = '/sounds/ui-sound-hover-1.mp3',
         volume = 0.15,

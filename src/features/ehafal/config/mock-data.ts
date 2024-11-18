@@ -1,6 +1,6 @@
-import { EHafalData } from "@/features/ehafal/types/datatable";
+import { TableData } from "@/features/ehafal/types/table";
 
-export const mockData: EHafalData[] = [
+export const mockData: TableData[] = [
     {
         id: 'MEM-001',
         target: 'Surah Al-Fatiha',

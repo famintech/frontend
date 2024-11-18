@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ProtectedRoute } from './protected-route';
 import Login from '@/pages/auth/login';
-import { DashboardLayout } from '@/components/layouts/DashboardLayout';
+import { DashboardLayout } from '@/shared/components/layouts/DashboardLayout';
 import Dashboard from '@/pages/dashboard';
 import EHafal from '@/pages/ehafal/index';
 // Export the router configuration

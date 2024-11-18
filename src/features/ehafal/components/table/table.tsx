@@ -3,10 +3,10 @@ import { SciFiTable } from '@/features/ehafal/themes/datatable';
 import { DatatableProps } from '@/features/ehafal/types/table';
 import { TableRow } from '@/features/ehafal/components/table/table-row';
 import { HeaderRow } from '@/features/ehafal/components/table/header-row';
-import { useDataTableAnimation } from '@/features/ehafal/hooks/use-table-animation';
+import { useTableAnimation } from '@/features/ehafal/hooks/use-table-animation';
 
 export const DataTable = ({ data, columns }: DatatableProps) => {
-    const { handleAnimationStart } = useDataTableAnimation();
+    const { handleAnimationStart } = useTableAnimation();
 
     return (
         <SciFiTable elevation={0}>

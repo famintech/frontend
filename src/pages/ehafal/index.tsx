@@ -1,7 +1,7 @@
 import { Toolbar } from "@/features/ehafal/components/table/toolbar";
 import { DataTable } from "@/features/ehafal/components/table/table";
 import { columns } from "@/features/ehafal/config/columns";
-import { mockData } from "@/config/mock/ehafal/datatable";
+import { mockData } from "@/features/ehafal/config/mock-data";
 
 export default function EHafal() {
     return (

@@ -1,6 +1,6 @@
-import { EHafalColumn } from '@/features/ehafal/types/table';
+import { Column } from '@/features/ehafal/types/table';
 
-export const columns: EHafalColumn[] = [
+export const columns: Column[] = [
     { id: 'id', label: 'ID', width: '8%' },
     { id: 'target', label: 'Target', width: '25%' },
     { id: 'scope', label: 'Scope', width: '9%' },
