@@ -21,10 +21,10 @@ export const DialogHeader = styled(DialogTitle)({
 });
 
 export const DialogBody = styled(DialogContent)({
-    padding: '24px',
+    padding: '32px 24px 24px 24px',  // Increased top padding
     display: 'flex',
     flexDirection: 'column',
-    gap: '20px',
+    gap: '24px',  // Increased gap between form fields
 });
 
 export const DialogFooter = styled(DialogActions)({
@@ -50,6 +50,7 @@ export const FormInput = styled('input')({
     padding: '8px 12px',
     color: '#fff',
     fontSize: '0.9rem',
+    fontFamily: 'inherit',
     outline: 'none',
     '&:focus': {
         borderColor: 'rgba(255, 255, 255, 0.3)',
@@ -57,6 +58,10 @@ export const FormInput = styled('input')({
     },
     '&:hover': {
         borderColor: 'rgba(255, 255, 255, 0.2)',
+    },
+    '&::placeholder': {
+        color: 'rgba(255, 255, 255, 0.5)',
+        opacity: 1,
     }
 });
 
@@ -64,9 +69,16 @@ export const FormSelect = styled('select')({
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
     border: '1px solid rgba(255, 255, 255, 0.1)',
     padding: '8px 12px',
+    paddingRight: '32px',  // Space for arrow
     color: '#fff',
     fontSize: '0.9rem',
+    fontFamily: 'inherit',
     outline: 'none',
+    appearance: 'none',  // Remove default arrow
+    backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right 8px center',
+    backgroundSize: '20px',
     '&:focus': {
         borderColor: 'rgba(255, 255, 255, 0.3)',
         backgroundColor: 'rgba(255, 255, 255, 0.08)',
@@ -76,6 +88,8 @@ export const FormSelect = styled('select')({
     },
     '& option': {
         backgroundColor: '#0a0e17',
+        fontSize: '0.9rem',
+        padding: '8px',
     }
 });
 
