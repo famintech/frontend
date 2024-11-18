@@ -10,7 +10,7 @@ import {
 import { useFormatEhafalDatatable } from '@/hooks/use-format-ehafal-datatable';
 import { EHafalDatatableProgressBar } from '@/components/ehafal/datatable-progress-bar';
 import { EHafalBadge } from '@/components/ehafal/datatable-badge';
-import { useTheme } from '@mui/material/styles';
+import { DurationCell } from '@/components/ehafal/duration-cell';
 import { useUiSound } from '@/hooks/use-ui-sound';
 import { EHafalDatatableProps } from '@/config/types/ehafal/datatable';
 
@@ -18,7 +18,6 @@ const DATA_APPEAR_SOUND = '/sounds/ui-sound-hover-1.mp3';
 
 export const EHafalDatatable = ({ data, columns }: EHafalDatatableProps) => {
     const { formatProgress, formatStartTime, formatDifficulty, formatPriority, formatDuration } = useFormatEhafalDatatable();
-    const theme = useTheme();
     const playSound = useUiSound(DATA_APPEAR_SOUND, { volume: 0.15 });
 
     const handleAnimationStart = (index: number) => {
@@ -71,22 +70,9 @@ export const EHafalDatatable = ({ data, columns }: EHafalDatatableProps) => {
                                         />
                                     </DataCell>
                                     <DataCell align="center" width={columns[5].width}>{formattedStartTime}</DataCell>
-                                    <DataCell align="center" width={columns[6].width}>
-                                        {formattedDuration.days && (
-                                            <span>
-                                                <span style={{ color: theme.palette.primary.main }}>{formattedDuration.days.value}</span>
-                                                {' days '}
-                                            </span>
-                                        )}
-                                        {formattedDuration.hours && (
-                                            <span>
-                                                <span style={{ color: theme.palette.primary.main }}>{formattedDuration.hours.value}</span>
-                                                {' hours '}
-                                            </span>
-                                        )}
-                                        <span style={{ color: theme.palette.primary.main }}>{formattedDuration.minutes.value}</span>
-                                        {' minutes'}
-                                    </DataCell>
+                                    <DurationCell
+                                        duration={formattedDuration}
+                                        width={columns[6].width} />
                                     <DataCell align="center" width={columns[7].width}>
                                         <EHafalBadge
                                             value={formattedDifficulty.value}

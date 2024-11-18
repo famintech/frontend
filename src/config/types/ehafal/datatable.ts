@@ -21,7 +21,6 @@ export interface EHafalDatatableProps {
     columns: EHafalColumn[];
 }
 
-// Formatting related types
 export interface FormattedProgress {
     value: string;
     color: string;
@@ -36,4 +35,9 @@ export interface FormattedDuration {
     days?: { value: number };
     hours?: { value: number };
     minutes: { value: number };
+}
+
+export interface DurationCellProps {
+    duration: FormattedDuration;
+    width: string;
 }

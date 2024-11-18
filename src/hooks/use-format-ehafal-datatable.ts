@@ -1,19 +1,4 @@
-
-interface FormattedProgress {
-  value: string;
-  color: string;
-}
-
-interface FormattedBadge {
-  value: string;
-  color: string;
-}
-
-interface FormattedDuration {
-  days?: { value: number };
-  hours?: { value: number };
-  minutes: { value: number };
-}
+import { FormattedProgress, FormattedBadge, FormattedDuration } from "@/config/types/ehafal/datatable";
 
 export const useFormatEhafalDatatable = () => {
   const formatProgress = (progress: string): FormattedProgress => {
