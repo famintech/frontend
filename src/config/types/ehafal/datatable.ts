@@ -41,3 +41,10 @@ export interface DurationCellProps {
     duration: FormattedDuration;
     width: string;
 }
+
+export interface TableRowProps {
+    row: EHafalData;
+    columns: EHafalColumn[];
+    index: number;
+    onAnimationStart: (index: number) => void;
+}

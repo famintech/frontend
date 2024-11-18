@@ -2,22 +2,15 @@ import { Table, TableBody, TableContainer, TableHead } from '@mui/material';
 import {
     SciFiTable,
     HeaderCell,
-    DataCell,
     TableRowStyled,
-    MotionTableRow,
-    rowVariants
 } from '@/theme/datatable';
-import { useFormatEhafalDatatable } from '@/hooks/use-format-ehafal-datatable';
-import { EHafalDatatableProgressBar } from '@/components/ehafal/datatable-progress-bar';
-import { EHafalBadge } from '@/components/ehafal/datatable-badge';
-import { DurationCell } from '@/components/ehafal/duration-cell';
 import { useUiSound } from '@/hooks/use-ui-sound';
 import { EHafalDatatableProps } from '@/config/types/ehafal/datatable';
+import { TableRow } from '@/components/ehafal/datatable-row';
 
 const DATA_APPEAR_SOUND = '/sounds/ui-sound-hover-1.mp3';
 
 export const EHafalDatatable = ({ data, columns }: EHafalDatatableProps) => {
-    const { formatProgress, formatStartTime, formatDifficulty, formatPriority, formatDuration } = useFormatEhafalDatatable();
     const playSound = useUiSound(DATA_APPEAR_SOUND, { volume: 0.15 });
 
     const handleAnimationStart = (index: number) => {
@@ -43,52 +36,15 @@ export const EHafalDatatable = ({ data, columns }: EHafalDatatableProps) => {
                         </TableRowStyled>
                     </TableHead>
                     <TableBody>
-                        {data.map((row, index) => {
-                            const progress = formatProgress(row.progress);
-                            const numericProgress = parseInt(row.progress);
-                            const formattedStartTime = formatStartTime(row.startTime);
-                            const formattedDifficulty = formatDifficulty(row.difficulty);
-                            const formattedPriority = formatPriority(row.priority);
-                            const formattedDuration = formatDuration(row.startTime);
-                            return (
-                                <MotionTableRow
-                                    key={row.id}
-                                    initial="hidden"
-                                    animate="visible"
-                                    custom={index}
-                                    variants={rowVariants}
-                                    onAnimationStart={() => handleAnimationStart(index)}
-                                >
-                                    <DataCell align="center" width={columns[0].width}>{row.id}</DataCell>
-                                    <DataCell align="center" width={columns[1].width}>{row.target}</DataCell>
-                                    <DataCell align="center" width={columns[2].width}>{row.scope}</DataCell>
-                                    <DataCell align="center" width={columns[3].width}>{row.status}</DataCell>
-                                    <DataCell align="center" width={columns[4].width}>
-                                        <EHafalDatatableProgressBar
-                                            value={numericProgress}
-                                            color={progress.color}
-                                        />
-                                    </DataCell>
-                                    <DataCell align="center" width={columns[5].width}>{formattedStartTime}</DataCell>
-                                    <DurationCell
-                                        duration={formattedDuration}
-                                        width={columns[6].width}
-                                    />
-                                    <DataCell align="center" width={columns[7].width}>
-                                        <EHafalBadge
-                                            value={formattedDifficulty.value}
-                                            color={formattedDifficulty.color}
-                                        />
-                                    </DataCell>
-                                    <DataCell align="center" width={columns[8].width}>
-                                        <EHafalBadge
-                                            value={formattedPriority.value}
-                                            color={formattedPriority.color}
-                                        />
-                                    </DataCell>
-                                </MotionTableRow>
-                            );
-                        })}
+                        {data.map((row, index) => (
+                            <TableRow
+                                key={row.id}
+                                row={row}
+                                columns={columns}
+                                index={index}
+                                onAnimationStart={handleAnimationStart}
+                            />
+                        ))}
                     </TableBody>
                 </Table>
             </TableContainer>
