@@ -1,5 +1,6 @@
-import { toolkitVariants } from "@/features/ehafal/components/table/styles/animations";
-import { ToolbarContainer, FilterContainer } from "@/features/ehafal/components/table/styles/components";
+import { Add as AddIcon } from '@mui/icons-material';
+import { toolkitVariants, buttonVariants } from "@/features/ehafal/components/table/styles/animations";
+import { ToolbarContainer, FilterContainer, CreateButton } from "@/features/ehafal/components/table/styles/components";
 import { SearchFilter, ScopeFilter, PriorityFilter } from '@/features/ehafal/components/table/filters';
 import { ToolbarProps } from "@/features/ehafal/types/table";
 
@@ -36,6 +37,13 @@ export const Toolbar = ({
                     selectedPriorities={selectedPriorities}
                     onPriorityChange={onPriorityChange}
                 />
+                <CreateButton
+                    variants={buttonVariants}
+                    initial="hidden"
+                    animate="visible"
+                >
+                    <AddIcon /> Create
+                </CreateButton>
             </FilterContainer>
         </ToolbarContainer>
     );

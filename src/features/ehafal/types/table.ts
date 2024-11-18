@@ -1,4 +1,4 @@
-import { Status, Difficulty, Priority } from "@/features/ehafal/types/enums";
+import { Status, Priority } from "@/features/ehafal/types/enums";
 
 export interface TableData {
     id: string;
@@ -8,7 +8,8 @@ export interface TableData {
     progress: string;
     startTime: string;
     duration: string;
-    difficulty: Difficulty;
+    // difficulty: Difficulty;
+    actions: string;
     priority: Priority;
 }
 

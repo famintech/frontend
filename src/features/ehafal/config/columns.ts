@@ -8,6 +8,7 @@ export const columns: Column[] = [
     { id: 'progress', label: 'Progress', width: '7%' },
     { id: 'startTime', label: 'Started', width: '12%' },
     { id: 'duration', label: 'Duration', width: '18%' },
-    { id: 'difficulty', label: 'Difficulty', width: '6%' },
+    // { id: 'difficulty', label: 'Difficulty', width: '6%' },
+    { id: 'actions', label: 'Actions', width: '6%' },
     { id: 'priority', label: 'Priority', width: '6%' },
 ];

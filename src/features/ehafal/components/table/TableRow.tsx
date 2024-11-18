@@ -6,13 +6,13 @@ import { BasicCell, ProgressCell, BadgeCell, DurationCell } from '@/features/eha
 
 export const TableRow = ({ row, columns, index, onAnimationStart }: TableRowProps) => {
     const { formatProgress } = useProgressFormatter();
-    const { formatDifficulty, formatPriority } = useBadgeFormatter();
+    const { formatPriority } = useBadgeFormatter();
     const { formatStartTime, formatDuration } = useTimeFormatter();
 
     const formattedData = {
         progress: formatProgress(row.progress),
         startTime: formatStartTime(row.startTime),
-        difficulty: formatDifficulty(row.difficulty),
+        // difficulty: formatDifficulty(row.difficulty),
         priority: formatPriority(row.priority),
         duration: formatDuration(row.startTime)
     };
@@ -33,7 +33,7 @@ export const TableRow = ({ row, columns, index, onAnimationStart }: TableRowProp
             <ProgressCell progress={formattedData.progress} width={columns[4].width} />
             <BasicCell value={formattedData.startTime} width={columns[5].width} />
             <DurationCell duration={formattedData.duration} width={columns[6].width} />
-            <BadgeCell badge={formattedData.difficulty} width={columns[7].width} />
+            <BasicCell value={row.actions} width={columns[7].width} />
             <BadgeCell badge={formattedData.priority} width={columns[8].width} />
         </MotionTableRow>
     );

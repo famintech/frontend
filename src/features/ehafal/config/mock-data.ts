@@ -1,4 +1,4 @@
-import { Priority, Difficulty, Status, TableData } from "@/features/ehafal/types";
+import { Priority, Status, TableData } from "@/features/ehafal/types";
 
 export const mockData: TableData[] = [
     {
@@ -9,7 +9,8 @@ export const mockData: TableData[] = [
         progress: '75%',
         startTime: '2024-03-15 08:00',
         duration: '3d 5h',
-        difficulty: Difficulty.MEDIUM,
+        // difficulty: Difficulty.MEDIUM,
+        actions: 'Edit',
         priority: Priority.HIGH,
     },
     {
@@ -20,7 +21,8 @@ export const mockData: TableData[] = [
         progress: '100%',
         startTime: '2024-03-10 14:30',
         duration: '8d 2h',
-        difficulty: Difficulty.EASY,
+        // difficulty: Difficulty.EASY,
+        actions: 'Edit',
         priority: Priority.MEDIUM,
     },
     {
@@ -31,7 +33,8 @@ export const mockData: TableData[] = [
         progress: '0%',
         startTime: '2024-03-18 10:00',
         duration: '5h',
-        difficulty: Difficulty.HARD,
+        // difficulty: Difficulty.HARD,
+        actions: 'Edit',
         priority: Priority.HIGH,
     },
     {
@@ -42,7 +45,8 @@ export const mockData: TableData[] = [
         progress: '45%',
         startTime: '2024-03-18 10:00',
         duration: '5h',
-        difficulty: Difficulty.HARD,
+        // difficulty: Difficulty.HARD,
+        actions: 'Edit',
         priority: Priority.HIGH,
     },
     {
@@ -53,7 +57,8 @@ export const mockData: TableData[] = [
         progress: '2.5%',
         startTime: '2024-03-18 10:00',
         duration: '5h',
-        difficulty: Difficulty.HARD,
+        // difficulty: Difficulty.HARD,
+        actions: 'Edit',
         priority: Priority.HIGH,
     },
     {
@@ -64,7 +69,8 @@ export const mockData: TableData[] = [
         progress: '20.5%',
         startTime: '2024-03-18 10:00',
         duration: '3h',
-        difficulty: Difficulty.EASY,
+        // difficulty: Difficulty.EASY,
+        actions: 'Edit',
         priority: Priority.MEDIUM,
     },
     {
@@ -75,7 +81,8 @@ export const mockData: TableData[] = [
         progress: '10.5%',
         startTime: '2024-03-18 10:00',
         duration: '3h',
-        difficulty: Difficulty.EASY,
+        // difficulty: Difficulty.EASY,
+        actions: 'Edit',
         priority: Priority.MEDIUM,
     }
 ];
