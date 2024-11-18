@@ -101,7 +101,7 @@ export default function EHafal() {
                 pitch: 1.5,
                 volume: 0.2
             });
-        }, index * 200); // Match the animation delay
+        }, index * 100); // Match the animation delay
     };
 
     return (
