@@ -2,7 +2,7 @@ import { DataCell, MotionTableRow, rowVariants } from '@/theme/datatable';
 import { EHafalDatatableProgressBar } from '@/components/ehafal/datatable-progress-bar';
 import { EHafalBadge } from '@/components/ehafal/datatable-badge';
 import { DurationCell } from '@/components/ehafal/datatable-duration-cell';
-import { useFormatEhafalDatatable } from '@/hooks/use-format-ehafal-datatable';
+import { useFormatEhafalTable } from '@/hooks/use-ehafal-table-formater';
 import { TableRowProps } from '@/config/types/ehafal/datatable';
 
 export const TableRow = ({ row, columns, index, onAnimationStart }: TableRowProps) => {
@@ -12,7 +12,7 @@ export const TableRow = ({ row, columns, index, onAnimationStart }: TableRowProp
         formatDifficulty, 
         formatPriority, 
         formatDuration 
-    } = useFormatEhafalDatatable();
+    } = useFormatEhafalTable();
 
     const progress = formatProgress(row.progress);
     const numericProgress = parseInt(row.progress);

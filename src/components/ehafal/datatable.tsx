@@ -2,25 +2,15 @@ import { Table, TableBody, TableContainer, TableHead } from '@mui/material';
 import {
     SciFiTable,
     HeaderCell,
-    TableRowStyled,
+    TableRowStyled, 
 } from '@/theme/datatable';
-import { useUiSound } from '@/hooks/use-ui-sound';
 import { EHafalDatatableProps } from '@/config/types/ehafal/datatable';
 import { TableRow } from '@/components/ehafal/datatable-row';
-
-const DATA_APPEAR_SOUND = '/sounds/ui-sound-hover-1.mp3';
+import { useDataTableAnimation } from '@/hooks/use-ehafal-table-animation';
 
 export const EHafalDatatable = ({ data, columns }: EHafalDatatableProps) => {
-    const playSound = useUiSound(DATA_APPEAR_SOUND, { volume: 0.15 });
 
-    const handleAnimationStart = (index: number) => {
-        setTimeout(() => {
-            playSound({
-                pitch: 1.5,
-                volume: 0.2
-            });
-        }, index * 100);
-    };
+    const { handleAnimationStart } = useDataTableAnimation();
 
     return (
         <SciFiTable elevation={0}>

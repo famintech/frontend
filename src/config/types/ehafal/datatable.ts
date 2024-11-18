@@ -48,3 +48,10 @@ export interface TableRowProps {
     index: number;
     onAnimationStart: (index: number) => void;
 }
+
+export interface DataTableAnimationOptions {
+    soundUrl?: string;
+    volume?: number;
+    pitch?: number;
+    delay?: number;
+}
