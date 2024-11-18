@@ -21,10 +21,17 @@ export const DialogHeader = styled(DialogTitle)({
 });
 
 export const DialogBody = styled(DialogContent)({
-    padding: '40px 24px 24px 24px',  // Increased top padding even more
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '24px',
+    padding: 0,  // Reset MUI's default padding
+    '& > *:first-of-type': {
+        marginTop: '40px',  // Add margin to first child
+    },
+    '& > *': {
+        padding: '0 24px',  // Add horizontal padding to all children
+        marginBottom: '24px',  // Space between fields
+    },
+    '& > *:last-child': {
+        marginBottom: '24px',  // Space at bottom
+    }
 });
 
 export const DialogFooter = styled(DialogActions)({
@@ -99,7 +106,7 @@ export const ActionButton = styled('button')({
     color: '#fff',
     padding: '8px 16px',
     fontSize: '0.9rem',
-    fontFamily: 'inherit',  // Added this line
+    fontFamily: 'inherit',
     cursor: 'pointer',
     '&:hover': {
         backgroundColor: 'rgba(255, 255, 255, 0.15)',
