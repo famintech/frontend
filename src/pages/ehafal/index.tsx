@@ -92,12 +92,16 @@ export default function EHafal() {
     const theme = useTheme();
     const playSound = useUiSound(DATA_APPEAR_SOUND, { volume: 0.15 });
 
-     // Create a function to handle animation start
-     const handleAnimationStart = (index: number) => {
-        // Play sound with different pitch based on row index
-        // Lower indices will have higher pitch, creating a descending tone effect
-        const pitch = 1.5 - (index * 0.1); // This will create pitches: 1.5, 1.4, 1.3, etc.
-        playSound({ pitch });
+    // Create a function to handle animation start
+    const handleAnimationStart = (index: number) => {
+        // Delay the sound slightly to match the animation
+        setTimeout(() => {
+            const pitch = 1.3 - (index * 0.08); // Adjusted pitch range
+            playSound({
+                pitch,
+                volume: 0.2
+            });
+        }, index * 200); // Match the animation delay
     };
 
     return (

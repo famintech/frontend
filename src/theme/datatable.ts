@@ -98,8 +98,8 @@ export const rowVariants = {
         opacity: 1,
         x: 0,
         transition: {
-            delay: i * 0.15, // Slightly faster delay between rows
-            duration: 0.3,
+            delay: i * 0.2, // Increased delay for better sound spacing
+            duration: 0.4,
             ease: "easeOut"
         }
     })
