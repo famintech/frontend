@@ -1,6 +1,6 @@
-import { Add as AddIcon } from '@mui/icons-material';
 import { toolkitVariants, buttonVariants } from "@/features/ehafal/components/table/styles/animations";
-import { ToolbarContainer, FilterContainer, CreateButton } from "@/features/ehafal/components/table/styles/components";
+import { ToolbarContainer, FilterContainer } from "@/features/ehafal/components/table/styles/components";
+import { CreateButton, StyledAddIcon, CreateButtonText } from "@/features/ehafal/components/table/styles/components/actions.styles";
 import { SearchFilter, ScopeFilter, PriorityFilter } from '@/features/ehafal/components/table/filters';
 import { ToolbarProps } from "@/features/ehafal/types/table";
 
@@ -42,7 +42,8 @@ export const Toolbar = ({
                     initial="hidden"
                     animate="visible"
                 >
-                    <AddIcon /> Create
+                    <StyledAddIcon />
+                    <CreateButtonText>Create</CreateButtonText>
                 </CreateButton>
             </FilterContainer>
         </ToolbarContainer>
