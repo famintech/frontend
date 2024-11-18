@@ -1,4 +1,4 @@
-import { toolkitVariants, ToolkitContainer } from "@/theme/datatable";
+import { toolkitVariants, ToolkitContainer } from "@/features/ehafal/themes/datatable";
 
 export const Toolbar = () => {
     return (

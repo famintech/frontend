@@ -1,5 +1,5 @@
 import { BadgeProps } from '@/features/ehafal/types/table';
-import { BadgeContainer } from '@/theme/datatable';
+import { BadgeContainer } from '@/features/ehafal/themes/datatable';
 
 export function Badge({ value, color }: BadgeProps) {
   return (

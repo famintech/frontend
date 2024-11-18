@@ -1,4 +1,4 @@
-import { MotionTableRow, rowVariants } from '@/theme/datatable';
+import { MotionTableRow, rowVariants } from '@/features/ehafal/themes/datatable';
 import { useTableFormater } from '@/features/ehafal/hooks/use-table-formater';
 import { TableRowProps } from '@/features/ehafal/types/table';
 import { BasicCell } from '@/features/ehafal/components/table/cells/basic-cell';

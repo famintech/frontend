@@ -1,4 +1,4 @@
-import { DataCell } from '@/theme/datatable';
+import { DataCell } from '@/features/ehafal/themes/datatable';
 import { ProgressBar } from '@/features/ehafal/components/table/progress-bar';
 import { ProgressCellProps } from '@/features/ehafal/types/table';
 

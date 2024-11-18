@@ -1,5 +1,5 @@
 import { ProgressBarProps } from '@/features/ehafal/types/table';
-import { ProgressContainer, ProgressFill, StripedBackground, ProgressValue } from '@/theme/datatable';
+import { ProgressContainer, ProgressFill, StripedBackground, ProgressValue } from '@/features/ehafal/themes/datatable';
 
 export function ProgressBar({
   value,
