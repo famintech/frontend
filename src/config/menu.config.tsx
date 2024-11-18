@@ -67,5 +67,23 @@ export const menuItems: MenuItem[] = [
     title: 'Workout',
     path: '/workout',
     icon: <LightbulbIcon />
+  },
+  {
+    id: 'nas-storage',
+    title: 'NAS Storage',
+    path: '/nas-storage',
+    icon: <LightbulbIcon />
+  },
+  {
+    id: 'music',
+    title: 'Music',
+    path: '/music',
+    icon: <LightbulbIcon />
+  },
+  {
+    id: 'todo',
+    title: 'To Do',
+    path: '/todo',
+    icon: <LightbulbIcon />
   }
 ];

@@ -1,30 +1,18 @@
-import { Table, TableBody, TableContainer, TableHead } from '@mui/material';
-import {
-    SciFiTable,
-    HeaderCell,
-    TableRowStyled, 
-} from '@/theme/datatable';
-import { EHafalDatatableProps } from '@/config/types/ehafal/datatable';
-import { TableRow } from '@/components/ehafal/datatable-row';
+import { Table, TableBody, TableContainer } from '@mui/material';
+import { SciFiTable } from '@/theme/datatable';
+import { EHafalDatatableProps } from '@/features/ehafal/types/datatable';
+import { TableRow } from '../../../features/ehafal/components/table/datatable-row';
+import { HeaderRow } from '../../../features/ehafal/components/table/datatable-header-row';
 import { useDataTableAnimation } from '@/hooks/use-ehafal-table-animation';
 
 export const EHafalDatatable = ({ data, columns }: EHafalDatatableProps) => {
-
     const { handleAnimationStart } = useDataTableAnimation();
 
     return (
         <SciFiTable elevation={0}>
             <TableContainer>
                 <Table>
-                    <TableHead>
-                        <TableRowStyled>
-                            {columns.map((column) => (
-                                <HeaderCell key={column.id} align="center" width={column.width}>
-                                    {column.label}
-                                </HeaderCell>
-                            ))}
-                        </TableRowStyled>
-                    </TableHead>
+                    <HeaderRow columns={columns} />
                     <TableBody>
                         {data.map((row, index) => (
                             <TableRow

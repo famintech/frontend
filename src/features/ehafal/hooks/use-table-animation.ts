@@ -1,5 +1,5 @@
 import { useUiSound } from './use-ui-sound';
-import { DataTableAnimationOptions } from '@/config/types/ehafal/datatable';
+import { DataTableAnimationOptions } from '@/features/ehafal/types/datatable';
 
 export const useDataTableAnimation = (options: DataTableAnimationOptions = {}) => {
     const {

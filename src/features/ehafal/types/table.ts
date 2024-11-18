@@ -21,6 +21,10 @@ export interface EHafalDatatableProps {
     columns: EHafalColumn[];
 }
 
+export interface HeaderRowProps {
+    columns: EHafalColumn[];
+}
+
 export interface FormattedProgress {
     value: string;
     color: string;
@@ -54,4 +58,27 @@ export interface DataTableAnimationOptions {
     volume?: number;
     pitch?: number;
     delay?: number;
+}
+
+export interface ProgressBarProps {
+    value: number;
+    color: string;
+    stripeDensity?: number;
+    stripeThickness?: number;
+    animationSpeed?: number;
+}
+
+export interface CellProps {
+    value: string;
+    width: string;
+}
+
+export interface ProgressCellProps {
+    progress: FormattedProgress;
+    width: string;
+}
+
+export interface BadgeCellProps {
+    badge: FormattedBadge;
+    width: string;
 }

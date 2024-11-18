@@ -1,4 +1,4 @@
-import { EHafalData } from "@/config/types/ehafal/datatable";
+import { EHafalData } from "@/features/ehafal/types/datatable";
 
 export const mockData: EHafalData[] = [
     {

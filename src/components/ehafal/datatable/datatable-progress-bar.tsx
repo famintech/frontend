@@ -1,13 +1,6 @@
 import { Box, styled } from '@mui/material';
 import { motion } from 'framer-motion';
-
-interface ProgressBarProps {
-  value: number;
-  color: string;
-  stripeDensity?: number; // pixels between stripes
-  stripeThickness?: number; // pixels of stripe thickness
-  animationSpeed?: number; // seconds per cycle
-}
+import { ProgressBarProps } from '@/features/ehafal/types/datatable';
 
 const ProgressContainer = styled(Box)({
   width: '100%',

@@ -1,4 +1,4 @@
-import { EHafalColumn } from '@/config/types/ehafal/datatable';
+import { EHafalColumn } from '@/features/ehafal/types/datatable';
 
 export const columns: EHafalColumn[] = [
     { id: 'id', label: 'ID', width: '8%' },

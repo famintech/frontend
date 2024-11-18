@@ -1,4 +1,4 @@
-import { FormattedProgress, FormattedBadge, FormattedDuration } from "@/config/types/ehafal/datatable";
+import { FormattedProgress, FormattedBadge, FormattedDuration } from "@/features/ehafal/types/datatable";
 
 export const useFormatEhafalTable = () => {
   const formatProgress = (progress: string): FormattedProgress => {
