@@ -10,9 +10,8 @@ export const TableRow = ({ row, columns, index, onAnimationStart }: TableRowProp
     const { formatStartTime, formatDuration } = useTimeFormatter();
 
     const formattedData = {
-        progress: formatProgress(row.progress),
+        progress: formatProgress(row.progress?.toString() || '0'),
         startTime: formatStartTime(row.startTime),
-        // difficulty: formatDifficulty(row.difficulty),
         priority: formatPriority(row.priority),
         duration: formatDuration(row.startTime)
     };

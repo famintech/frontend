@@ -7,12 +7,13 @@ export const useTimeFormatter = () => {
     const [datePart, timePart] = dateString.split(', ');
     const [day, month, year] = datePart.split('/');
     const [time] = timePart.split('.');
-    
+
     // Create a new date string in ISO format
     return new Date(`${year}-${month}-${day}T${time}`);
   };
 
-  const formatStartTime = (dateTimeString: string): string => {
+  const formatStartTime = (dateTimeString: string | null): string => {
+    if (!dateTimeString) return '-';
     try {
       const date = parseUKDate(dateTimeString);
       if (isNaN(date.getTime())) {
@@ -28,21 +29,26 @@ export const useTimeFormatter = () => {
       }).replace(/am|pm/i, (match) => match.toUpperCase());
     } catch (error) {
       console.error('Error formatting date:', error);
-      return 'Invalid Date';
+      return '-';
     }
   };
 
-  const formatDuration = (startTimeString: string): FormattedDuration => {
+  const formatDuration = (startTimeString: string | null): FormattedDuration => {
+    if (!startTimeString) {
+      return {
+        minutes: { value: 0 }
+      };
+    }
     try {
       const startTime = parseUKDate(startTimeString);
       const now = new Date();
-      
+
       const diffMs = now.getTime() - startTime.getTime();
-      
+
       const days = Math.floor(diffMs / (24 * 60 * 60 * 1000));
       const hours = Math.floor((diffMs % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
       const minutes = Math.floor((diffMs % (60 * 60 * 1000)) / (60 * 1000));
-      
+
       return {
         ...(days > 0 ? { days: { value: days } } : {}),
         ...(hours > 0 ? { hours: { value: hours } } : {}),
@@ -56,7 +62,7 @@ export const useTimeFormatter = () => {
     }
   };
 
-  return { 
+  return {
     formatStartTime,
     formatDuration
   };
