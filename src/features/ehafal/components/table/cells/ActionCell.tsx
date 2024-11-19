@@ -12,7 +12,7 @@ export const ActionCell = ({ id, width }: ActionCellProps) => {
     const navigate = useNavigate();
 
     const handleView = () => {
-        navigate(`/ehafal/memorisation/${id}`);
+        navigate(`/e-hafal/memorisation/${id}`);
     };
 
     return (
