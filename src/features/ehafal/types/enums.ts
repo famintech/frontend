@@ -1,17 +1,17 @@
 export enum Status {
-    IN_PROGRESS = 'In Progress',
-    COMPLETED = 'Completed',
-    PENDING = 'Pending'
+    IN_PROGRESS = 'IN_PROGRESS',
+    COMPLETED = 'COMPLETED',
+    PENDING = 'PENDING'
 }
 
 export enum Difficulty {
-    EASY = 'Easy',
-    MEDIUM = 'Medium',
-    HARD = 'Hard'
+    EASY = 'EASY',
+    MEDIUM = 'MEDIUM',
+    HARD = 'HARD'
 }
 
 export enum Priority {
-    HIGH = 'High',
-    MEDIUM = 'Medium',
-    LOW = 'Low'
+    HIGH = 'HIGH',
+    MEDIUM = 'MEDIUM',
+    LOW = 'LOW'
 }
