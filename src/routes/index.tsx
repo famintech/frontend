@@ -4,6 +4,8 @@ import Login from '@/pages/auth/login';
 import { DashboardLayout } from '@/shared/components/layouts/DashboardLayout';
 import Dashboard from '@/pages/dashboard';
 import EHafal from '@/pages/ehafal/index';
+import Memorisation from '@/pages/ehafal/memorisation';
+
 // Export the router configuration
 export const routerConfig = [
   {
@@ -28,6 +30,10 @@ export const routerConfig = [
           {
             path: 'e-hafal',
             element: <EHafal />
+          },
+          {
+            path: 'e-hafal/memorisation/:id',
+            element: <Memorisation />
           }
         ]
       }
