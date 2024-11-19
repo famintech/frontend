@@ -16,5 +16,9 @@ export const API_ENDPOINTS = {
     },
     USERS: {
         PROFILE: '/users/profile'
+    },
+    MEMORIZATION: {
+        BASE: '/memorization',
+        PROGRESS: (id: string) => `/memorization/${id}/progress`,
     }
 };

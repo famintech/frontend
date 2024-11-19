@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Status, Priority } from '@/features/ehafal/types/enums';
+import { useMemorization } from '@/features/ehafal/hooks/use-memorization';
 import {
     StyledDialog,
     DialogHeader,
@@ -14,6 +15,7 @@ import {
 import { CreateDialogProps } from '@/features/ehafal/types/table';
 
 export const CreateDialog = ({ open, onClose }: CreateDialogProps) => {
+    const { createMemorization } = useMemorization();
     const [formData, setFormData] = useState({
         target: '',
         scope: '',
@@ -21,10 +23,13 @@ export const CreateDialog = ({ open, onClose }: CreateDialogProps) => {
         priority: Priority.MEDIUM
     });
 
-    const handleSubmit = () => {
-        // Handle form submission
-        console.log(formData);
-        onClose();
+    const handleSubmit = async () => {
+        try {
+            await createMemorization(formData);
+            onClose();
+        } catch (error) {
+            console.error('Error creating memorization:', error);
+        }
     };
 
     return (
