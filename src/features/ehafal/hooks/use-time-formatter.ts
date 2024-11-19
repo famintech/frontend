@@ -2,9 +2,19 @@ import { FormattedDuration } from "@/features/ehafal/types/table";
 
 export const useTimeFormatter = () => {
 
+  const parseUKDate = (dateString: string): Date => {
+    // Split the date string into parts
+    const [datePart, timePart] = dateString.split(', ');
+    const [day, month, year] = datePart.split('/');
+    const [time] = timePart.split('.');
+    
+    // Create a new date string in ISO format
+    return new Date(`${year}-${month}-${day}T${time}`);
+  };
+
   const formatStartTime = (dateTimeString: string): string => {
     try {
-      const date = new Date(dateTimeString);
+      const date = parseUKDate(dateTimeString);
       if (isNaN(date.getTime())) {
         throw new Error('Invalid date');
       }
@@ -23,20 +33,27 @@ export const useTimeFormatter = () => {
   };
 
   const formatDuration = (startTimeString: string): FormattedDuration => {
-    const startTime = new Date(startTimeString);
-    const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kuala_Lumpur' }));
-    
-    const diffMs = now.getTime() - startTime.getTime();
-    
-    const days = Math.floor(diffMs / (24 * 60 * 60 * 1000));
-    const hours = Math.floor((diffMs % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-    const minutes = Math.floor((diffMs % (60 * 60 * 1000)) / (60 * 1000));
-    
-    return {
-      ...(days > 0 ? { days: { value: days } } : {}),
-      ...(hours > 0 ? { hours: { value: hours } } : {}),
-      minutes: { value: minutes }
-    };
+    try {
+      const startTime = parseUKDate(startTimeString);
+      const now = new Date();
+      
+      const diffMs = now.getTime() - startTime.getTime();
+      
+      const days = Math.floor(diffMs / (24 * 60 * 60 * 1000));
+      const hours = Math.floor((diffMs % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+      const minutes = Math.floor((diffMs % (60 * 60 * 1000)) / (60 * 1000));
+      
+      return {
+        ...(days > 0 ? { days: { value: days } } : {}),
+        ...(hours > 0 ? { hours: { value: hours } } : {}),
+        minutes: { value: Math.max(0, minutes) }
+      };
+    } catch (error) {
+      console.error('Error calculating duration:', error);
+      return {
+        minutes: { value: 0 }
+      };
+    }
   };
 
   return { 
