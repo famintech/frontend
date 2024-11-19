@@ -2,7 +2,7 @@ import { MotionTableRow } from '@/features/ehafal/components/table/styles/elemen
 import { rowVariants } from '@/features/ehafal/components/table/styles/animations';
 import { useProgressFormatter, useBadgeFormatter, useTimeFormatter } from '@/features/ehafal/hooks';
 import { TableRowProps } from '@/features/ehafal/types';
-import { BasicCell, ProgressCell, BadgeCell, DurationCell } from '@/features/ehafal/components/table/cells';
+import { BasicCell, ProgressCell, BadgeCell, DurationCell, ActionCell } from '@/features/ehafal/components/table/cells';
 
 export const TableRow = ({ row, columns, index, onAnimationStart }: TableRowProps) => {
     const { formatProgress } = useProgressFormatter();
@@ -32,7 +32,7 @@ export const TableRow = ({ row, columns, index, onAnimationStart }: TableRowProp
             <ProgressCell progress={formattedData.progress} width={columns[4].width} />
             <BasicCell value={formattedData.startTime} width={columns[5].width} />
             <DurationCell duration={formattedData.duration} width={columns[6].width} />
-            <BasicCell value={row.actions} width={columns[7].width} />
+            <ActionCell id={row.id} width={columns[7].width} />
             <BadgeCell badge={formattedData.priority} width={columns[8].width} />
         </MotionTableRow>
     );
