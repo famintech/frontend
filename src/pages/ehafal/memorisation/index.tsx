@@ -1,18 +1,28 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { MemorizationContainer, HeaderContainer, Title, Scope, ProgressSection } from '@/features/ehafal/components/memorisation/styles';
+import { 
+    MemorizationContainer, 
+    HeaderContainer, 
+    Title, 
+    Scope, 
+    ProgressSection,
+    ContentSection,
+    AddItemButton,
+    StyledAddIcon 
+} from '@/features/ehafal/components/memorisation/styles';
 import { ProgressBar } from '@/features/ehafal/components/table/ProgressBar';
-import { Badge } from '@/features/ehafal/components/table/Badge';
+import { AddItemDialog } from '@/features/ehafal/components/memorisation/AddItemDialog';
+import { buttonVariants } from '@/features/ehafal/components/table/styles/animations';
 
 export default function Memorisation() {
     const { id } = useParams();
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
     
-    // TODO: Replace with actual data fetching
     const memorization = {
         id,
         target: 'Surah Al-Kahf Ayat 1-10',
         scope: 'Al-Quran',
         progress: 0,
-        priority: 'LOW'
     };
 
     return (
@@ -23,14 +33,28 @@ export default function Memorisation() {
                 transition={{ duration: 0.3 }}
             >
                 <Title>{memorization.target}</Title>
-                <Scope>
-                    Scope: {memorization.scope}
-                </Scope>
+                <Scope>Scope: {memorization.scope}</Scope>
                 <ProgressSection>
                     <ProgressBar value={memorization.progress} color="#00ff00" />
-                    <Badge value={memorization.priority} color="#00ff00" />
                 </ProgressSection>
             </HeaderContainer>
+            
+            <ContentSection>
+                <AddItemButton
+                    variants={buttonVariants}
+                    initial="hidden"
+                    animate="visible"
+                    onClick={() => setIsDialogOpen(true)}
+                >
+                    <StyledAddIcon />
+                    Add Item to Memorize
+                </AddItemButton>
+            </ContentSection>
+
+            <AddItemDialog
+                open={isDialogOpen}
+                onClose={() => setIsDialogOpen(false)}
+            />
         </MemorizationContainer>
     );
 }
