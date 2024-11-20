@@ -24,10 +24,7 @@ interface MemorizationItemType {
     content: string;
     repetitionsRequired: number;
     progress: number;
-    progressRecords: {
-        repetitionNumber: number;
-        completed: boolean;
-    }[];
+    completedRepetitions: number;  
 }
 
 interface NewMemorizationItem {
@@ -134,7 +131,7 @@ export default function Memorisation() {
                             title={item.title}
                             content={item.content}
                             repetitions={item.repetitionsRequired}
-                            progressRecords={item.progressRecords}
+                            completedRepetitions={item.completedRepetitions}  // Changed prop
                             onProgressChange={(repetitionNumber, completed) =>
                                 handleProgressChange(item.id, repetitionNumber, completed)
                             }

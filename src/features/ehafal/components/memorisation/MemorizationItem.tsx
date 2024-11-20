@@ -17,10 +17,7 @@ interface MemorizationItemProps {
     title: string;
     content: string;
     repetitions: number;
-    progressRecords?: {
-        repetitionNumber: number;
-        completed: boolean;
-    }[];
+    completedRepetitions: number;
     onProgressChange: (repetitionNumber: number, completed: boolean) => void;
 }
 
@@ -29,22 +26,24 @@ export const MemorizationItem = ({
     title,
     content,
     repetitions,
-    progressRecords = [],
+    completedRepetitions,
     onProgressChange
 }: MemorizationItemProps) => {
     const [checked, setChecked] = useState<boolean[]>(() => {
         const initialState = new Array(repetitions).fill(false);
-        progressRecords.forEach(record => {
-            if (record.completed && record.repetitionNumber <= repetitions) {
-                initialState[record.repetitionNumber - 1] = true;
-            }
-        });
+        // Fill based on completedRepetitions
+        for (let i = 0; i < completedRepetitions; i++) {
+            initialState[i] = true;
+        }
         return initialState;
     });
 
-    const progress = Math.round((checked.filter(Boolean).length / repetitions) * 100);
+    const progress = Math.round((completedRepetitions / repetitions) * 100);
 
     const handleCheck = (index: number) => {
+        // Only allow checking/unchecking the next available checkbox
+        if (index !== completedRepetitions) return;
+
         const newChecked = [...checked];
         newChecked[index] = !newChecked[index];
         setChecked(newChecked);
@@ -54,12 +53,11 @@ export const MemorizationItem = ({
     const handleReset = () => {
         setChecked(new Array(repetitions).fill(false));
         // Notify backend about reset
-        checked.forEach((isChecked, index) => {
-            if (isChecked) {
-                onProgressChange(index + 1, false);
-            }
-        });
+        for (let i = completedRepetitions - 1; i >= 0; i--) {
+            onProgressChange(i + 1, false);
+        }
     };
+
     return (
         <ItemCard
             initial={{ opacity: 0, y: 20 }}
@@ -87,11 +85,15 @@ export const MemorizationItem = ({
                         <Checkbox
                             checked={isChecked}
                             onChange={() => handleCheck(index)}
+                            disabled={index !== completedRepetitions}
                             sx={{
                                 color: 'rgba(255, 255, 255, 0.3)',
                                 '&.Mui-checked': {
                                     color: '#00ff00',
                                 },
+                                '&.Mui-disabled': {
+                                    color: 'rgba(255, 255, 255, 0.1)',
+                                }
                             }}
                         />
                     </CheckboxWrapper>
