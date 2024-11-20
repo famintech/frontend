@@ -24,6 +24,10 @@ interface MemorizationItemType {
     content: string;
     repetitionsRequired: number;
     progress: number;
+    progressRecords: {
+        repetitionNumber: number;
+        completed: boolean;
+    }[];
 }
 
 interface NewMemorizationItem {
@@ -58,13 +62,12 @@ export default function Memorisation() {
     }
     if (isLoading || !memorization) return <div>Loading...</div>;
 
-    const handleProgressChange = async (itemId: string, newProgress: number) => {
+    const handleProgressChange = async (itemId: string, repetitionNumber: number, completed: boolean) => {
         try {
             const item = memorization.items.find((item: MemorizationItemType) => item.id === itemId);
             if (!item) throw new Error('Item not found');
-            
-            const repetitionNumber = Math.ceil((newProgress / 100) * item.repetitionsRequired);
-            await updateItemProgress(itemId, repetitionNumber, newProgress === 100);
+
+            await updateItemProgress(itemId, repetitionNumber, completed);
         } catch (error) {
             setSnackbar({
                 open: true,
@@ -111,7 +114,7 @@ export default function Memorisation() {
                     <ProgressBar value={memorization.progress} color="#00ff00" />
                 </ProgressSection>
             </HeaderContainer>
-            
+
             <ContentSection>
                 <AddItemButton
                     variants={buttonVariants}
@@ -131,7 +134,10 @@ export default function Memorisation() {
                             title={item.title}
                             content={item.content}
                             repetitions={item.repetitionsRequired}
-                            onProgressChange={(progress) => handleProgressChange(item.id, progress)}
+                            progressRecords={item.progressRecords}
+                            onProgressChange={(repetitionNumber, completed) =>
+                                handleProgressChange(item.id, repetitionNumber, completed)
+                            }
                         />
                     ))}
                 </ItemsContainer>

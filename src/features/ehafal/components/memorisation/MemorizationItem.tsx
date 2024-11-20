@@ -17,7 +17,11 @@ interface MemorizationItemProps {
     title: string;
     content: string;
     repetitions: number;
-    onProgressChange: (progress: number) => void;
+    progressRecords?: {
+        repetitionNumber: number;
+        completed: boolean;
+    }[];
+    onProgressChange: (repetitionNumber: number, completed: boolean) => void;
 }
 
 export const MemorizationItem = ({
@@ -25,9 +29,18 @@ export const MemorizationItem = ({
     title,
     content,
     repetitions,
+    progressRecords = [],
     onProgressChange
 }: MemorizationItemProps) => {
-    const [checked, setChecked] = useState<boolean[]>(new Array(repetitions).fill(false));
+    const [checked, setChecked] = useState<boolean[]>(() => {
+        const initialState = new Array(repetitions).fill(false);
+        progressRecords.forEach(record => {
+            if (record.completed && record.repetitionNumber <= repetitions) {
+                initialState[record.repetitionNumber - 1] = true;
+            }
+        });
+        return initialState;
+    });
 
     const progress = Math.round((checked.filter(Boolean).length / repetitions) * 100);
 
@@ -35,14 +48,18 @@ export const MemorizationItem = ({
         const newChecked = [...checked];
         newChecked[index] = !newChecked[index];
         setChecked(newChecked);
-        onProgressChange(Math.round((newChecked.filter(Boolean).length / repetitions) * 100));
+        onProgressChange(index + 1, newChecked[index]);
     };
 
     const handleReset = () => {
         setChecked(new Array(repetitions).fill(false));
-        onProgressChange(0);
+        // Notify backend about reset
+        checked.forEach((isChecked, index) => {
+            if (isChecked) {
+                onProgressChange(index + 1, false);
+            }
+        });
     };
-
     return (
         <ItemCard
             initial={{ opacity: 0, y: 20 }}
