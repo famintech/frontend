@@ -27,7 +27,7 @@ export const useMemorizationDetails = (id: string) => {
       );
 
       if (!response.ok) throw new Error('Failed to update item progress');
-      
+
       mutate();
       return response.json();
     } catch (error) {
@@ -43,7 +43,7 @@ export const useMemorizationDetails = (id: string) => {
   }) => {
     try {
       const response = await fetch(
-        `${API_CONFIG.BASE_URL}${API_ENDPOINTS.MEMORIZATION.BASE}/${memorizationId}/items`,
+        `${API_CONFIG.BASE_URL}${API_ENDPOINTS.MEMORIZATION.ITEMS.ADD(memorizationId)}`,
         {
           method: 'POST',
           headers: {
@@ -54,7 +54,7 @@ export const useMemorizationDetails = (id: string) => {
       );
 
       if (!response.ok) throw new Error('Failed to add item');
-      
+
       mutate();
       return response.json();
     } catch (error) {

@@ -21,6 +21,7 @@ export const API_ENDPOINTS = {
         BASE: '/memorization',
         PROGRESS: (id: string) => `/memorization/${id}/progress`,
         ITEMS: {
+            ADD: (memorizationId: string) => `/memorization/${memorizationId}/items`,
             PROGRESS: (itemId: string) => `/memorization/items/${itemId}/progress`,
         }
     }
