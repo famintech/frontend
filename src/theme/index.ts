@@ -44,7 +44,7 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Chakra Petch", sans-serif',
+    fontFamily: '"Product Sans", sans-serif',
   },
 });
 
