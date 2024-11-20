@@ -8,24 +8,27 @@ import {
     ItemTitle,
     CheckboxesContainer,
     CheckboxWrapper,
-    StyledIconButton
+    StyledIconButton,
+    ItemContent
 } from '@/features/ehafal/components/memorisation/styles';
 
 interface MemorizationItemProps {
     id: string;
+    title: string;
     content: string;
     repetitions: number;
     onProgressChange: (progress: number) => void;
 }
 
-export const MemorizationItem = ({ 
-    id, 
-    content, 
-    repetitions, 
-    onProgressChange 
+export const MemorizationItem = ({
+    id,
+    title,
+    content,
+    repetitions,
+    onProgressChange
 }: MemorizationItemProps) => {
     const [checked, setChecked] = useState<boolean[]>(new Array(repetitions).fill(false));
-    
+
     const progress = Math.round((checked.filter(Boolean).length / repetitions) * 100);
 
     const handleCheck = (index: number) => {
@@ -47,14 +50,15 @@ export const MemorizationItem = ({
             transition={{ duration: 0.3 }}
         >
             <ItemHeader>
-                <ItemTitle>{content}</ItemTitle>
+                <ItemTitle>{title}</ItemTitle>
                 <StyledIconButton onClick={handleReset} size="small">
                     <RefreshIcon fontSize="small" />
                 </StyledIconButton>
             </ItemHeader>
-            
-            <ProgressBar 
-                value={progress} 
+            <ItemContent dangerouslySetInnerHTML={{ __html: content }} />
+
+            <ProgressBar
+                value={progress}
                 color="#00ff00"
                 stripeDensity={4}
                 stripeThickness={2}

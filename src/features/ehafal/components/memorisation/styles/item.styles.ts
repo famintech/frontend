@@ -62,3 +62,26 @@ export const StyledIconButton = styled(IconButton)({
         backgroundColor: 'rgba(255, 255, 255, 0.1)',
     },
 });
+
+export const ItemContent = styled('div')({
+    marginTop: '1rem',
+    color: '#fff',
+    
+    'p': {
+        margin: '0 0 0.5em 0',
+    },
+    
+    'ul, ol': {
+        padding: '0 1rem',
+    },
+    
+    'a': {
+        color: '#00F5FF',
+    },
+    
+    'code': {
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        padding: '0.2em 0.4em',
+        borderRadius: '3px',
+    }
+});

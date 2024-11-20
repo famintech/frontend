@@ -18,6 +18,7 @@ import { buttonVariants } from '@/features/ehafal/components/table/styles/animat
 
 interface MemorizationItem {
     id: string;
+    title: string;
     content: string;
     repetitions: number;
     progress: number;

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { RichTextEditor } from '@/features/ehafal/components/memorisation/RichTextEditor';
 import {
     StyledDialog,
     DialogHeader,
@@ -16,6 +17,7 @@ interface AddItemDialogProps {
     onClose: () => void;
     onAdd: (newItem: {
         id: string;
+        title: string;
         content: string;
         repetitions: number;
         progress: number;
@@ -24,6 +26,7 @@ interface AddItemDialogProps {
 
 export const AddItemDialog = ({ open, onClose, onAdd }: AddItemDialogProps) => {
     const [formData, setFormData] = useState({
+        title: '',
         content: '',
         repetitions: 40
     });
@@ -37,7 +40,8 @@ export const AddItemDialog = ({ open, onClose, onAdd }: AddItemDialogProps) => {
     const handleSubmit = async () => {
         try {
             const newItem = {
-                id: crypto.randomUUID(), // Generate unique ID
+                id: crypto.randomUUID(),
+                title: formData.title,
                 content: formData.content,
                 repetitions: formData.repetitions,
                 progress: 0
@@ -50,8 +54,8 @@ export const AddItemDialog = ({ open, onClose, onAdd }: AddItemDialogProps) => {
                 severity: 'success'
             });
             
-            // Reset form
             setFormData({
+                title: '',
                 content: '',
                 repetitions: 40
             });
@@ -74,11 +78,18 @@ export const AddItemDialog = ({ open, onClose, onAdd }: AddItemDialogProps) => {
                 <DialogHeader>Add New Item to Memorize</DialogHeader>
                 <DialogBody>
                     <FormField>
-                        <FormLabel>Content</FormLabel>
+                        <FormLabel>Title</FormLabel>
                         <FormInput
+                            value={formData.title}
+                            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                            placeholder="Enter item title..."
+                        />
+                    </FormField>
+                    <FormField>
+                        <FormLabel>Content</FormLabel>
+                        <RichTextEditor
                             value={formData.content}
-                            onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                            placeholder="Enter content to memorize..."
+                            onChange={(value) => setFormData({ ...formData, content: value })}
                         />
                     </FormField>
                     <FormField>
