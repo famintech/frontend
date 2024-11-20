@@ -96,6 +96,8 @@ export default function Memorisation() {
         }
     };
 
+    const items = memorization.items || [];
+
     return (
         <MemorizationContainer>
             <HeaderContainer
@@ -122,7 +124,7 @@ export default function Memorisation() {
                 </AddItemButton>
 
                 <ItemsContainer>
-                    {memorization.items.map((item: MemorizationItemType) => (
+                    {items.map((item: MemorizationItemType) => (
                         <MemorizationItem
                             key={item.id}
                             id={item.id}
