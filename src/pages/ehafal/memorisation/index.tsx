@@ -1,5 +1,6 @@
 import { useState } from 'react';
-// import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useMemorizationDetails } from '@/features/ehafal/hooks';
 import {
     MemorizationContainer,
     HeaderContainer,
@@ -15,45 +16,85 @@ import { ProgressBar } from '@/features/ehafal/components/table/ProgressBar';
 import { AddItemDialog } from '@/features/ehafal/components/memorisation/AddItemDialog';
 import { MemorizationItem } from '@/features/ehafal/components/memorisation/MemorizationItem';
 import { buttonVariants } from '@/features/ehafal/components/table/styles/animations';
+import { SciFiSnackbar } from '@/features/ehafal/components/dialog/ScifiSnackbar';
 
-interface MemorizationItem {
+interface MemorizationItemType {
     id: string;
     title: string;
     content: string;
-    repetitions: number;
+    repetitionsRequired: number;
     progress: number;
 }
 
+interface NewMemorizationItem {
+    title: string;
+    content: string;
+    repetitions: number;
+}
+
 export default function Memorisation() {
-    // const { id } = useParams();
+    const { id = '' } = useParams<{ id: string }>();
+    const { memorization, isLoading, error, updateItemProgress, addItem } = useMemorizationDetails(id);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [items, setItems] = useState<MemorizationItem[]>([]);
+    const [snackbar, setSnackbar] = useState<{
+        open: boolean;
+        message: string;
+        severity: 'error' | 'success' | 'info' | 'warning';
+    }>({
+        open: false,
+        message: '',
+        severity: 'error'
+    });
 
-    const overallProgress = items.length
-        ? Math.round(items.reduce((acc, item) => acc + item.progress, 0) / items.length)
-        : 0;
-
-    const handleProgressChange = (itemId: string, newProgress: number) => {
-        setItems(prevItems =>
-            prevItems.map(item =>
-                item.id === itemId
-                    ? { ...item, progress: newProgress }
-                    : item
-            )
+    if (error) {
+        return (
+            <SciFiSnackbar
+                open={true}
+                message="Failed to fetch memorization details. Please try again later."
+                severity="error"
+                onClose={() => setSnackbar({ ...snackbar, open: false })}
+            />
         );
+    }
+    if (isLoading || !memorization) return <div>Loading...</div>;
+
+    const handleProgressChange = async (itemId: string, newProgress: number) => {
+        try {
+            const item = memorization.items.find((item: MemorizationItemType) => item.id === itemId);
+            if (!item) throw new Error('Item not found');
+            
+            const repetitionNumber = Math.ceil((newProgress / 100) * item.repetitionsRequired);
+            await updateItemProgress(itemId, repetitionNumber, newProgress === 100);
+        } catch (error) {
+            setSnackbar({
+                open: true,
+                message: 'Failed to update progress. Please try again.',
+                severity: 'error'
+            });
+        }
     };
 
-    const handleAddItem = (newItem: MemorizationItem) => {
-        setItems(prev => [...prev, newItem]);
-        setIsDialogOpen(false);
+    const handleAddItem = async (newItem: NewMemorizationItem) => {
+        try {
+            await addItem(id, {
+                title: newItem.title,
+                content: newItem.content,
+                repetitionsRequired: newItem.repetitions
+            });
+            setIsDialogOpen(false);
+            setSnackbar({
+                open: true,
+                message: 'Item added successfully',
+                severity: 'success'
+            });
+        } catch (error) {
+            setSnackbar({
+                open: true,
+                message: 'Failed to add item. Please try again.',
+                severity: 'error'
+            });
+        }
     };
-
-    // const memorization = {
-    //     id,
-    //     target: 'Surah Al-Kahf Ayat 1-10',
-    //     scope: 'Al-Quran',
-    //     progress: 0,
-    // };
 
     return (
         <MemorizationContainer>
@@ -62,10 +103,10 @@ export default function Memorisation() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
             >
-                <Title>Memorization Target</Title>
-                <Scope>Scope: Al-Quran</Scope>
+                <Title>{memorization.target}</Title>
+                <Scope>Scope: {memorization.scope}</Scope>
                 <ProgressSection>
-                    <ProgressBar value={overallProgress} color="#00ff00" />
+                    <ProgressBar value={memorization.progress} color="#00ff00" />
                 </ProgressSection>
             </HeaderContainer>
             
@@ -81,10 +122,13 @@ export default function Memorisation() {
                 </AddItemButton>
 
                 <ItemsContainer>
-                    {items.map(item => (
+                    {memorization.items.map((item: MemorizationItemType) => (
                         <MemorizationItem
                             key={item.id}
-                            {...item}
+                            id={item.id}
+                            title={item.title}
+                            content={item.content}
+                            repetitions={item.repetitionsRequired}
                             onProgressChange={(progress) => handleProgressChange(item.id, progress)}
                         />
                     ))}
@@ -95,6 +139,13 @@ export default function Memorisation() {
                 open={isDialogOpen}
                 onClose={() => setIsDialogOpen(false)}
                 onAdd={handleAddItem}
+            />
+
+            <SciFiSnackbar
+                open={snackbar.open}
+                message={snackbar.message}
+                severity={snackbar.severity as 'error' | 'success'}
+                onClose={() => setSnackbar({ ...snackbar, open: false })}
             />
         </MemorizationContainer>
     );
