@@ -14,9 +14,15 @@ import { SciFiSnackbar } from '@/features/ehafal/components/dialog/ScifiSnackbar
 interface AddItemDialogProps {
     open: boolean;
     onClose: () => void;
+    onAdd: (newItem: {
+        id: string;
+        content: string;
+        repetitions: number;
+        progress: number;
+    }) => void;
 }
 
-export const AddItemDialog = ({ open, onClose }: AddItemDialogProps) => {
+export const AddItemDialog = ({ open, onClose, onAdd }: AddItemDialogProps) => {
     const [formData, setFormData] = useState({
         content: '',
         repetitions: 40
@@ -30,12 +36,26 @@ export const AddItemDialog = ({ open, onClose }: AddItemDialogProps) => {
 
     const handleSubmit = async () => {
         try {
-            // TODO: Add API call to save the item
+            const newItem = {
+                id: crypto.randomUUID(), // Generate unique ID
+                content: formData.content,
+                repetitions: formData.repetitions,
+                progress: 0
+            };
+            
+            onAdd(newItem);
             setSnackbar({
                 open: true,
                 message: 'Item added successfully!',
                 severity: 'success'
             });
+            
+            // Reset form
+            setFormData({
+                content: '',
+                repetitions: 40
+            });
+            
             setTimeout(() => {
                 onClose();
             }, 1000);
