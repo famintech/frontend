@@ -1,6 +1,9 @@
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import Underline from '@tiptap/extension-underline';
+import TextAlign from '@tiptap/extension-text-align';
 import { styled } from '@mui/material/styles';
+import { EditorToolbar } from './RichTextEditorToolbar';
 
 const EditorContainer = styled('div')({
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
@@ -25,6 +28,23 @@ const EditorContainer = styled('div')({
         'ul, ol': {
             padding: '0 1rem',
         },
+
+        'blockquote': {
+            borderLeft: '3px solid rgba(255, 255, 255, 0.2)',
+            paddingLeft: '1rem',
+            color: 'rgba(255, 255, 255, 0.7)',
+        },
+
+        'code': {
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            padding: '0.2em 0.4em',
+            borderRadius: '3px',
+        },
+
+        'h2': {
+            fontSize: '1.5em',
+            margin: '1em 0 0.5em',
+        }
     }
 });
 
@@ -35,7 +55,13 @@ interface RichTextEditorProps {
 
 export const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
     const editor = useEditor({
-        extensions: [StarterKit],
+        extensions: [
+            StarterKit,
+            Underline,
+            TextAlign.configure({
+                types: ['heading', 'paragraph'],
+            }),
+        ],
         content: value,
         onUpdate: ({ editor }) => {
             onChange(editor.getHTML());
@@ -44,6 +70,7 @@ export const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
 
     return (
         <EditorContainer>
+            <EditorToolbar editor={editor} />
             <EditorContent editor={editor} />
         </EditorContainer>
     );
