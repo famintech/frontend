@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import {
     MemorizationContainer,
     HeaderContainer,
@@ -24,7 +24,7 @@ interface MemorizationItem {
 }
 
 export default function Memorisation() {
-    const { id } = useParams();
+    // const { id } = useParams();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [items, setItems] = useState<MemorizationItem[]>([]);
 
